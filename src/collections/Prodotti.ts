@@ -7,6 +7,9 @@ export const Prodotti: CollectionConfig = {
     singular: 'Prodotto',
     plural: 'Prodotti',
   },
+  access: {
+    read: () => true,
+  },
   admin: {
     useAsTitle: 'nome',
     defaultColumns: ['nome', 'categoria', 'marca', 'prezzo', 'disponibile', 'inEvidenza'],
