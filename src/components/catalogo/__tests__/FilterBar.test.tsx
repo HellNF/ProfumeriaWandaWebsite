@@ -1,13 +1,21 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { useRouter } from 'next/navigation'
 import { FilterBar } from '../FilterBar'
 
 // Mock Next.js navigation hooks
 jest.mock('next/navigation', () => ({
-  useRouter: () => ({ push: jest.fn() }),
-  usePathname: () => '/catalogo',
-  useSearchParams: () => new URLSearchParams(),
+  useRouter: jest.fn(),
+  usePathname: jest.fn(() => '/catalogo'),
+  useSearchParams: jest.fn(() => new URLSearchParams()),
 }))
+
+const mockPush = jest.fn()
+
+beforeEach(() => {
+  mockPush.mockClear()
+  ;(useRouter as jest.Mock).mockReturnValue({ push: mockPush })
+})
 
 describe('FilterBar', () => {
   it('mostra il filtro "Tutti" come attivo di default', () => {
@@ -30,11 +38,10 @@ describe('FilterBar', () => {
     expect(screen.getByRole('button', { name: /solo in promozione/i })).toBeInTheDocument()
   })
 
-  it('il click su una categoria non genera errori', async () => {
+  it('chiama router.push con la categoria corretta al click', async () => {
     const user = userEvent.setup()
     render(<FilterBar />)
     await user.click(screen.getByRole('button', { name: 'Profumeria' }))
-    // If we get here without errors, the click handler works
-    expect(screen.getByRole('button', { name: 'Profumeria' })).toBeInTheDocument()
+    expect(mockPush).toHaveBeenCalledWith('/catalogo?categoria=profumeria')
   })
 })

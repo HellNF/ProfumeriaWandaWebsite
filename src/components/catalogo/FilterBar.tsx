@@ -29,7 +29,8 @@ export function FilterBar() {
       } else {
         params.delete(key)
       }
-      router.push(`${pathname}?${params.toString()}`)
+      const qs = params.toString()
+      router.push(qs ? `${pathname}?${qs}` : pathname)
     },
     [router, pathname, searchParams],
   )
@@ -52,6 +53,7 @@ export function FilterBar() {
 
       <button
         onClick={() => updateFilter('promo', onlyPromo ? '' : '1')}
+        aria-pressed={onlyPromo}
         className={`px-4 py-2 text-xs tracking-wider uppercase border transition-colors duration-200 ml-auto ${
           onlyPromo
             ? 'bg-wanda-fucsia text-white border-wanda-fucsia'
