@@ -34,7 +34,7 @@ export function ProductCard({ prodotto }: ProductCardProps) {
           PROMO
         </span>
       )}
-      {!disponibile && (
+      {disponibile === false && (
         <span className="absolute top-2 right-2 z-10 bg-gray-400 text-white text-xs px-2 py-1">
           Non disponibile
         </span>
