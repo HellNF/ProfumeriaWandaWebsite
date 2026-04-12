@@ -49,11 +49,12 @@ export function MobileNav() {
     >
       <ul className="flex">
         {NAV_ITEMS.map(({ href, label, icon }) => {
-          const isActive = pathname === href
+          const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href)
           return (
             <li key={href} className="flex-1">
               <Link
                 href={href}
+                aria-current={isActive ? 'page' : undefined}
                 className={`flex flex-col items-center justify-center py-3 gap-0.5 transition-colors ${
                   isActive ? 'text-wanda-fucsia' : 'text-wanda-gray-mid hover:text-wanda-nero'
                 }`}
