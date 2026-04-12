@@ -15,5 +15,6 @@ export function getCategoryLabel(value: string): string {
 }
 
 export function getDiscountPercent(prezzo: number, prezzoScontato: number): number {
+  if (prezzo === 0) return 0
   return Math.round(((prezzo - prezzoScontato) / prezzo) * 100)
 }
