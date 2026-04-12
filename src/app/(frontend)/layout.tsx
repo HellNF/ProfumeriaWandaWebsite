@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, Inter } from 'next/font/google'
 import './globals.css'
-// import { Header } from '@/components/layout/Header'     // Task 6
-// import { Footer } from '@/components/layout/Footer'     // Task 6
-// import { MobileNav } from '@/components/layout/MobileNav' // Task 6
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
+import { MobileNav } from '@/components/layout/MobileNav'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -36,10 +36,10 @@ export default function FrontendLayout({ children }: { children: React.ReactNode
   return (
     <html lang="it" className={`${playfair.variable} ${inter.variable}`}>
       <body className="font-sans bg-white text-wanda-nero antialiased">
-        {/* <Header /> */}
+        <Header />
         {children}
-        {/* <Footer /> */}
-        {/* <MobileNav /> */}
+        <Footer />
+        <MobileNav />
         {/* Plausible Analytics — added in Task 13 */}
       </body>
     </html>
