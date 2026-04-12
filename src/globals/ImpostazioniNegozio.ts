@@ -6,6 +6,9 @@ export const ImpostazioniNegozio: GlobalConfig = {
   access: {
     read: () => true,
   },
+  admin: {
+    group: 'Negozio',
+  },
   fields: [
     {
       name: 'nomeNegozio',
