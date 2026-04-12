@@ -56,7 +56,7 @@ export default async function NegozioPage() {
             <div>
               <h2 className="font-serif text-lg mb-2">Telefono</h2>
               <a
-                href={`tel:${settings.telefono}`}
+                href={`tel:${settings.telefono.replace(/\s/g, '')}`}
                 className="text-wanda-fucsia hover:underline"
               >
                 {settings.telefono}
@@ -65,41 +65,43 @@ export default async function NegozioPage() {
           )}
 
           {/* Social */}
-          <div>
-            <h2 className="font-serif text-lg mb-3">Seguici</h2>
-            <div className="flex gap-4">
-              {settings.linkInstagram && (
-                <a
-                  href={settings.linkInstagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-outline text-xs px-4 py-2"
-                >
-                  Instagram
-                </a>
-              )}
-              {settings.linkFacebook && (
-                <a
-                  href={settings.linkFacebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-outline text-xs px-4 py-2"
-                >
-                  Facebook
-                </a>
-              )}
-              {settings.linkWhatsApp && (
-                <a
-                  href={`https://wa.me/${settings.linkWhatsApp.replace(/\D/g, '')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary text-xs px-4 py-2 inline-block"
-                >
-                  WhatsApp
-                </a>
-              )}
+          {(settings.linkInstagram || settings.linkFacebook || settings.linkWhatsApp) && (
+            <div>
+              <h2 className="font-serif text-lg mb-3">Seguici</h2>
+              <div className="flex gap-4">
+                {settings.linkInstagram && (
+                  <a
+                    href={settings.linkInstagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-outline text-xs px-4 py-2"
+                  >
+                    Instagram
+                  </a>
+                )}
+                {settings.linkFacebook && (
+                  <a
+                    href={settings.linkFacebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-outline text-xs px-4 py-2"
+                  >
+                    Facebook
+                  </a>
+                )}
+                {settings.linkWhatsApp && (
+                  <a
+                    href={`https://wa.me/${settings.linkWhatsApp.replace(/\D/g, '')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary text-xs px-4 py-2 inline-block"
+                  >
+                    WhatsApp
+                  </a>
+                )}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* ETHOS */}
           <div className="border border-gray-100 p-4 bg-wanda-gray-light">
