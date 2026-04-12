@@ -34,6 +34,7 @@ export function FeaturedProducts({ prodotti }: FeaturedProductsProps) {
         <Link
           href="/catalogo"
           className="text-sm tracking-wider uppercase text-wanda-gray-mid hover:text-wanda-nero transition-colors hidden md:block"
+          aria-label="Vedi tutto il catalogo"
         >
           Vedi tutto →
         </Link>

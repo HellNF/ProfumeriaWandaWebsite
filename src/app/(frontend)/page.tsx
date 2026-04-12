@@ -17,7 +17,10 @@ export default async function HomePage() {
   ])
 
   const immagineHero =
-    settings.immagineHero && typeof settings.immagineHero === 'object'
+    settings.immagineHero &&
+    typeof settings.immagineHero === 'object' &&
+    'url' in settings.immagineHero &&
+    !!(settings.immagineHero as { url: string }).url
       ? (settings.immagineHero as { url: string; alt?: string })
       : null
 

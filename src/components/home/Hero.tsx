@@ -10,7 +10,7 @@ interface HeroProps {
 
 export function Hero({ testoHero, sottotitoloHero, immagineHero }: HeroProps) {
   return (
-    <section className="relative h-[70vh] min-h-[480px] flex items-center overflow-hidden bg-wanda-nero">
+    <section aria-labelledby="hero-heading" className="relative h-[70vh] min-h-[480px] flex items-center overflow-hidden bg-wanda-nero">
       {/* Background image */}
       {immagineHero && (
         <Image
@@ -31,7 +31,7 @@ export function Hero({ testoHero, sottotitoloHero, immagineHero }: HeroProps) {
         <p className="text-wanda-fucsia text-xs tracking-[0.3em] uppercase mb-4">
           Profumeria dal 1960
         </p>
-        <h1 className="font-serif text-4xl md:text-6xl text-white leading-tight mb-4 max-w-xl">
+        <h1 id="hero-heading" className="font-serif text-4xl md:text-6xl text-white leading-tight mb-4 max-w-xl">
           {testoHero ?? 'Bellezza e stile dal 1960'}
         </h1>
         {sottotitoloHero && (
