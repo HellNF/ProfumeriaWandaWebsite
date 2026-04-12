@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-playfair);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-wanda-nero text-white px-6 py-3 text-sm tracking-wider uppercase hover:bg-wanda-fucsia transition-colors duration-200;
+  }
+
+  .btn-outline {
+    @apply border border-wanda-nero text-wanda-nero px-6 py-3 text-sm tracking-wider uppercase hover:bg-wanda-nero hover:text-white transition-colors duration-200;
+  }
+}

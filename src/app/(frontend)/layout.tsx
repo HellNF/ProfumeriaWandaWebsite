@@ -1,15 +1,41 @@
 import type { Metadata } from 'next'
-import React from 'react'
+import { Playfair_Display, Inter } from 'next/font/google'
+import './globals.css'
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  display: 'swap',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  description: 'Profumeria Wanda - Profumi, Cosmetici e Pelletteria a Verona',
-  title: 'Profumeria Wanda',
+  title: {
+    template: '%s | Profumeria Wanda',
+    default: 'Profumeria Wanda — Profumeria dal 1960',
+  },
+  description:
+    'Profumeria Wanda dal 1960: profumi, cosmetici, trucchi, pelletteria e borse. Affiliata ETHOS.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:3000'),
+  openGraph: {
+    siteName: 'Profumeria Wanda',
+    locale: 'it_IT',
+    type: 'website',
+  },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function FrontendLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="it">
-      <body>{children}</body>
+    <html lang="it" className={`${playfair.variable} ${inter.variable}`}>
+      <body className="font-sans bg-white text-wanda-nero antialiased">
+        {children}
+        {/* Plausible Analytics — added in Task 13 */}
+      </body>
     </html>
   )
 }
