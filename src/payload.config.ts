@@ -8,6 +8,7 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Prodotti } from './collections/Prodotti'
+import { ImpostazioniNegozio } from './globals/ImpostazioniNegozio'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -25,6 +26,7 @@ export default buildConfig({
     },
   },
   collections: [Prodotti, Media, Users],
+  globals: [ImpostazioniNegozio],
   editor: lexicalEditor(),
   secret: payloadSecret,
   typescript: {
