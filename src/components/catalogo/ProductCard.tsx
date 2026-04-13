@@ -1,100 +1,101 @@
 import Image from 'next/image'
 import { formatPrice } from '@/lib/utils'
-
-interface Foto {
-  immagine: { url: string; alt?: string } | string | null
-}
-
-interface Prodotto {
-  id: string
-  nome: string
-  marca?: string | null
-  prezzo?: number | null
-  inPromozione?: boolean | null
-  prezzoScontato?: number | null
-  disponibile?: boolean | null
-  foto?: Foto[] | null
-}
+import type { Prodotto } from '@/types/cms'
 
 interface ProductCardProps {
   prodotto: Prodotto
 }
 
 export function ProductCard({ prodotto }: ProductCardProps) {
-  const { nome, marca, prezzo, prezzoScontato, inPromozione, disponibile, foto } = prodotto
+  const { nome, marca, prezzo, prezzoScontato, percentualeSconto, inPromozione, disponibile, formato, foto } = prodotto as any
 
   const primeraFoto = foto?.[0]?.immagine
   const immagine = primeraFoto && typeof primeraFoto === 'object' ? primeraFoto : null
+  
+  // Use card size if available for better performance
+  let imageUrl = immagine?.sizes?.card?.url ?? immagine?.url
+
+  // Fix per immagini locali: se l'URL è assoluto su localhost, lo rendiamo relativo
+  if (imageUrl && imageUrl.startsWith('http://localhost:3000')) {
+    imageUrl = imageUrl.replace('http://localhost:3000', '')
+  }
 
   return (
-    <article className="group relative bg-white border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-300">
-      {/* Badges */}
-      {inPromozione && (
-        <span className="absolute top-2 left-2 z-10 bg-wanda-fucsia text-white text-xs font-medium px-2 py-1">
-          PROMO
-        </span>
+    <article className="group relative bg-white rounded-xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
+      {/* Badges Catchy */}
+      {inPromozione && percentualeSconto && (
+        <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
+          <span className="bg-wanda-fucsia text-white text-xs font-black px-3 py-1.5 rounded-lg shadow-lg animate-bounce">
+            -{percentualeSconto}%
+          </span>
+        </div>
       )}
+      
       {disponibile === false && (
-        <span className="absolute top-2 right-2 z-10 bg-gray-400 text-white text-xs px-2 py-1">
-          Non disponibile
+        <span className="absolute inset-0 z-20 bg-white/40 backdrop-blur-[2px] flex items-center justify-center">
+          <span className="bg-wanda-nero/80 text-white text-[10px] tracking-widest font-bold px-6 py-2 rounded-full uppercase shadow-lg">
+            Esaurito
+          </span>
         </span>
       )}
 
-      {/* Immagine */}
-      <div className="aspect-square bg-wanda-gray-light relative overflow-hidden">
-        {immagine ? (
+      {/* Image Container - Aspect 4/5 from Stitch */}
+      <div className="aspect-[4/5] bg-wanda-surface-low relative overflow-hidden">
+        {imageUrl ? (
           <Image
-            src={immagine.url}
-            alt={immagine.alt ?? nome}
+            src={imageUrl}
+            alt={immagine?.alt ?? nome}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
+            className={`object-cover transition-transform duration-700 ease-out group-hover:scale-105 ${disponibile === false ? 'grayscale' : ''}`}
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <svg
-              className="w-12 h-12 text-gray-200"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1}
-                d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-              />
-            </svg>
+          <div className="w-full h-full flex items-center justify-center bg-wanda-surface-mid/20">
+             <span className="text-wanda-outline opacity-20 italic">Wanda Selection</span>
+          </div>
+        )}
+        
+        {/* Formato ml sovrapposto all'immagine */}
+        {formato && (
+          <div className="absolute bottom-3 right-3 bg-white/80 backdrop-blur-md px-2 py-1 rounded text-[10px] font-bold text-wanda-nero shadow-sm">
+            {formato}ml
           </div>
         )}
       </div>
 
-      {/* Info */}
-      <div className="p-3">
+      {/* Info Container */}
+      <div className="p-6">
         {marca && (
-          <p className="text-xs text-wanda-gray-mid uppercase tracking-wider mb-1">{marca}</p>
+          <p className="text-[10px] text-wanda-fucsia uppercase tracking-[0.3em] mb-2 font-bold">
+            {typeof marca === 'object' ? (marca as any).nome : marca}
+          </p>
         )}
-        <h3 className="font-serif text-sm text-wanda-nero leading-tight mb-2 line-clamp-2">
+        <h3 className="font-headline text-lg text-wanda-nero leading-tight mb-4 line-clamp-2 h-12">
           {nome}
         </h3>
 
-        {prezzo != null && (
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between mt-auto">
+          <div className="flex flex-col">
             {inPromozione && prezzoScontato != null ? (
               <>
-                <span className="text-wanda-fucsia font-medium text-sm">
-                  €{formatPrice(prezzoScontato)}
-                </span>
-                <span className="text-wanda-gray-mid text-xs line-through">
+                <span className="text-wanda-text-soft text-xs line-through opacity-50">
                   €{formatPrice(prezzo)}
                 </span>
+                <span className="text-wanda-fucsia font-black text-2xl tracking-tighter">
+                  €{formatPrice(prezzoScontato)}
+                </span>
               </>
+            ) : prezzo != null ? (
+              <span className="text-wanda-nero font-bold text-xl tracking-tight">€{formatPrice(prezzo)}</span>
             ) : (
-              <span className="text-wanda-nero font-medium text-sm">€{formatPrice(prezzo)}</span>
+              <span className="text-wanda-text-soft text-sm italic">In negozio</span>
             )}
           </div>
-        )}
+          
+          <button className="p-3 bg-wanda-surface-low rounded-full text-wanda-fucsia hover:bg-wanda-fucsia hover:text-white transition-all active:scale-90 shadow-sm">
+             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          </button>
+        </div>
       </div>
     </article>
   )

@@ -5,7 +5,7 @@ interface MapEmbedProps {
 
 export function MapEmbed({ src }: MapEmbedProps) {
   return (
-    <div className="aspect-video w-full rounded-sm overflow-hidden border border-gray-100">
+    <div className="aspect-video w-full rounded-xs overflow-hidden border border-gray-100">
       <iframe
         src={src}
         width="100%"

@@ -1,50 +1,65 @@
 import { Suspense } from 'react'
-import { getPayload } from 'payload'
-import type { Where } from 'payload'
-import configPromise from '@payload-config'
 import type { Metadata } from 'next'
 import { FilterBar } from '@/components/catalogo/FilterBar'
 import { ProductGrid } from '@/components/catalogo/ProductGrid'
+import { getCatalogProducts, getStoreSettings } from '@/lib/cms'
 
-export const metadata: Metadata = {
-  title: 'Catalogo',
-  description:
-    'Scopri il catalogo completo di Profumeria Wanda: profumi, cosmetici, pelletteria e molto altro.',
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getStoreSettings()
+  return {
+    title: 'Catalogo',
+    description: `Scopri il catalogo completo di ${settings.nomeNegozio}: profumi, cosmetici, pelletteria e molto altro.`,
+  }
 }
 
 interface Props {
-  searchParams: Promise<{ categoria?: string; promo?: string }>
+  searchParams: Promise<{ categoria?: string; promo?: string; destinatario?: string }>
 }
 
-export default async function CatalogoPage({ searchParams }: Props) {
-  const { categoria, promo } = await searchParams
-
-  const payload = await getPayload({ config: configPromise })
-
-  const where: Where = {}
-  if (categoria) where.categoria = { equals: categoria }
-  if (promo === '1') where.inPromozione = { equals: true }
-
-  const { docs: prodotti } = await payload.find({
-    collection: 'prodotti',
-    where,
-    limit: 100,
-    sort: '-createdAt',
+async function CatalogoContent({ searchParams }: Props) {
+  const { categoria, promo, destinatario } = await searchParams
+  const prodotti = await getCatalogProducts({
+    categoria,
+    promo: promo === '1',
+    destinatario,
   })
 
   return (
-    <main className="container mx-auto px-4 py-12 min-h-screen">
-      <div className="mb-10">
-        <p className="text-wanda-fucsia text-xs tracking-[0.3em] uppercase mb-2">Collezione</p>
-        <h1 className="font-serif text-4xl text-wanda-nero">Catalogo</h1>
-      </div>
+    <>
+      <FilterBar />
+      <ProductGrid prodotti={prodotti} />
+    </>
+  )
+}
 
-      <Suspense>
-        <FilterBar />
+export default async function CatalogoPage({ searchParams }: Props) {
+  return (
+    <main className="max-w-7xl mx-auto pt-32 pb-20 px-8 min-h-screen space-y-12">
+      {/* Header Section from Stitch */}
+      <header className="text-center lg:text-left space-y-4">
+        <h1 className="font-headline text-5xl md:text-6xl text-wanda-nero font-bold tracking-tight">
+          La nostra selezione per te
+        </h1>
+        <p className="text-wanda-text-soft text-lg max-w-2xl leading-relaxed">
+          Ogni prodotto è scelto con amore, pensando alla tua storia e alla tua bellezza. 
+          Scopri l&apos;essenza dell&apos;artigianalità italiana e dei marchi internazionali più amati.
+        </p>
+      </header>
+
+      <Suspense
+        fallback={
+          <div className="space-y-12">
+            <div className="h-20 bg-wanda-surface-low rounded-xl animate-pulse" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <div key={index} className="aspect-[4/5] bg-wanda-surface-low rounded-xl animate-pulse" />
+              ))}
+            </div>
+          </div>
+        }
+      >
+        <CatalogoContent searchParams={searchParams} />
       </Suspense>
-
-      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-      <ProductGrid prodotti={prodotti as any} />
     </main>
   )
 }

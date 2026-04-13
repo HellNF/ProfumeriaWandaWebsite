@@ -22,7 +22,14 @@
       "Bash(npx tsc:*)",
       "Bash(npm ls:*)",
       "Bash(npm show:*)",
-      "Bash(ls /c/Users/panci/vsworkspace/ProfumeriaWandaWebsite/node_modules/react/compiler-runtime*)"
+      "Bash(ls /c/Users/panci/vsworkspace/ProfumeriaWandaWebsite/node_modules/react/compiler-runtime*)",
+      "Bash(ls /c/Users/nicol/Desktop/ProfumeriaWandaWebsite/node_modules/@payloadcms/ui/dist/*.css)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\('exports', {}\\), indent=2\\)\\)\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\({k:v for k,v in d.items\\(\\) if k in ['typesVersions','types','typings']}, indent=2\\)\\)\")",
+      "Bash(ls /c/Users/nicol/Desktop/ProfumeriaWandaWebsite/*.d.ts)",
+      "Bash(npx eslint:*)",
+      "Read(//c/AppData/Local/Temp/claude/C--Users-nicol-Desktop-ProfumeriaWandaWebsite/d23e283d-cda6-41d3-8af3-b233e003156b/tasks/**)",
+      "Read(//c/Users/nicol/AppData/Local/Temp/claude/C--Users-nicol-Desktop-ProfumeriaWandaWebsite/d23e283d-cda6-41d3-8af3-b233e003156b/tasks/**)"
     ]
   }
 }

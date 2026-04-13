@@ -1,24 +1,49 @@
 /* Scoped to (frontend) route group only — Payload admin uses its own styles */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-wanda-nero: #2d2f2f;
+  --color-wanda-bianco: #ffffff;
+  --color-wanda-fucsia: #b4005d;
+  --color-wanda-fucsia-light: #ff6fa2;
+  --color-wanda-violetto: #973775;
+  --color-wanda-bg: #f6f6f6;
+  --color-wanda-surface-low: #f0f1f1;
+  --color-wanda-surface-mid: #e7e8e8;
+  --color-wanda-outline: #767777;
+  --color-wanda-text-soft: #5a5c5c;
+
+  --radius-xl: 3rem;
+  --radius-lg: 2rem;
+  
+  --font-headline: var(--font-noto-serif), serif;
+  --font-body: var(--font-plus-jakarta), sans-serif;
+}
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
+  body {
+    @apply bg-wanda-bg text-wanda-nero font-body antialiased;
   }
 
   h1, h2, h3, h4 {
-    font-family: var(--font-playfair);
+    @apply font-headline font-bold tracking-tight;
   }
 }
 
 @layer components {
+  .glass-nav {
+    @apply bg-wanda-bg/60 backdrop-blur-xl border-b border-wanda-fucsia/5;
+  }
+
   .btn-primary {
-    @apply bg-wanda-nero text-white px-6 py-3 text-sm tracking-wider uppercase hover:bg-wanda-fucsia transition-colors duration-200;
+    @apply bg-gradient-to-r from-wanda-fucsia to-wanda-fucsia-light text-white px-10 py-4 rounded-full font-bold shadow-lg shadow-wanda-fucsia/20 hover:scale-105 active:scale-95 transition-all duration-300;
   }
 
   .btn-outline {
-    @apply border border-wanda-nero text-wanda-nero px-6 py-3 text-sm tracking-wider uppercase hover:bg-wanda-nero hover:text-white transition-colors duration-200;
+    @apply border-2 border-wanda-fucsia text-wanda-fucsia px-10 py-4 rounded-full font-bold hover:bg-wanda-fucsia hover:text-white transition-all duration-300;
+  }
+
+  .card-dialogue {
+    @apply bg-white rounded-xl shadow-[0_40px_80px_-20px_rgba(180,0,93,0.08)] p-8 border border-white/40;
   }
 }

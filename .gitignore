@@ -40,3 +40,6 @@ next-env.d.ts
 
 # reference images
 image.png
+
+/public/media
+/stitch_profumeria_pelletteria_online/

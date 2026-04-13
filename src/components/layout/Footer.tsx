@@ -1,53 +1,98 @@
-// src/components/layout/Footer.tsx
 import Link from 'next/link'
+import Image from 'next/image'
+import { Logo } from './Logo'
+import type { ImpostazioniNegozio } from '@/types/cms'
+import { Copyright } from './Copyright'
 
-export function Footer() {
+interface FooterProps {
+  settings: ImpostazioniNegozio
+}
+
+export function Footer({ settings }: FooterProps) {
+  const foundationYear = settings?.annoFondazione ?? 1960
+  const nomeNegozio = settings?.nomeNegozio ?? 'Profumeria Wanda'
+  const logo = typeof settings?.logoNegozio === 'object' ? settings.logoNegozio : null
+
+  const SOCIAL_LINKS = [
+    { href: settings?.linkInstagram, label: 'Instagram' },
+    { href: settings?.linkFacebook, label: 'Facebook' },
+    { href: settings?.linkTikTok, label: 'TikTok' },
+    { href: settings?.linkYouTube, label: 'YouTube' },
+    { href: settings?.linkTelegram, label: 'Telegram' },
+    { href: settings?.linkWhatsApp ? `https://wa.me/${settings.linkWhatsApp.replace(/\D/g, '')}` : null, label: 'WhatsApp' },
+  ].filter((link) => !!link.href)
+
   return (
-    <footer className="bg-wanda-nero text-white pt-12 pb-24 md:pb-12">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className="w-full rounded-t-[3rem] mt-20 bg-wanda-surface-low text-wanda-nero pt-16 pb-24 md:pb-12 border-t border-wanda-fucsia/5">
+      <div className="container mx-auto px-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand */}
-          <div>
-            <p className="font-serif text-lg mb-2">Wanda</p>
-            <p className="text-xs tracking-[0.2em] uppercase text-gray-400 mb-4">
-              profumeria dal 1960
+          <div className="col-span-1 md:col-span-2 space-y-4">
+            {logo ? (
+              <div className="relative h-12 w-40">
+                <Image
+                  src={logo.url}
+                  alt={logo.alt ?? nomeNegozio}
+                  fill
+                  className="object-contain object-left"
+                />
+              </div>
+            ) : (
+              <Logo className="h-10 w-auto text-wanda-nero/40 hover:text-wanda-fucsia transition-colors" />
+            )}
+            {settings?.sloganNegozio && (
+              <p className="text-xs tracking-[0.2em] uppercase text-wanda-text-soft">
+                {settings.sloganNegozio}
+              </p>
+            )}
+            <p className="text-sm text-wanda-text-soft max-w-sm leading-relaxed">
+              {settings?.descrizioneNegozio || 'Dal 1960 curiamo la tua essenza con la gentilezza di una chiacchierata tra amiche. Partner ETHOS.'}
             </p>
-            <p className="text-sm text-gray-400">Affiliata ETHOS — carta fedeltà accettata</p>
+            <div className="text-xs text-wanda-outline space-y-1 pt-2">
+              {settings?.partitaIva && <p>P.IVA: {settings.partitaIva}</p>}
+              {settings?.indirizzo && <p>{settings.indirizzo}{settings.citta ? `, ${settings.citta}` : ''}</p>}
+            </div>
           </div>
 
           {/* Links */}
-          <nav aria-label="Footer navigation">
-            <ul className="space-y-2 text-sm text-gray-300">
-              <li><Link href="/" className="hover:text-wanda-fucsia transition-colors">Home</Link></li>
-              <li><Link href="/catalogo" className="hover:text-wanda-fucsia transition-colors">Catalogo</Link></li>
-              <li><Link href="/negozio" className="hover:text-wanda-fucsia transition-colors">Il Negozio</Link></li>
-            </ul>
-          </nav>
-
-          {/* Social placeholder — will be wired to CMS in Task 11 */}
           <div>
-            <p className="text-sm uppercase tracking-wider text-gray-400 mb-3">Seguici</p>
-            <div className="flex gap-4">
-              <a
-                href="#"
-                aria-label="Instagram"
-                className="text-gray-400 hover:text-wanda-fucsia transition-colors text-sm"
-              >
-                Instagram
-              </a>
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="text-gray-400 hover:text-wanda-fucsia transition-colors text-sm"
-              >
-                Facebook
-              </a>
-            </div>
+            <p className="text-xs uppercase tracking-[0.3em] text-wanda-fucsia font-bold mb-8">Esplora</p>
+            <nav aria-label="Footer navigation">
+              <ul className="space-y-4 text-sm text-wanda-text-soft">
+                <li><Link href="/" className="hover:text-wanda-fucsia transition-all hover:translate-x-1 inline-block">Home</Link></li>
+                <li><Link href="/catalogo" className="hover:text-wanda-fucsia transition-all hover:translate-x-1 inline-block">Catalogo Prodotti</Link></li>
+                <li><Link href="/negozio" className="hover:text-wanda-fucsia transition-all hover:translate-x-1 inline-block">Il Negozio</Link></li>
+                {settings?.linkPrivacy && <li><Link href={settings.linkPrivacy} className="hover:text-wanda-fucsia transition-all text-xs opacity-70">Privacy Policy</Link></li>}
+              </ul>
+            </nav>
+          </div>
+
+          {/* Social */}
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-wanda-fucsia font-bold mb-8">Social</p>
+            <ul className="space-y-4">
+              {SOCIAL_LINKS.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-wanda-text-soft hover:text-wanda-fucsia transition-all flex items-center gap-2"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+              {SOCIAL_LINKS.length === 0 && (
+                <li className="text-sm text-wanda-text-soft italic">Seguici per le novità</li>
+              )}
+            </ul>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-6 text-xs text-gray-500 text-center">
-          © {new Date().getFullYear()} Profumeria Wanda. Tutti i diritti riservati.
+        <div className="border-t border-wanda-mid/10 mt-12 pt-8 text-xs text-wanda-outline flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+          <p><Copyright nomeNegozio={nomeNegozio} /></p>
+          <p className="opacity-50 tracking-widest uppercase italic">Dal {foundationYear} con amore</p>
         </div>
       </div>
     </footer>

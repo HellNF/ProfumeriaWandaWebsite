@@ -1,24 +1,35 @@
 // src/components/negozio/StructuredData.tsx
+import type { ImpostazioniNegozio } from '@/types/cms'
+
 interface StructuredDataProps {
-  nomeNegozio: string
-  descrizione?: string | null
-  indirizzo?: string | null
-  telefono?: string | null
-  orari?: string | null
-  linkInstagram?: string | null
-  linkFacebook?: string | null
+  settings: ImpostazioniNegozio
 }
 
-export function StructuredData({
-  nomeNegozio,
-  descrizione,
-  indirizzo,
-  telefono,
-  orari,
-  linkInstagram,
-  linkFacebook,
-}: StructuredDataProps) {
+export function StructuredData({ settings }: StructuredDataProps) {
+  const {
+    nomeNegozio,
+    descrizioneNegozio: descrizione,
+    indirizzo,
+    telefono,
+    linkInstagram,
+    linkFacebook,
+    orariStrutturati,
+  } = settings
+
   const sameAs = [linkInstagram, linkFacebook].filter(Boolean)
+
+  // Map structured hours to Schema.org format
+  const openingHours = orariStrutturati?.map((item) => {
+    if (item.chiuso) return null
+    const days = item.giorni.join(',')
+    if (item.pausaPranzo && item.oraChiusuraPranzo && item.oraRiaperturaPranzo) {
+      return [
+        `${days} ${item.oraApertura}-${item.oraChiusuraPranzo}`,
+        `${days} ${item.oraRiaperturaPranzo}-${item.oraChiusura}`,
+      ]
+    }
+    return `${days} ${item.oraApertura}-${item.oraChiusura}`
+  }).flat().filter(Boolean)
 
   const data = {
     '@context': 'https://schema.org',
@@ -33,7 +44,7 @@ export function StructuredData({
       },
     }),
     ...(telefono && { telephone: telefono }),
-    ...(orari && { openingHours: orari }),
+    ...(openingHours && openingHours.length > 0 && { openingHours }),
     ...(sameAs.length > 0 && { sameAs }),
   }
 
