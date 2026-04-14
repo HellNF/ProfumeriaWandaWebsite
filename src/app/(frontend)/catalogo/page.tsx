@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import { FilterBar } from '@/components/catalogo/FilterBar'
 import { ProductGrid } from '@/components/catalogo/ProductGrid'
+import { ProductGridSkeleton } from '@/components/catalogo/ProductSkeleton'
 import { getCatalogProducts, getStoreSettings } from '@/lib/cms'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -34,10 +35,10 @@ async function CatalogoContent({ searchParams }: Props) {
 
 export default async function CatalogoPage({ searchParams }: Props) {
   return (
-    <main className="max-w-7xl mx-auto pt-32 pb-20 px-8 min-h-screen space-y-12">
+    <main className="wanda-container pt-32 pb-20 min-h-screen space-y-12">
       {/* Header Section from Stitch */}
-      <header className="text-center lg:text-left space-y-4">
-        <h1 className="font-headline text-5xl md:text-6xl text-wanda-nero font-bold tracking-tight">
+      <header className="text-center lg:text-left space-y-4 reveal-on-scroll">
+        <h1 className="font-headline text-4xl md:text-6xl text-wanda-nero font-bold tracking-tight">
           La nostra selezione per te
         </h1>
         <p className="text-wanda-text-soft text-lg max-w-2xl leading-relaxed">
@@ -50,11 +51,7 @@ export default async function CatalogoPage({ searchParams }: Props) {
         fallback={
           <div className="space-y-12">
             <div className="h-20 bg-wanda-surface-low rounded-xl animate-pulse" />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {Array.from({ length: 6 }).map((_, index) => (
-                <div key={index} className="aspect-[4/5] bg-wanda-surface-low rounded-xl animate-pulse" />
-              ))}
-            </div>
+            <ProductGridSkeleton count={6} />
           </div>
         }
       >

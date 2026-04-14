@@ -7,17 +7,17 @@ interface Testimonial {
 }
 
 interface TestimonialsProps {
-  reviews: any[]
+  reviews: Testimonial[]
 }
 
 export function Testimonials({ reviews }: TestimonialsProps) {
   if (reviews.length === 0) return null
 
   return (
-    <section className="container mx-auto px-8 py-24 bg-wanda-bg relative overflow-hidden">
-      <div className="text-center mb-16 space-y-4">
+    <section className="wanda-container py-24 bg-wanda-bg relative overflow-hidden">
+      <div className="text-center mb-16 space-y-4 reveal-on-scroll">
         <span className="text-wanda-fucsia font-bold uppercase tracking-[0.3em] text-xs">Dicono di noi</span>
-        <h2 className="text-4xl md:text-5xl font-bold font-headline">Parola ai nostri Ospiti</h2>
+        <h2 className="text-3xl md:text-5xl font-bold font-headline">Parola ai nostri Ospiti</h2>
         <div className="flex justify-center gap-1 text-wanda-fucsia">
           {Array.from({ length: 5 }).map((_, i) => (
             <span key={i} className="text-xl">★</span>
@@ -26,11 +26,11 @@ export function Testimonials({ reviews }: TestimonialsProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
         {reviews.map((rev, index) => (
           <div 
             key={index} 
-            className={`card-dialogue flex flex-col justify-between h-full transform transition-all duration-500 hover:-translate-y-2 ${
+            className={`card-dialogue flex flex-col justify-between h-full transform transition-all duration-500 hover:-translate-y-2 reveal-on-scroll reveal-delay-${index * 100} ${
               index === 1 ? 'md:translate-y-8' : ''
             }`}
           >
@@ -43,7 +43,7 @@ export function Testimonials({ reviews }: TestimonialsProps) {
             <div className="mt-8 pt-6 border-t border-wanda-fucsia/5 flex items-center justify-between">
               <span className="font-bold text-wanda-nero tracking-tight">— {rev.autore}</span>
               <div className="flex text-wanda-fucsia text-xs">
-                {Array.from({ length: Number(rev.stelle) }).map((_, i) => (
+                {Array.from({ length: Math.min(Math.max(Number(rev.stelle) || 5, 1), 5) }).map((_, i) => (
                   <span key={i}>★</span>
                 ))}
               </div>

@@ -126,14 +126,15 @@ export const Prodotti: CollectionConfig = {
                   name: 'formato',
                   type: 'number',
                   label: 'Formato / Capienza (ml)',
+                  min: 1,
                   admin: {
                     width: '100%',
                     placeholder: 'Es: 50, 100, 250...',
                     description: 'Indica la dimensione in millilitri.',
                     condition: (data) => ['profumeria', 'cosmetici', 'trucco'].includes(data?.categoria),
                   },
-                  validate: (val, { data }) => {
-                    if (['profumeria', 'cosmetici', 'trucco'].includes(data?.categoria) && !val) {
+                  validate: (val: unknown, { data }: { data: Record<string, unknown> }) => {
+                    if (['profumeria', 'cosmetici', 'trucco'].includes(data?.categoria as string) && !val) {
                       return 'Il formato è obbligatorio per questa categoria'
                     }
                     return true
@@ -165,6 +166,7 @@ export const Prodotti: CollectionConfig = {
                   type: 'number',
                   label: 'Prezzo Normale (€)',
                   required: true,
+                  min: 0,
                   admin: {
                     width: '33%',
                     description: 'Prezzo pieno (es: 50.00).',
@@ -175,10 +177,12 @@ export const Prodotti: CollectionConfig = {
                   name: 'percentualeSconto',
                   type: 'number',
                   label: 'Sconto (%)',
+                  min: 1,
+                  max: 99,
                   admin: {
                     width: '33%',
                     condition: (data) => Boolean(data?.inPromozione),
-                    description: 'Inserisci solo il numero (es: 20).',
+                    description: 'Inserisci solo il numero (es: 20). Valore tra 1 e 99.',
                   },
                 },
                 {

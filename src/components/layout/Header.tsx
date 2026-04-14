@@ -19,7 +19,7 @@ export function Header({ settings }: HeaderProps) {
 
   return (
     <header className="sticky top-0 z-50 glass-nav">
-      <div className="container mx-auto flex items-center justify-between h-20 px-8">
+      <div className="wanda-container flex items-center justify-between h-20">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 hover:scale-105 transition-transform duration-300">
           {logo ? (
@@ -43,7 +43,8 @@ export function Header({ settings }: HeaderProps) {
             <Link
               key={href}
               href={href}
-              className="text-sm font-semibold tracking-wide uppercase text-wanda-text-soft hover:text-wanda-fucsia transition-all duration-200 hover:-translate-y-0.5"
+              className="text-sm font-semibold tracking-wide uppercase text-wanda-text-soft hover:text-wanda-fucsia transition-all duration-300 hover:-translate-y-1 active:scale-95"
+              aria-label={`Vai alla pagina ${label}`}
             >
               {label}
             </Link>
@@ -52,7 +53,7 @@ export function Header({ settings }: HeaderProps) {
 
         {/* CTA */}
         <div className="hidden lg:block">
-          <Link href="/negozio" className="btn-primary py-2.5 px-6 text-sm">
+          <Link href="/negozio" className="btn-primary py-2.5 px-6 text-sm" aria-label="Vieni a trovarci in negozio">
             Vieni a trovarci
           </Link>
         </div>

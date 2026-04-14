@@ -1,0 +1,19 @@
+-- Enable RLS on all public tables reported by the Supabase advisor
+ALTER TABLE public.prodotti_foto ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.payload_kv ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.payload_migrations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.payload_preferences_rels ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.users_sessions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.payload_locked_documents ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.payload_preferences ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.payload_locked_documents_rels ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.recensioni ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.impostazioni_negozio ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.impostazioni_negozio_orari_strutturati ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.impostazioni_negozio_orari_strutturati_giorni ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.importatore_marche ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.prodotti ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.importatore_marche_marche_da_importare ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.media ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.marche ENABLE ROW LEVEL SECURITY;

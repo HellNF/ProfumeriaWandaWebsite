@@ -103,6 +103,39 @@ export const ImpostazioniNegozio: GlobalConfig = {
               type: 'row',
               fields: [
                 {
+                  name: 'heroImageFit',
+                  type: 'select',
+                  label: 'Modalità visualizzazione immagine',
+                  defaultValue: 'cover',
+                  options: [
+                    { label: 'Riempi (Cover - Può tagliare i bordi)', value: 'cover' },
+                    { label: 'Contieni (Contain - Mostra intera, può lasciare spazi)', value: 'contain' },
+                  ],
+                  admin: { width: '50%' },
+                },
+                {
+                  name: 'heroImagePosition',
+                  type: 'select',
+                  label: 'Allineamento immagine',
+                  defaultValue: 'center',
+                  options: [
+                    { label: 'Centro', value: 'center' },
+                    { label: 'In Alto', value: 'top' },
+                    { label: 'In Basso', value: 'bottom' },
+                    { label: 'A Sinistra', value: 'left' },
+                    { label: 'A Destra', value: 'right' },
+                  ],
+                  admin: { 
+                    width: '50%',
+                    condition: (data) => data?.heroImageFit === 'cover' 
+                  },
+                },
+              ],
+            },
+            {
+              type: 'row',
+              fields: [
+                {
                   name: 'ctaHeroLabel',
                   type: 'text',
                   label: 'Testo bottone CTA',
@@ -130,6 +163,129 @@ export const ImpostazioniNegozio: GlobalConfig = {
               admin: {
                 description: 'Titolo sopra la griglia dei prodotti in evidenza',
               },
+            },
+          ],
+        },
+
+        // ─── IMMAGINI HOMEPAGE ───────────────────────────────────────────────────
+        {
+          label: 'Immagini Homepage',
+          description: 'Gestione delle immagini delle categorie e sezioni speciali',
+          fields: [
+            {
+              type: 'group',
+              name: 'categorieHome',
+              label: 'Immagini Categorie (Bento Grid)',
+              fields: [
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'immagineFragranze',
+                      type: 'upload',
+                      relationTo: 'media',
+                      label: 'Immagine Fragranze (Grande)',
+                      admin: { width: '50%' },
+                    },
+                    {
+                      name: 'immagineSkincare',
+                      type: 'upload',
+                      relationTo: 'media',
+                      label: 'Immagine Skincare',
+                      admin: { width: '50%' },
+                    },
+                  ],
+                },
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'immagineMakeup',
+                      type: 'upload',
+                      relationTo: 'media',
+                      label: 'Immagine Make-up',
+                      admin: { width: '50%' },
+                    },
+                    {
+                      name: 'immagineAccessori',
+                      type: 'upload',
+                      relationTo: 'media',
+                      label: 'Immagine Accessori (Grande)',
+                      admin: { width: '50%' },
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              name: 'immagineQualitaTradizione',
+              type: 'upload',
+              relationTo: 'media',
+              label: 'Immagine Sezione Qualità & Tradizione',
+              admin: {
+                description: 'L\'immagine mostrata nella sezione ETHOS Partner in fondo alla home',
+              },
+            },
+            {
+              name: 'immagineConsulenzaWanda',
+              type: 'upload',
+              relationTo: 'media',
+              label: 'Immagine Sezione Consulenza di Wanda',
+              admin: {
+                description: 'L\'immagine che appare accanto alla citazione di Wanda nella homepage',
+              },
+            },
+          ],
+        },
+
+        // ─── IMMAGINI NEGOZIO ────────────────────────────────────────────────────
+        {
+          label: 'Immagini Negozio',
+          description: 'Gestione delle immagini per la pagina "Il Negozio"',
+          fields: [
+            {
+              name: 'immagineHeroNegozio',
+              type: 'upload',
+              relationTo: 'media',
+              label: 'Immagine Hero Negozio',
+              admin: {
+                description: 'Immagine grande in cima alla pagina negozio',
+              },
+            },
+            {
+              name: 'immagineStoria',
+              type: 'upload',
+              relationTo: 'media',
+              label: 'Immagine La Nostra Storia',
+              admin: {
+                description: 'L\'immagine che accompagna il testo sulla fondazione del 1960',
+              },
+            },
+            {
+              type: 'group',
+              name: 'serviziNegozio',
+              label: 'Immagini Servizi',
+              fields: [
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'immagineConsulenzaOlfattiva',
+                      type: 'upload',
+                      relationTo: 'media',
+                      label: 'Immagine Consulenza Olfattiva',
+                      admin: { width: '50%' },
+                    },
+                    {
+                      name: 'immagineCaffeChiacchiere',
+                      type: 'upload',
+                      relationTo: 'media',
+                      label: 'Immagine Caffè e Chiacchiere',
+                      admin: { width: '50%' },
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },

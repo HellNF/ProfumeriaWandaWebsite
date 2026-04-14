@@ -7,11 +7,11 @@
   --color-wanda-fucsia: #b4005d;
   --color-wanda-fucsia-light: #ff6fa2;
   --color-wanda-violetto: #973775;
-  --color-wanda-bg: #f6f6f6;
-  --color-wanda-surface-low: #f0f1f1;
-  --color-wanda-surface-mid: #e7e8e8;
+  --color-wanda-bg: #fafafa;
+  --color-wanda-surface-low: #f5f5f5;
+  --color-wanda-surface-mid: #eeeeee;
   --color-wanda-outline: #767777;
-  --color-wanda-text-soft: #5a5c5c;
+  --color-wanda-text-soft: #3d3f3f;
 
   --radius-xl: 3rem;
   --radius-lg: 2rem;
@@ -22,7 +22,9 @@
 
 @layer base {
   body {
-    @apply bg-wanda-bg text-wanda-nero font-body antialiased;
+    @apply bg-wanda-bg text-wanda-nero font-body antialiased selection:bg-wanda-fucsia/10 selection:text-wanda-fucsia;
+    background-image: radial-gradient(circle at center, rgba(180, 0, 93, 0.015) 0%, transparent 70%);
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4 {
@@ -45,5 +47,45 @@
 
   .card-dialogue {
     @apply bg-white rounded-xl shadow-[0_40px_80px_-20px_rgba(180,0,93,0.08)] p-8 border border-white/40;
+  }
+
+  .wanda-container {
+    @apply max-w-7xl mx-auto px-6 md:px-12 lg:px-16;
+  }
+
+  /* Reveal Animations */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1), transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    will-change: auto;
+  }
+
+  .reveal-delay-0 { transition-delay: 0ms; }
+  .reveal-delay-100 { transition-delay: 100ms; }
+  .reveal-delay-200 { transition-delay: 200ms; }
+  .reveal-delay-300 { transition-delay: 300ms; }
+  .reveal-delay-400 { transition-delay: 400ms; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-on-scroll {
+      opacity: 1;
+      transform: none;
+      transition: none;
+      will-change: auto;
+    }
+    .reveal-delay-0,
+    .reveal-delay-100,
+    .reveal-delay-200,
+    .reveal-delay-300,
+    .reveal-delay-400 {
+      transition-delay: 0ms;
+    }
   }
 }

@@ -6,7 +6,9 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { MobileNav } from '@/components/layout/MobileNav'
 import { BannerPromo } from '@/components/layout/BannerPromo'
+import { RevealScript } from '@/components/layout/RevealScript'
 import { getStoreSettings } from '@/lib/cms'
+import { Suspense } from 'react'
 
 const notoSerif = Noto_Serif({
   subsets: ['latin'],
@@ -83,6 +85,9 @@ export default async function FrontendLayout({ children }: { children: React.Rea
         <main>{children}</main>
         <Footer settings={settings} />
         <MobileNav />
+        <Suspense fallback={null}>
+          <RevealScript />
+        </Suspense>
         {process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN && (
           <Script
             defer

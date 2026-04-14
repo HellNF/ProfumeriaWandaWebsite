@@ -25,8 +25,9 @@ export interface Prodotto {
   id: string
   nome: string
   categoria: 'profumeria' | 'cosmetici' | 'trucco' | 'pelletteria' | 'borse-valigie' | 'altro'
-  marca?: string | null
+  marca?: string | { nome: string } | null
   descrizione?: string | null
+  formato?: number | string | null
   foto?: Array<{
     immagine: Media | string
     id?: string | null
@@ -34,10 +35,17 @@ export interface Prodotto {
   prezzo?: number | null
   inPromozione?: boolean | null
   prezzoScontato?: number | null
+  percentualeSconto?: number | null
   disponibile?: boolean | null
   inEvidenza?: boolean | null
   createdAt: string
   updatedAt: string
+}
+
+export interface Testimonial {
+  autore: string
+  recensione: string
+  stelle: string
 }
 
 export interface ImpostazioniNegozio {
@@ -53,9 +61,29 @@ export interface ImpostazioniNegozio {
   testoHero?: string | null
   sottotitoloHero?: string | null
   immagineHero?: Media | string | null
+  heroImageFit?: 'cover' | 'contain' | null
+  heroImagePosition?: 'center' | 'top' | 'bottom' | 'left' | 'right' | null
   ctaHeroLabel?: string | null
   ctaHeroUrl?: string | null
   testoSezioneEvidenza?: string | null
+
+  // Immagini Homepage
+  categorieHome?: {
+    immagineFragranze?: Media | string | null
+    immagineSkincare?: Media | string | null
+    immagineMakeup?: Media | string | null
+    immagineAccessori?: Media | string | null
+  } | null
+  immagineQualitaTradizione?: Media | string | null
+  immagineConsulenzaWanda?: Media | string | null
+
+  // Immagini Negozio
+  immagineHeroNegozio?: Media | string | null
+  immagineStoria?: Media | string | null
+  serviziNegozio?: {
+    immagineConsulenzaOlfattiva?: Media | string | null
+    immagineCaffeChiacchiere?: Media | string | null
+  } | null
 
   // Sede & Contatti
   indirizzo?: string | null

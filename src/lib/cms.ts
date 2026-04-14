@@ -1,7 +1,7 @@
 import configPromise from '@payload-config'
 import { cacheLife } from 'next/cache'
 import { getPayload, type Where } from 'payload'
-import type { ImpostazioniNegozio, Prodotto } from '@/types/cms'
+import type { ImpostazioniNegozio, Prodotto, Testimonial } from '@/types/cms'
 
 type CatalogoFilters = {
   categoria?: string
@@ -85,7 +85,7 @@ export async function getCatalogProducts(filters: CatalogoFilters): Promise<Prod
   }
 }
 
-export async function getReviews() {
+export async function getReviews(): Promise<Testimonial[]> {
   'use cache'
   cacheLife('minutes')
 
@@ -96,7 +96,7 @@ export async function getReviews() {
       limit: 3,
       sort: '-createdAt',
     })
-    return docs
+    return (docs as unknown as Testimonial[]) || []
   } catch (err) {
     console.error('Error fetching reviews:', err)
     return []

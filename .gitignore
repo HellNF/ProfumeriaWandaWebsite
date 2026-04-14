@@ -43,3 +43,5 @@ image.png
 
 /public/media
 /stitch_profumeria_pelletteria_online/
+.claude/
+.agents/

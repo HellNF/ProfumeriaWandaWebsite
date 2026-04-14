@@ -26,8 +26,7 @@ export default buildConfig({
     user: Users.slug,
     meta: {
       titleSuffix: '— Profumeria Wanda Admin',
-      favicon: '/favicon.ico',
-      ogImage: '/og-image.jpg',
+      icons: [{ url: '/favicon.ico' }],
     },
     importMap: {
       baseDir: path.resolve(dirname),

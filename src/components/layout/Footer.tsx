@@ -24,8 +24,8 @@ export function Footer({ settings }: FooterProps) {
 
   return (
     <footer className="w-full rounded-t-[3rem] mt-20 bg-wanda-surface-low text-wanda-nero pt-16 pb-24 md:pb-12 border-t border-wanda-fucsia/5">
-      <div className="container mx-auto px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div className="wanda-container">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 text-center md:text-left">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2 space-y-4">
             {logo ? (
@@ -77,6 +77,7 @@ export function Footer({ settings }: FooterProps) {
                     href={link.href!}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`${link.label} (apre in nuova scheda)`}
                     className="text-sm text-wanda-text-soft hover:text-wanda-fucsia transition-all flex items-center gap-2"
                   >
                     {link.label}

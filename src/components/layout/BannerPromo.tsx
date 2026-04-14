@@ -18,7 +18,7 @@ export function BannerPromo({ settings }: BannerPromoProps) {
 
   const bgColor = bgColors[coloreBanner ?? 'fucsia']
 
-  const Content = () => (
+  const content = (
     <div className={`${bgColor} text-white py-2 px-4 text-center text-xs tracking-widest uppercase font-medium`}>
       {testoBanner}
     </div>
@@ -27,10 +27,10 @@ export function BannerPromo({ settings }: BannerPromoProps) {
   if (linkBanner) {
     return (
       <Link href={linkBanner} className="block hover:opacity-90 transition-opacity">
-        <Content />
+        {content}
       </Link>
     )
   }
 
-  return <Content />
+  return content
 }
