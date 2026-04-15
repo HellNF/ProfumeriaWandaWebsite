@@ -58,9 +58,11 @@ export default buildConfig({
           generateFileURL: ({ filename, prefix }) => {
             const bucket = process.env.SUPABASE_S3_BUCKET || 'wanda-media'
             const endpoint = process.env.SUPABASE_S3_ENDPOINT || ''
-            const baseUrl = endpoint.replace(/\/s3$/, '')
+            // L'endpoint S3 può usare *.storage.supabase.co, ma i file pubblici
+            // si servono sempre via <ref>.supabase.co (senza .storage.)
+            const projectRef = new URL(endpoint).hostname.split('.')[0]
             const key = prefix ? `${prefix}/${filename}` : filename
-            return `${baseUrl}/object/public/${bucket}/${key}`
+            return `https://${projectRef}.supabase.co/storage/v1/object/public/${bucket}/${key}`
           },
         },
       },
