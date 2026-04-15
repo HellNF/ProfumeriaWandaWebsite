@@ -1,5 +1,6 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { s3Storage } from '@payloadcms/storage-s3'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -26,7 +27,7 @@ export default buildConfig({
     user: Users.slug,
     meta: {
       titleSuffix: '— Profumeria Wanda Admin',
-      icons: [{ url: '/favicon.ico' }],
+      icons: [{ url: '/media/WandaFavicon.ico' }],
     },
     importMap: {
       baseDir: path.resolve(dirname),
@@ -45,11 +46,23 @@ export default buildConfig({
     },
   }),
   sharp,
-  upload: {
-    limits: {
-      fileSize: 10_000_000, // 10MB limit per file
-    },
-  },
+  plugins: [
+    s3Storage({
+      collections: {
+        media: true,
+      },
+      bucket: process.env.SUPABASE_S3_BUCKET || 'wanda-media',
+      config: {
+        endpoint: process.env.SUPABASE_S3_ENDPOINT,
+        region: process.env.SUPABASE_S3_REGION || 'eu-west-3',
+        credentials: {
+          accessKeyId: process.env.SUPABASE_S3_ACCESS_KEY_ID || '',
+          secretAccessKey: process.env.SUPABASE_S3_SECRET_ACCESS_KEY || '',
+        },
+        forcePathStyle: true,
+      },
+    }),
+  ],
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
-  telemetry: false, // Opt-out of anonymous telemetry for privacy
+  telemetry: false,
 })
