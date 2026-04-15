@@ -17,15 +17,7 @@ export const Media: CollectionConfig = {
     group: 'Catalogo',
   },
   upload: {
-    crop: {
-      aspectRatios: [
-        { label: 'Quadrato (1:1)', value: 1 / 1 },
-        { label: 'Ritratto (4:5)', value: 4 / 5 },
-        { label: 'Cinemascope (16:9)', value: 16 / 9 },
-        { label: 'A4 (1:1.41)', value: 1 / 1.41 },
-        { label: 'Custom', value: undefined },
-      ],
-    },
+    crop: true,
     focalPoint: true,
     imageSizes: [
       {
