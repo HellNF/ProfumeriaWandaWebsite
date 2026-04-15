@@ -88,6 +88,7 @@ export const Prodotti: CollectionConfig = {
                   type: 'select',
                   required: true,
                   label: 'Categoria del Negozio',
+                  index: true,
                   admin: {
                     width: '50%',
                     description: 'Scegli dove apparirà il prodotto nel catalogo.',
@@ -272,6 +273,7 @@ export const Prodotti: CollectionConfig = {
       type: 'checkbox',
       label: 'PRODOTTO DISPONIBILE',
       defaultValue: true,
+      index: true,
       admin: {
         position: 'sidebar',
         description: 'Togli la spunta se il prodotto è finito (apparirà come "Esaurito").',
@@ -282,6 +284,7 @@ export const Prodotti: CollectionConfig = {
       type: 'checkbox',
       label: 'MOSTRA IN VETRINA (Home)',
       defaultValue: false,
+      index: true,
       admin: {
         position: 'sidebar',
         description: 'Se attivo, il prodotto apparirà tra i primi nella pagina principale del sito.',
