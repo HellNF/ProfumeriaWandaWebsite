@@ -1,0 +1,222 @@
+[
+  {
+    "nome": "Giorgio Armani",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2021/10/ARMANI_LOGO-2.jpg",
+    "descrizione": "Giorgio Armani è un creatore di moda che, con il suo stile inconfondibile e discreto, ha conquistato le donne di tutto il mondo. La sua idea di eleganza, al di là delle tendenze, associa modernità e atemporalità. Nelle sue fragranze come nei suoi abiti troviamo la stessa anima, delicata e controllata, discreta e personale."
+  },
+  {
+    "nome": "Yves Saint Laurent",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2021/10/YSL-LOGO-YVES-SAINT-LAURENT-BEAUTE-BLACK-2.jpg",
+    "descrizione": "Yves Saint Laurent Beauté è l'unico brand young, luxury e edgy in profumeria. Dal lancio di Black Opium nel 2014 ha abbracciato un'estetica rock audace. Touche Éclat, Mascara Volume Effet Faux Cils e Rouge Pur Couture sono i suoi must-have iconici amati da milioni di donne."
+  },
+  {
+    "nome": "Lancôme",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2021/10/lancome-logo-new-2.jpg",
+    "descrizione": "La bellezza è una rosa che Lancôme offre alle donne. Creata nel 1935 da Armand Petitjean per promuovere lo stile 'à la française' nel mondo. Lancôme incarna da sempre la quintessenza della bellezza contemporanea, tra make-up, fragranze e trattamenti skincare d'eccellenza."
+  },
+  {
+    "nome": "Versace",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2021/02/56-Versace-300x300.jpg",
+    "descrizione": "Versace è un'azienda italiana di alta moda fondata nel 1978 dallo stilista Gianni Versace. Le sue fragranze esprimono eleganza e gusto raffinato attraverso note sensuali e sofisticate, celebrando la femminilità e la mascolinità con accordi freschi, floreali o opulenti."
+  },
+  {
+    "nome": "Gucci",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2021/09/Gucci-300x72.jpg",
+    "descrizione": "Dall'Italia al mondo, fedele al suo patrimonio dal 1921, Gucci celebra la poesia della bellezza. Le fragranze Gucci sono un invito aperto ad abbracciare la propria pluralità e a sperimentare le molteplici sfaccettature del proprio essere, con iconiche collezioni come Guilty, Flora e Bloom."
+  },
+  {
+    "nome": "Prada",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2021/09/PRADA_LOGO_NERO-2.jpg",
+    "descrizione": "La poesia del paradosso. Come in ogni sfilata Prada, la bellezza risiede nel potere delle contraddizioni: emozioni e riflessioni, armonia e conflitto. Ogni composizione olfattiva Prada nasce dall'alchimia dei contrasti e della trasformazione che forgia il lusso moderno."
+  },
+  {
+    "nome": "Dolce&Gabbana",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2021/02/85-DolceGabbana-300x300.jpg",
+    "descrizione": "Dolce&Gabbana Beauty accompagna in un viaggio all'insegna del lusso e dell'autenticità, in cui i codici estetici e l'identità del Brand si ritrovano in fragranze e make-up che celebrano la Bellezza nella sua espressione più autentica e mediterranea."
+  },
+  {
+    "nome": "Burberry",
+    "logoUrl": null,
+    "descrizione": "Fondata da Thomas Burberry nel 1856, lo stile di Burberry si basa sui principi del design tipico British: innovazione e manodopera qualificata. Le fragranze classiche e iconiche del brand sono ispirate alla musica, alla moda, a Londra e al ricco patrimonio culturale britannico."
+  },
+  {
+    "nome": "Calvin Klein",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2021/09/prova-logo-ck-400x246.jpg",
+    "descrizione": "Calvin Klein è uno dei marchi di lifestyle leader a livello mondiale, sinonimo di autentico stile minimalista moderno. Il suo portfolio di fragranze continua a ridefinire gli standard del profumo con uno stile provocativo, moderno, sensuale e iconico che rappresenta ideali coraggiosi e progressisti."
+  },
+  {
+    "nome": "Carolina Herrera",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2022/03/CH_300_150_logo.png",
+    "descrizione": "Creando uno stile globalmente riconosciuto, Carolina Herrera è alla guida della sua maison da oltre trent'anni. Il brand rappresenta l'eleganza newyorkese arricchita da uno spirito latino contagioso. La prima Eau de Parfum fu lanciata nel 1988, dando inizio a una storia di successi olfattivi."
+  },
+  {
+    "nome": "Clarins",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2021/02/34-Clarins-300x300.jpg",
+    "descrizione": "Clarins prende la bellezza sul serio. Nata dall'amore e dal rispetto di Jacques Courtin-Clarins per le donne, fin dall'apertura del primo Istituto a Parigi nel 1954. N°1 nel trattamento di alta gamma, Clarins offre il meglio della Natura attingendo agli attivi più preziosi per ogni tipo di pelle."
+  },
+  {
+    "nome": "Clinique",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2022/11/Logo-400x200-1.jpg",
+    "descrizione": "Clinique è la prima marca della profumeria ad essere sviluppata in collaborazione con dermatologi. Dal 1968 investe in ricerca scientifica per soddisfare le esigenze di tutti i tipi di pelle, unendo ingredienti attivi performanti e tecniche di formulazione d'avanguardia. Tutti i prodotti sono testati allergologicamente."
+  },
+  {
+    "nome": "Collistar",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2021/02/243-Collistar-300x300.jpg",
+    "descrizione": "Collistar è un brand beauty fondato a Milano nel 1983, presente in oltre 45 Paesi e parte di Bolton Group. Brand italiano leader nelle vendite nella profumeria selettiva, crede in una bellezza accessibile che rende ogni donna protagonista della propria storia di bellezza."
+  },
+  {
+    "nome": "Shiseido",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2022/10/Logo-x-comunicati_NERO-1-400x144.jpg",
+    "descrizione": "Fondata nel 1872 a Tokyo come prima farmacia in stile occidentale in Giappone, la missione di Shiseido è fornire prodotti per la cura della pelle, make-up e fragranze con efficacia e sicurezza senza eguali, fondendo filosofia orientale e innovazione occidentale attraverso tecnologie scientifiche avanzate."
+  },
+  {
+    "nome": "Tom Ford",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2022/11/TF-Logo_400x200.jpg",
+    "descrizione": "Tom Ford è uno dei designer più influenti della nostra epoca. Il marchio Tom Ford è stato fondato nel 2005 con il desiderio di creare il primo vero brand di lusso del XXI secolo, distinguendosi per eccezionale eleganza e sensualità, con un servizio personalizzato e impeccabile."
+  },
+  {
+    "nome": "Ralph Lauren",
+    "logoUrl": null,
+    "descrizione": "Ralph Lauren ha trasformato una semplice boutique di cravatte degli anni '60 in un gigante del lusso internazionale. Le fragranze, lanciate nel 1978 con i leggendari Polo e Lauren, catturano l'essenza del brand attraverso note fresche con accordi legnosi per lui e note floreali eleganti per lei."
+  },
+  {
+    "nome": "Narciso Rodriguez",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2021/02/233-Narciso-Rodriguez-300x300.jpg",
+    "descrizione": "Narciso Rodriguez è un maestro dell'eleganza. Le sue fragranze sono pensate come un potente tributo alle donne, alla loro forza, alla loro bellezza e alla loro grazia. La firma olfattiva del designer è un raro olio di muschio egiziano che crea un cuore iconico e riconoscibile in tutte le sue composizioni."
+  },
+  {
+    "nome": "Issey Miyake",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2021/02/231-Issey-Miyake-300x300.jpg",
+    "descrizione": "Issey Miyake è un visionario che crea un mix unico di culture e influenze in una ricerca costante dell'essenziale e dell'inventiva. Il brand fonde tradizione e innovazione, natura e sofisticazione, artigianato e tecnologia avanzata, traendo ispirazione da arte, architettura e incontri culturali."
+  },
+  {
+    "nome": "Jean Paul Gaultier",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2022/03/JPG-Corporate-Logo-400x146.png",
+    "descrizione": "Sensualità, libertà e irriverenza definiscono Jean Paul Gaultier, l'enfant terrible della moda. Il brand è noto per le sue iconiche fragranze nei distintivi flaconi a forma di busto, simbolo di audacia e creatività da oltre 20 anni. Gaultier ha rivoluzionato il runway portando lo street style alla haute couture."
+  },
+  {
+    "nome": "Mugler",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2021/10/MUGLER_LOGO-2.jpg",
+    "descrizione": "Frutto di associazioni inedite, i profumi di Mugler sono fragranze di carattere, persistenti, perfettamente riconoscibili e assolutamente indimenticabili. La filosofia è 'harmony in excess': composizioni focalizzate su pochi ingredienti rari in overdose, dosati con maestria per creare profumi di alta profumeria."
+  },
+  {
+    "nome": "Jimmy Choo",
+    "logoUrl": null,
+    "descrizione": "Jimmy Choo nasce dalla maestria artigianale del fondatore malese che aprì la sua prima boutique a Londra conquistando il mondo con calzature di lusso. Dal 2011 le fragranze Jimmy Choo celebrano sensualità, eleganza e carattere, creando atmosfere opulente con flaconi curatissimi per lui e per lei."
+  },
+  {
+    "nome": "Bvlgari",
+    "logoUrl": null,
+    "descrizione": "Bvlgari parfums nasce dall'incontro tra gioielliere e profumiere per esprimere con magnificenza tutto il glamour mediterraneo contemporaneo. Profondamente radicato nell'eredità romana, il brand fonde maestria orafa e arte profumiera, creando fragranze ispirate alle gemme naturali e alle influenze globali."
+  },
+  {
+    "nome": "Cartier",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2021/02/82-Cartier-300x300.jpg",
+    "descrizione": "Maison storica e leader indiscussa nel mondo della gioielleria e degli orologi, Cartier estende la sua maestria artigianale alle fragranze. La massima attenzione per ogni piccolo dettaglio ha fatto sì che questo luxury brand diventasse uno dei più desiderati al mondo per le sue delicate profumazioni femminili."
+  },
+  {
+    "nome": "Valentino",
+    "logoUrl": null,
+    "descrizione": "Valentino è una maison di alta moda fondata nel 1957 da Valentino Garavani. Le fragranze esprimono un'eleganza imperturbabile con uno stile intramontabile, attraverso ingredienti nobili con contrastanti note agrumate e speziate, in packaging unici che riflettono l'intento emotivo di ogni collezione."
+  },
+  {
+    "nome": "Moschino",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2021/02/73-Moschino-300x300.jpg",
+    "descrizione": "Moschino è una delle più iconiche istituzioni della moda italiana degli anni '80, rivoluzionaria e irriverente. Noto per le fragranze vivaci, giocose e originali, il brand è sinonimo di essere sempre chic e a proprio agio, in ogni circostanza, con un packaging distintivo che incarna eleganza e distinzione."
+  },
+  {
+    "nome": "Rabanne",
+    "logoUrl": null,
+    "descrizione": "Da quasi sei decenni Rabanne è una forza pionieristica del mondo del lusso. Noto per le sue creazioni fashion d'avanguardia e le sue audaci fragranze, il brand sfida continuamente le convenzioni e invita ad esprimere liberamente la propria personalità con composizioni olfattive iconiche come 1 Million e Lady Million."
+  },
+  {
+    "nome": "Boss",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2022/01/Logo-new-boss-piccolo-2-400x208.jpg",
+    "descrizione": "Lasciati guidare nella tua strada verso il successo grazie alle fragranze BOSS. Un mix di eleganza e modernità caratterizzato da note raffinate e da un design senza tempo. BOSS incarna lo spirito dell'uomo e della donna moderni, ambiziosi e determinati, con il tagline #BEYOUROWNBOSS."
+  },
+  {
+    "nome": "Azzaro",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2021/10/AZZARO-logo.jpg",
+    "descrizione": "Seduzione, autenticità, eleganza e modernità, ma anche gioia di vivere, convivialità, edonismo e spirito libero: questi sono i valori di Azzaro. Il brand crea alchimie innovative utilizzando materie prime di alta qualità, con fragranze che si rivolgono sia agli uomini che alle donne con uguale raffinatezza."
+  },
+  {
+    "nome": "Tommy Hilfiger",
+    "logoUrl": null,
+    "descrizione": "Tommy Hilfiger è uno dei più riconoscibili marchi americani nel mondo, simbolo dello stile preppy e casual-chic. Le fragranze del brand catturano l'essenza dello spirito americano: fresche, giovani e ottimiste, perfette per chi abbraccia uno stile di vita dinamico e positivo."
+  },
+  {
+    "nome": "Trussardi",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2023/06/logo_trussardi.jpg",
+    "descrizione": "Trussardi è un brand storico del Made in Italy, sinonimo di savoir faire, maestria artigianale ed eleganza senza tempo da oltre 100 anni. Brand lifestyle che esprime creatività attraverso moda, arte, cibo e design, rappresentando la massima espressione dell'italianità iconica nel mondo."
+  },
+  {
+    "nome": "La Mer",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2021/07/La-Mer-logo-300x150.jpg",
+    "descrizione": "La storia di La Mer è fatta di ricerca ed eccellenza per rivelare i benefici del mare sulla pelle. Dopo una ustione, il Dr. Huber cercò una cura: 12 anni e 6000 esperimenti dopo, creò il prezioso Miracle Broth™, il leggendario elisir di rinnovamento cellulare che trasforma la pelle."
+  },
+  {
+    "nome": "Chloé",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2024/08/3616303445560.jpg",
+    "descrizione": "Chloé è una maison di moda parigina fondata nel 1952, espressione di una femminilità libera e naturale. Le sue fragranze incarnano la stessa delicatezza romantica degli abiti: floreali, leggere e sofisticate, con un carattere deciso che seduce senza sforzo, come una donna parigina."
+  },
+  {
+    "nome": "Elizabeth Arden",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2024/12/085805525354.jpeg",
+    "descrizione": "Elizabeth Arden è un'icona della bellezza americana, fondata nel 1910 dall'omonima pioniera della cosmesi. Il brand unisce scienza e bellezza in prodotti per la cura della pelle e fragranze eleganti, con l'iconica linea Eight Hour Cream che continua a essere un bestseller mondiale da decenni."
+  },
+  {
+    "nome": "MAC Cosmetics",
+    "logoUrl": "https://www.ethos.it/wp-content/uploads/2024/10/773602657063.jpg",
+    "descrizione": "MAC Cosmetics è il brand di make-up professionale per eccellenza, fondato a Toronto nel 1984 e diventato rapidamente il riferimento per make-up artist e appassionati di bellezza in tutto il mondo. Noto per l'inclusività, l'innovazione e la straordinaria varietà cromatica dei suoi prodotti."
+  },
+  {
+    "nome": "Davidoff",
+    "logoUrl": null,
+    "descrizione": "Davidoff è un brand svizzero fondato sull'eredità di Zino Davidoff, maestro nell'arte del tabacco. Le fragranze maschili Davidoff, con il leggendario Cool Water in testa, sono diventate icone della profumeria contemporanea, celebrate per le loro note acquatiche fresche e la mascolinità pulita e sofisticata."
+  },
+  {
+    "nome": "Elie Saab",
+    "logoUrl": null,
+    "descrizione": "Elie Saab è il couturier libanese celebre in tutto il mondo per i suoi abiti da sogno indossati dalle star. Le sue fragranze nascono dalla stessa visione: femminilità romantica e sofisticata, costruita intorno a fiori rari e note orientali opulente, come la leggendaria Le Parfum e Girl of Now."
+  },
+  {
+    "nome": "Biotherm",
+    "logoUrl": null,
+    "descrizione": "Biotherm è un brand di skincare nato nel 1952 con una scoperta straordinaria: il plankton termale, fonte di vita dall'acqua alpina. Ogni prodotto Biotherm è formulato per rivitalizzare, idratare e rigenerare la pelle con ingredienti di origine acquatica ad alta efficacia, rispettando la pelle e l'ambiente."
+  },
+  {
+    "nome": "Montblanc",
+    "logoUrl": null,
+    "descrizione": "Montblanc, la prestigiosa maison svizzera nata nel 1906, ha saputo trasferire la sua eccellenza artigianale alle fragranze. Le profumazioni Montblanc incarnano lo spirito dell'esplorazione e dell'eleganza maschile, con composizioni sofisticate che evocano il mondo dei grandi viaggiatori e degli intellettuali."
+  },
+  {
+    "nome": "Viktor&Rolf",
+    "logoUrl": null,
+    "descrizione": "Viktor&Rolf è un duo di designer olandesi noto per la sua visione anti-conformista della moda. Le loro fragranze, come la cult Flowerbomb e Spicebomb, sono piccole bombe olfattive che esplodono di carattere: contraddittorie, poetiche e assolutamente indimenticabili, proprio come la loro moda."
+  },
+  {
+    "nome": "Missoni",
+    "logoUrl": null,
+    "descrizione": "Missoni è la maison italiana famosa in tutto il mondo per i suoi tessuti a zig-zag multicolore, icone dello stile italiano dal 1953. Le fragranze Missoni rispecchiano la stessa vivacità e creatività, con composizioni mediterranee che evocano calore, colore e la gioia di vivere all'italiana."
+  },
+  {
+    "nome": "Dsquared2",
+    "logoUrl": null,
+    "descrizione": "Dsquared2 è il brand dei gemelli canadesi Dean e Dan Caten, fondato nel 1995 e diventato sinonimo di stile rock-chic provocatorio. Le fragranze del brand riflettono la stessa dualità: audaci e sensuali, con un'energia contemporanea che unisce tradizione artigianale italiana e spirito nordamericano irreverente."
+  },
+  {
+    "nome": "Zadig&Voltaire",
+    "logoUrl": null,
+    "descrizione": "Zadig&Voltaire è un brand parigino nato nel 1997, espressione del rock chic contemporaneo. Le fragranze catturano lo spirito del brand: libere, ribelli ma eleganti, costruite intorno a un'anima rock con materiali di alta qualità. This Is Her! e This Is Him! sono tra le fragranze più amate dalla generazione Y."
+  },
+  {
+    "nome": "Iceberg",
+    "logoUrl": null,
+    "descrizione": "Iceberg è il brand italiano fondato nel 1974, noto per il suo stile sportswear-luxury ispirato alla cultura pop americana. Le fragranze Iceberg esprimono la stessa freschezza e leggerezza delle sue collezioni: giovani, vivaci e accessibili, con un carattere italiano riconoscibile."
+  },
+  {
+    "nome": "Laura Biagiotti",
+    "logoUrl": null,
+    "descrizione": "Laura Biagiotti, soprannominata 'la Regina del cashmere', è una delle più grandi ambasciatrici dello stile italiano nel mondo. Le sue fragranze nascono dall'amore per Roma e per la femminilità delicata: Roma, Venezia e Romantica sono composizioni poetiche che raccontano l'Italia con eleganza raffinata."
+  }
+]

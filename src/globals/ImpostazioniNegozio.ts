@@ -1,3 +1,4 @@
+import { revalidateTag } from 'next/cache'
 import type { GlobalConfig } from 'payload'
 
 export const ImpostazioniNegozio: GlobalConfig = {
@@ -697,4 +698,7 @@ export const ImpostazioniNegozio: GlobalConfig = {
       ],
     },
   ],
+  hooks: {
+    afterChange: [() => revalidateTag('impostazioni-negozio', 'max')],
+  },
 }

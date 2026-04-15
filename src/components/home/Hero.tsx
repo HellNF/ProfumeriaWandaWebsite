@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Sparkles } from 'lucide-react'
 import { ParallaxHeroImage } from './ParallaxHeroImage'
+import { normalizePayloadUrl } from '@/lib/utils'
 import type { Media } from '@/types/cms'
 
 interface HeroProps {
@@ -23,26 +24,8 @@ export function Hero({
   ctaHeroLabel, 
   ctaHeroUrl 
 }: HeroProps) {
-  // Helper per estrarre l'URL correttamente
-  const getUrl = (img: Media | string | null | undefined) => {
-    if (typeof img === 'object' && img?.url) {
-      if (img.url.startsWith('http://localhost:3000')) {
-        return img.url.replace('http://localhost:3000', '')
-      }
-      return img.url
-    }
-    if (typeof img === 'string') {
-      if (img.startsWith('http://localhost:3000')) {
-        return img.replace('http://localhost:3000', '')
-      }
-      if (img.startsWith('/') || img.startsWith('http')) {
-        return img
-      }
-    }
-    return null
-  }
-
-  const imageUrl = getUrl(immagineHero)
+  const rawUrl = typeof immagineHero === 'object' ? immagineHero?.url : immagineHero
+  const imageUrl = normalizePayloadUrl(rawUrl)
   const imageAlt = (typeof immagineHero === 'object' && immagineHero?.alt) || 'Atelier Wanda'
 
   // Mappatura delle posizioni CSS

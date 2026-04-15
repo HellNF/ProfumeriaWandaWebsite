@@ -1,4 +1,5 @@
 // src/collections/Prodotti.ts
+import { revalidateTag } from 'next/cache'
 import type { CollectionConfig } from 'payload'
 
 const formatSlug = (val: string): string =>
@@ -45,6 +46,8 @@ export const Prodotti: CollectionConfig = {
         return data
       },
     ],
+    afterChange: [() => revalidateTag('prodotti', 'max')],
+    afterDelete: [() => revalidateTag('prodotti', 'max')],
   },
   fields: [
     {

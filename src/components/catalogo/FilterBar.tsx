@@ -45,59 +45,66 @@ export function FilterBar() {
   )
 
   return (
-    <div className="space-y-6 mb-12">
-      {/* Categorie */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-wanda-surface-low p-4 rounded-xl">
-        <div className="flex flex-wrap gap-3 justify-center">
-          {CATEGORIES.map(({ value, label }) => (
-            <button
-              key={value}
-              onClick={() => updateFilter('categoria', value)}
-              className={`px-6 py-2 rounded-full font-bold text-sm transition-all duration-300 ${
-                activeCategory === value
-                  ? 'bg-wanda-fucsia text-white shadow-md'
-                  : 'bg-white text-wanda-text-soft hover:text-wanda-fucsia border border-wanda-outline/10 hover:border-wanda-fucsia/30'
-              }`}
-            >
-              {label}
-            </button>
-          ))}
+    <div className="mb-12 space-y-3">
+      {/* Riga 1: Categorie (scroll orizzontale) + toggle promo */}
+      <div className="flex items-center gap-2 bg-wanda-surface-low rounded-xl p-2">
+        {/* Scroll area con fade sui bordi */}
+        <div className="relative flex-1 min-w-0">
+          <div className="overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="flex gap-2 w-max">
+              {CATEGORIES.map(({ value, label }) => (
+                <button
+                  key={value}
+                  onClick={() => updateFilter('categoria', value)}
+                  className={`px-4 py-2 rounded-lg font-bold text-sm whitespace-nowrap transition-all duration-200 ${
+                    activeCategory === value
+                      ? 'bg-wanda-fucsia text-white shadow-sm'
+                      : 'bg-transparent text-wanda-text-soft hover:bg-white hover:text-wanda-fucsia'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+          {/* Fade destra per indicare scroll */}
+          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-wanda-surface-low to-transparent pointer-events-none" />
         </div>
 
-        <div className="flex items-center gap-4 border-l border-wanda-outline/20 pl-6 h-full">
-          <label className="flex items-center cursor-pointer gap-3">
-            <span className="text-sm font-bold text-wanda-text-soft">Solo in promozione</span>
+        {/* Divider + toggle promo — sempre visibile a destra */}
+        <div className="shrink-0 flex items-center gap-3 border-l border-wanda-outline/20 pl-3">
+          <label className="flex items-center cursor-pointer gap-2">
+            <span className="text-xs font-bold text-wanda-text-soft whitespace-nowrap hidden sm:block">Offerte</span>
             <div className="relative">
-              <input 
-                type="checkbox" 
-                className="sr-only peer" 
+              <input
+                type="checkbox"
+                className="sr-only peer"
                 checked={onlyPromo}
                 onChange={() => updateFilter('promo', onlyPromo ? '' : '1')}
+                aria-label="Mostra solo prodotti in promozione"
               />
-              <div className="w-11 h-6 bg-wanda-surface-mid rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-wanda-fucsia"></div>
+              <div className="w-10 h-5 bg-wanda-surface-mid rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-wanda-fucsia" />
             </div>
           </label>
         </div>
       </div>
 
-      {/* Destinatario (Solo se categoria non è Altro o Borse) */}
-      <div className="flex items-center gap-4 bg-white p-3 rounded-xl border border-wanda-outline/5 overflow-x-auto no-scrollbar">
-        <span className="text-xs font-bold uppercase tracking-widest text-wanda-text-soft px-4 shrink-0">Filtra per:</span>
-        <div className="flex gap-2">
-          {GENDERS.map(({ value, label }) => (
-            <button
-              key={value}
-              onClick={() => updateFilter('destinatario', value)}
-              className={`px-5 py-1.5 rounded-full text-xs font-bold transition-all ${
-                activeGender === value
-                  ? 'bg-wanda-nero text-white'
-                  : 'bg-wanda-surface-low text-wanda-text-soft hover:bg-wanda-surface-mid'
-              }`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+      {/* Riga 2: Genere */}
+      <div className="flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl border border-wanda-outline/5">
+        <span className="text-[10px] font-bold uppercase tracking-widest text-wanda-outline shrink-0 mr-1">Per:</span>
+        {GENDERS.map(({ value, label }) => (
+          <button
+            key={value}
+            onClick={() => updateFilter('destinatario', value)}
+            className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 ${
+              activeGender === value
+                ? 'bg-wanda-nero text-white'
+                : 'text-wanda-text-soft hover:bg-wanda-surface-low'
+            }`}
+          >
+            {label}
+          </button>
+        ))}
       </div>
     </div>
   )

@@ -73,6 +73,20 @@
   .reveal-delay-300 { transition-delay: 300ms; }
   .reveal-delay-400 { transition-delay: 400ms; }
 
+  /* Brand Marquee */
+  .marquee-track {
+    animation: marquee 40s linear infinite;
+  }
+
+  .marquee-container:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .reveal-on-scroll {
       opacity: 1;
@@ -86,6 +100,9 @@
     .reveal-delay-300,
     .reveal-delay-400 {
       transition-delay: 0ms;
+    }
+    .marquee-track {
+      animation: none;
     }
   }
 }

@@ -8,6 +8,12 @@ export function RevealScript() {
   const searchParams = useSearchParams()
 
   useEffect(() => {
+    // Rimuove is-visible dal DOM prima di ricominciare: evita hydration mismatch
+    // su navigazione SPA dove il DOM vecchio persiste mentre React riconcilia
+    document.querySelectorAll('.reveal-on-scroll.is-visible').forEach((el) => {
+      el.classList.remove('is-visible')
+    })
+
     const observerOptions = {
       root: null,
       rootMargin: '0px',
@@ -30,19 +36,8 @@ export function RevealScript() {
     // Initial observation
     observeElements()
 
-    // Watch for DOM changes (like products loading or filtering)
-    const mutationObserver = new MutationObserver(() => {
-      observeElements()
-    })
-
-    mutationObserver.observe(document.body, {
-      childList: true,
-      subtree: true
-    })
-
     return () => {
       observer.disconnect()
-      mutationObserver.disconnect()
     }
   }, [pathname, searchParams]) // Re-run on navigation or filter changes
 

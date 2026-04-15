@@ -1,3 +1,4 @@
+import { revalidateTag } from 'next/cache'
 import type { CollectionConfig } from 'payload'
 
 export const Marche: CollectionConfig = {
@@ -16,6 +17,10 @@ export const Marche: CollectionConfig = {
     create: ({ req: { user } }) => Boolean(user),
     update: ({ req: { user } }) => Boolean(user),
     delete: ({ req: { user } }) => Boolean(user),
+  },
+  hooks: {
+    afterChange: [() => revalidateTag('marche', 'max')],
+    afterDelete: [() => revalidateTag('marche', 'max')],
   },
   fields: [
     {

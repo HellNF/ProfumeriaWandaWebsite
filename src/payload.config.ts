@@ -13,6 +13,7 @@ import { Marche } from './collections/Marche.ts'
 import { Recensioni } from './collections/Recensioni.ts'
 import { ImpostazioniNegozio } from './globals/ImpostazioniNegozio.ts'
 import { ImportatoreMarche } from './globals/ImportatoreMarche.ts'
+import { ImportatoreProdotti } from './globals/ImportatoreProdotti.ts'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -34,7 +35,7 @@ export default buildConfig({
     },
   },
   collections: [Prodotti, Marche, Media, Users, Recensioni],
-  globals: [ImpostazioniNegozio, ImportatoreMarche],
+  globals: [ImpostazioniNegozio, ImportatoreMarche, ImportatoreProdotti],
   editor: lexicalEditor(),
   secret: payloadSecret,
   typescript: {

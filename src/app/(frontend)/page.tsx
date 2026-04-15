@@ -2,51 +2,35 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Hero } from '@/components/home/Hero'
 import { FeaturedProducts } from '@/components/home/FeaturedProducts'
+import { BrandsMarquee } from '@/components/home/BrandsMarquee'
 import { Testimonials } from '@/components/home/Testimonials'
-import { getFeaturedProducts, getStoreSettings, getReviews } from '@/lib/cms'
-import type { Media } from '@/types/cms'
+import { getFeaturedProducts, getBrands, getStoreSettings, getReviews } from '@/lib/cms'
+import { getMediaUrl, getMediaAlt } from '@/lib/utils'
 
 export default async function HomePage() {
-  const [settings, prodottiInEvidenza, recensioni] = await Promise.all([
-    getStoreSettings(),
-    getFeaturedProducts(),
-    getReviews(),
+  const [settings, prodottiInEvidenza, recensioni, marche] = await Promise.all([
+    getStoreSettings().catch(() => ({}) as Awaited<ReturnType<typeof getStoreSettings>>),
+    getFeaturedProducts().catch(() => []),
+    getReviews().catch(() => []),
+    getBrands().catch(() => []),
   ])
 
-  // Helper per estrarre URL dalle immagini dei gruppi e correggere URL locali
-  const getImgUrl = (img: Media | string | null | undefined, fallback: string) => {
-    if (typeof img === 'object' && img?.url) {
-      // Se l'URL è assoluto su localhost (tipico in dev), lo rendiamo relativo
-      if (img.url.startsWith('http://localhost:3000')) {
-        return img.url.replace('http://localhost:3000', '')
-      }
-      return img.url
-    }
-    // Anche per le stringhe fallback se sono localhost
-    if (typeof img === 'string' && img.startsWith('http://localhost:3000')) {
-      return img.replace('http://localhost:3000', '')
-    }
-    return fallback
-  }
-  const getImgAlt = (img: Media | string | null | undefined, fallback: string) => 
-    (typeof img === 'object' && img?.alt ? img.alt : fallback)
-
   const catImages = settings.categorieHome || {}
-  
-  const imgFragranze = getImgUrl(catImages.immagineFragranze, "https://lh3.googleusercontent.com/aida-public/AB6AXuDFVo2LdpY5AtJ0-3Z94wXt0Su_QWtsSC4VTVCBDFa5SdGuDkVb5SNVMgkmMBIp-suTk71fsy1rs02z8MHu6PLCrnbnR6B5GtamDXVvzNKW-4W0hGaJLwUvl0DBfL54Rp0uxDKZ7wu-SGnFjt3IVaCphtWVL215NTQNZlFNyQOk8DWV7g93RaRl4HRMo2KyK_d90-O7RpzsJ9wWeP3feTA9g9WO_KEEkvlQm6aBp-wQF8RyuKZXPq0uGlaokxyTwso3cpkJuni6vU0")
-  const altFragranze = getImgAlt(catImages.immagineFragranze, "Fragranze artistiche e profumi di lusso")
 
-  const imgSkincare = getImgUrl(catImages.immagineSkincare, "https://lh3.googleusercontent.com/aida-public/AB6AXuAfnnwtEybtnAsZx58622d0qIAgSFWWgg7gYAxgEXl2oqjvPepjmMzm_PlO5jYAVDkygDYzRyAwET7l4oUsclGYv2sMiTs_1Bz34pKK2Y0U0EocEDldXK3LdDXNI6rwW0EDbla6XeqRWdY1aysYudBp-fwZeGp9doGH9vyv-rCBmB9isanGy-vZyoDZAFDdjJM7Fj8Qq-AfcFCcIOcE9YceaQuDef8Yh2f9RZtEeEAn4jBkc6B9TChIBBBM23ZRve80G3KEnjnNUww")
-  const altSkincare = getImgAlt(catImages.immagineSkincare, "Prodotti per la cura della pelle e skincare")
+  const imgFragranze = getMediaUrl(catImages.immagineFragranze, "https://lh3.googleusercontent.com/aida-public/AB6AXuDFVo2LdpY5AtJ0-3Z94wXt0Su_QWtsSC4VTVCBDFa5SdGuDkVb5SNVMgkmMBIp-suTk71fsy1rs02z8MHu6PLCrnbnR6B5GtamDXVvzNKW-4W0hGaJLwUvl0DBfL54Rp0uxDKZ7wu-SGnFjt3IVaCphtWVL215NTQNZlFNyQOk8DWV7g93RaRl4HRMo2KyK_d90-O7RpzsJ9wWeP3feTA9g9WO_KEEkvlQm6aBp-wQF8RyuKZXPq0uGlaokxyTwso3cpkJuni6vU0")
+  const altFragranze = getMediaAlt(catImages.immagineFragranze, "Fragranze artistiche e profumi di lusso")
 
-  const imgMakeup = getImgUrl(catImages.immagineMakeup, "https://lh3.googleusercontent.com/aida-public/AB6AXuDS_5zzy6-YRwpybWTLoRNV82UD29s0VmskE6_RHv5Wplcj-YJk-Ef79hGKwWCVfEM6yXz-h2ri3L59ZsPznhEXrIM0he73914h7WD6haae_7rgKxHVMUQD0R3oQ7iRm5Zs2ou7ndoamV23mftSBC71C4u6i8gyn-4blmvAPuevFiv0G11vl_yDyOyM3V3I3CujoQgBxT-SvqlMTcEf4am7ppeJGCLhDrpV3SUWjtFRS9impbU9m2MWbzHpF4ksikIcWtWVeM5twQg")
-  const altMakeup = getImgAlt(catImages.immagineMakeup, "Make-up e trucco professionale")
+  const imgSkincare = getMediaUrl(catImages.immagineSkincare, "https://lh3.googleusercontent.com/aida-public/AB6AXuAfnnwtEybtnAsZx58622d0qIAgSFWWgg7gYAxgEXl2oqjvPepjmMzm_PlO5jYAVDkygDYzRyAwET7l4oUsclGYv2sMiTs_1Bz34pKK2Y0U0EocEDldXK3LdDXNI6rwW0EDbla6XeqRWdY1aysYudBp-fwZeGp9doGH9vyv-rCBmB9isanGy-vZyoDZAFDdjJM7Fj8Qq-AfcFCcIOcE9YceaQuDef8Yh2f9RZtEeEAn4jBkc6B9TChIBBBM23ZRve80G3KEnjnNUww")
+  const altSkincare = getMediaAlt(catImages.immagineSkincare, "Prodotti per la cura della pelle e skincare")
 
-  const imgAccessori = getImgUrl(catImages.immagineAccessori, "https://lh3.googleusercontent.com/aida-public/AB6AXuDsAQYC4BqxzIAGKpVXwhv90p5v7sKF0Vgbmzp3VpairgYDhDduvzLPisacA7cCXUausSp2kbcjipfWb0zxklDskm_M77VbYkah9nmj-GsZrejilww2kphjavMKP12Jlg0KtDVYcItrEAHT24ibxaHM2GtTcg00D7H7lw1jV9wbgbnroRXQ5mezpkIkycoL9O1uuJczdmO2KPKWsq0t3EUiV8WymVMTY-X1OwgvLlhu0v7HZ0r2Qdt6S3ksOmF-rwX16xWUcVMmEtE")
-  const altAccessori = getImgAlt(catImages.immagineAccessori, "Borse e accessori di pelletteria di design")
+  const imgMakeup = getMediaUrl(catImages.immagineMakeup, "https://lh3.googleusercontent.com/aida-public/AB6AXuDS_5zzy6-YRwpybWTLoRNV82UD29s0VmskE6_RHv5Wplcj-YJk-Ef79hGKwWCVfEM6yXz-h2ri3L59ZsPznhEXrIM0he73914h7WD6haae_7rgKxHVMUQD0R3oQ7iRm5Zs2ou7ndoamV23mftSBC71C4u6i8gyn-4blmvAPuevFiv0G11vl_yDyOyM3V3I3CujoQgBxT-SvqlMTcEf4am7ppeJGCLhDrpV3SUWjtFRS9impbU9m2MWbzHpF4ksikIcWtWVeM5twQg")
+  const altMakeup = getMediaAlt(catImages.immagineMakeup, "Make-up e trucco professionale")
 
-  const imgQualita = getImgUrl(settings.immagineQualitaTradizione, "https://lh3.googleusercontent.com/aida-public/AB6AXuABGlQR7VcJsq6HNL7FGaWiaHc6PQA3rhC6taMKt4og-STk8AHVQP2DVh3KuEZqKKRi-qzPR8Ac1RWbU4gOoiM5tcg3H1PtLGK8QPOnReivCUvcCaGTlIRah9Ii6NpF_lRLakuGhamWJayutZ4-PH-_Ij4t4nr2szH6I0S0wn_uEnDM5vZ55eJS7n4AUSe-BeU22BrXIrH0y_k7iFQauQHRJrjniFgf57xZZbZdPd78gVbW-k1L2DE-47nCFEI1O5OtJfUHR2cWlK0")
-  const altQualita = getImgAlt(settings.immagineQualitaTradizione, "Qualità Ethos")
+  const imgAccessori = getMediaUrl(catImages.immagineAccessori, "https://lh3.googleusercontent.com/aida-public/AB6AXuDsAQYC4BqxzIAGKpVXwhv90p5v7sKF0Vgbmzp3VpairgYDhDduvzLPisacA7cCXUausSp2kbcjipfWb0zxklDskm_M77VbYkah9nmj-GsZrejilww2kphjavMKP12Jlg0KtDVYcItrEAHT24ibxaHM2GtTcg00D7H7lw1jV9wbgbnroRXQ5mezpkIkycoL9O1uuJczdmO2KPKWsq0t3EUiV8WymVMTY-X1OwgvLlhu0v7HZ0r2Qdt6S3ksOmF-rwX16xWUcVMmEtE")
+  const altAccessori = getMediaAlt(catImages.immagineAccessori, "Borse e accessori di pelletteria di design")
+
+  const imgQualita = getMediaUrl(settings.immagineQualitaTradizione, "https://lh3.googleusercontent.com/aida-public/AB6AXuABGlQR7VcJsq6HNL7FGaWiaHc6PQA3rhC6taMKt4og-STk8AHVQP2DVh3KuEZqKKRi-qzPR8Ac1RWbU4gOoiM5tcg3H1PtLGK8QPOnReivCUvcCaGTlIRah9Ii6NpF_lRLakuGhamWJayutZ4-PH-_Ij4t4nr2szH6I0S0wn_uEnDM5vZ55eJS7n4AUSe-BeU22BrXIrH0y_k7iFQauQHRJrjniFgf57xZZbZdPd78gVbW-k1L2DE-47nCFEI1O5OtJfUHR2cWlK0")
+  const altQualita = getMediaAlt(settings.immagineQualitaTradizione, "Qualità Ethos")
 
   return (
     <main className="space-y-24 pb-20">
@@ -65,11 +49,11 @@ export default async function HomePage() {
           <p className="text-wanda-text-soft max-w-2xl mx-auto text-lg">Qualità accessibile, scelta con cura per ogni tua esigenza quotidiana.</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[800px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 h-auto lg:h-[800px]">
           {/* Fragranze Large Card */}
-          <Link 
-            href="/catalogo?categoria=profumeria" 
-            className="md:col-span-8 group relative overflow-hidden rounded-xl bg-wanda-surface-low transition-all duration-500 hover:shadow-2xl active:scale-[0.99] reveal-on-scroll"
+          <Link
+            href="/catalogo?categoria=profumeria"
+            className="md:col-span-2 lg:col-span-8 group relative overflow-hidden rounded-xl bg-wanda-surface-low transition-all duration-500 hover:shadow-2xl active:scale-[0.99] reveal-on-scroll min-h-[300px] md:min-h-[350px] lg:min-h-0"
             aria-label="Esplora la nostra collezione di fragranze e profumeria"
           >
             <Image 
@@ -90,7 +74,7 @@ export default async function HomePage() {
           {/* Skincare Card */}
           <Link 
             href="/catalogo?categoria=cosmetici" 
-            className="md:col-span-4 group relative overflow-hidden rounded-xl bg-wanda-surface-mid transition-all duration-500 hover:shadow-2xl active:scale-[0.99] reveal-on-scroll reveal-delay-100"
+            className="md:col-span-1 lg:col-span-4 group relative overflow-hidden rounded-xl bg-wanda-surface-mid transition-all duration-500 hover:shadow-2xl active:scale-[0.99] reveal-on-scroll reveal-delay-100 min-h-[280px] lg:min-h-0"
             aria-label="Scopri i prodotti per la skincare e i cosmetici"
           >
             <Image 
@@ -110,7 +94,7 @@ export default async function HomePage() {
           {/* Make-up Card */}
           <Link 
             href="/catalogo?categoria=trucco" 
-            className="md:col-span-4 group relative overflow-hidden rounded-xl bg-wanda-surface-mid transition-all duration-500 hover:shadow-2xl active:scale-[0.99] reveal-on-scroll reveal-delay-200"
+            className="md:col-span-1 lg:col-span-4 group relative overflow-hidden rounded-xl bg-wanda-surface-mid transition-all duration-500 hover:shadow-2xl active:scale-[0.99] reveal-on-scroll reveal-delay-200 min-h-[280px] lg:min-h-0"
             aria-label="Esplora la nostra selezione di Make-up"
           >
             <Image 
@@ -129,7 +113,7 @@ export default async function HomePage() {
           {/* Bags & Accessories */}
           <Link 
             href="/catalogo?categoria=pelletteria" 
-            className="md:col-span-8 group relative overflow-hidden rounded-xl bg-wanda-surface-low transition-all duration-500 hover:shadow-2xl active:scale-[0.99] reveal-on-scroll reveal-delay-300"
+            className="md:col-span-2 lg:col-span-8 group relative overflow-hidden rounded-xl bg-wanda-surface-low transition-all duration-500 hover:shadow-2xl active:scale-[0.99] reveal-on-scroll reveal-delay-300 min-h-[300px] md:min-h-[350px] lg:min-h-0"
             aria-label="Scopri borse e accessori di pelletteria"
           >
             <Image 
@@ -156,6 +140,8 @@ export default async function HomePage() {
         title={settings.testoSezioneEvidenza}
         immagineConsulenza={settings.immagineConsulenzaWanda}
       />
+
+      <BrandsMarquee marche={marche} />
 
       {recensioni && recensioni.length > 0 && <Testimonials reviews={recensioni} />}
 

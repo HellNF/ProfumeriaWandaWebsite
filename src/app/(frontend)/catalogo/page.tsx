@@ -25,10 +25,12 @@ async function CatalogoContent({ searchParams }: Props) {
     destinatario,
   })
 
+  const filtraggioAttivo = !!(categoria || promo || destinatario)
+
   return (
     <>
       <FilterBar />
-      <ProductGrid prodotti={prodotti} />
+      <ProductGrid prodotti={prodotti} filtraggioAttivo={filtraggioAttivo} />
     </>
   )
 }

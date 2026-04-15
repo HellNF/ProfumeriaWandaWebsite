@@ -4,7 +4,7 @@ import { Wind, Coffee, MapPin, Clock, Phone, Navigation } from 'lucide-react'
 import { MapEmbed } from '@/components/negozio/MapEmbed'
 import { StructuredData } from '@/components/negozio/StructuredData'
 import { getStoreSettings } from '@/lib/cms'
-import type { Media } from '@/types/cms'
+import { getMediaUrl, getMediaAlt } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'Il Negozio',
@@ -18,32 +18,19 @@ const dayLabels: Record<string, string> = {
 export default async function NegozioPage() {
   const settings = await getStoreSettings()
 
-  // Helper per estrarre URL dalle immagini e correggere URL locali
-  const getImgUrl = (img: Media | string | null | undefined, fallback: string) => {
-    if (typeof img === 'object' && img?.url) {
-      if (img.url.startsWith('http://localhost:3000')) {
-        return img.url.replace('http://localhost:3000', '')
-      }
-      return img.url
-    }
-    return fallback
-  }
-  const getImgAlt = (img: Media | string | null | undefined, fallback: string) => 
-    (typeof img === 'object' && img?.alt ? img.alt : fallback)
-
   const servImages = settings.serviziNegozio || {}
 
-  const imgHero = getImgUrl(settings.immagineHeroNegozio, "https://lh3.googleusercontent.com/aida-public/AB6AXuDP6917KZk53AwGAHObhtqi6rieq38KAREqkOXnegkERH9VLzSXfHaf9KtCUscNyldtHBUmQy3AziUVOxhW6guHvkOg5LIIhCmxvHubUpdgmiJtULZBPhdbmSrU-T1p4RlbXmZU1CgmZogHuderLAL6PMCW0o2SYoKHPJvJktgbCpucbXlzLBFSG3p8SLzT3NOYp7m6mUG9UtEj3Cr8Rv5kdEtQxkLPjqQARgKV6dXc9JrgDIiAZiird-3bjQeyOY_1zSPMaDRNYwc")
-  const altHero = getImgAlt(settings.immagineHeroNegozio, "Interno Boutique")
+  const imgHero = getMediaUrl(settings.immagineHeroNegozio, "https://lh3.googleusercontent.com/aida-public/AB6AXuDP6917KZk53AwGAHObhtqi6rieq38KAREqkOXnegkERH9VLzSXfHaf9KtCUscNyldtHBUmQy3AziUVOxhW6guHvkOg5LIIhCmxvHubUpdgmiJtULZBPhdbmSrU-T1p4RlbXmZU1CgmZogHuderLAL6PMCW0o2SYoKHPJvJktgbCpucbXlzLBFSG3p8SLzT3NOYp7m6mUG9UtEj3Cr8Rv5kdEtQxkLPjqQARgKV6dXc9JrgDIiAZiird-3bjQeyOY_1zSPMaDRNYwc")
+  const altHero = getMediaAlt(settings.immagineHeroNegozio, "Interno Boutique")
 
-  const imgStoria = getImgUrl(settings.immagineStoria, "https://lh3.googleusercontent.com/aida-public/AB6AXuA29C17qyhf-rklGL5NnCGi7_ydGjXakQi3JBN06y53LUeXC8HMZn7t-uNmby1wQXSV7Luzt5KRplVLdLw6nf8QBNjTqipi5Z3AMV61nW18Y7I_ZmX5KEwDqdpTGyLNBV7u4j7_0BtSsN2gTxTd2tPhJFvgaGTx6r54lQx5KqXuqIZG9BeyVct0aq_wiTpoBquvZWIBR0YxhQrFhZBJq7ILhVXZQ67Om52O4ETMTGIvzirknW4IXNSUjHnGY-JT7E-eOwYJmIdVdY8")
-  const altStoria = getImgAlt(settings.immagineStoria, "Storia Profumeria Wanda")
+  const imgStoria = getMediaUrl(settings.immagineStoria, "https://lh3.googleusercontent.com/aida-public/AB6AXuA29C17qyhf-rklGL5NnCGi7_ydGjXakQi3JBN06y53LUeXC8HMZn7t-uNmby1wQXSV7Luzt5KRplVLdLw6nf8QBNjTqipi5Z3AMV61nW18Y7I_ZmX5KEwDqdpTGyLNBV7u4j7_0BtSsN2gTxTd2tPhJFvgaGTx6r54lQx5KqXuqIZG9BeyVct0aq_wiTpoBquvZWIBR0YxhQrFhZBJq7ILhVXZQ67Om52O4ETMTGIvzirknW4IXNSUjHnGY-JT7E-eOwYJmIdVdY8")
+  const altStoria = getMediaAlt(settings.immagineStoria, "Storia Profumeria Wanda")
 
-  const imgConsulenza = getImgUrl(servImages.immagineConsulenzaOlfattiva, "https://lh3.googleusercontent.com/aida-public/AB6AXuBBnANPd8QygHqU_OAdg8o25aoMXPkGSOGkDfvGhEM3EBAZXdzjhQC-dECifw4v-EVDhBaUE5FFbmyOmgAzc2XK8dyiLLQEBPBXCTltej64YeGlPYPl7F2FTatPusRNFiAjRoQizFrp315t768xRuilBogGCUeqz8-HVFif9pXvHKeBRcaD9-Qh0-LjBShzJvejZJDolCpL_gk4pK0aD3kNJH3ndu2TTBiFt0QQ02rZb1peF5jrxNrvqCHfk03X3MD7rOBM3eJOeqM")
-  const altConsulenza = getImgAlt(servImages.immagineConsulenzaOlfattiva, "Consulenza Olfattiva")
+  const imgConsulenza = getMediaUrl(servImages.immagineConsulenzaOlfattiva, "https://lh3.googleusercontent.com/aida-public/AB6AXuBBnANPd8QygHqU_OAdg8o25aoMXPkGSOGkDfvGhEM3EBAZXdzjhQC-dECifw4v-EVDhBaUE5FFbmyOmgAzc2XK8dyiLLQEBPBXCTltej64YeGlPYPl7F2FTatPusRNFiAjRoQizFrp315t768xRuilBogGCUeqz8-HVFif9pXvHKeBRcaD9-Qh0-LjBShzJvejZJDolCpL_gk4pK0aD3kNJH3ndu2TTBiFt0QQ02rZb1peF5jrxNrvqCHfk03X3MD7rOBM3eJOeqM")
+  const altConsulenza = getMediaAlt(servImages.immagineConsulenzaOlfattiva, "Consulenza Olfattiva")
 
-  const imgCaffe = getImgUrl(servImages.immagineCaffeChiacchiere, "https://lh3.googleusercontent.com/aida-public/AB6AXuBHRvkLfjLvUmXs45JXFtMRyrkZmLSw_LxUpOJlaybHikB6bkvT8p4ix3hsp6a9YnFFlMTukjE9vCcUo7e86cDxd2Nc0IFLLbImUcSk_YNyIrAEcnsafLJHWdboFPOTAGZnF58SxsfbMmBxvgY8FG_Q8RYZC3Bz3ORQCWG9ZW34R0dG6dgYKyV0XPB25BI7mI9lwyaOgNBwNdLGDI-goy5w2KBrYDv7fmTWYaPHeanXuABusXzDIBUU_7cGW795na7HT9hF75VaBBo")
-  const altCaffe = getImgAlt(servImages.immagineCaffeChiacchiere, "Un caffè e due chiacchiere")
+  const imgCaffe = getMediaUrl(servImages.immagineCaffeChiacchiere, "https://lh3.googleusercontent.com/aida-public/AB6AXuBHRvkLfjLvUmXs45JXFtMRyrkZmLSw_LxUpOJlaybHikB6bkvT8p4ix3hsp6a9YnFFlMTukjE9vCcUo7e86cDxd2Nc0IFLLbImUcSk_YNyIrAEcnsafLJHWdboFPOTAGZnF58SxsfbMmBxvgY8FG_Q8RYZC3Bz3ORQCWG9ZW34R0dG6dgYKyV0XPB25BI7mI9lwyaOgNBwNdLGDI-goy5w2KBrYDv7fmTWYaPHeanXuABusXzDIBUU_7cGW795na7HT9hF75VaBBo")
+  const altCaffe = getMediaAlt(servImages.immagineCaffeChiacchiere, "Un caffè e due chiacchiere")
 
   return (
     <main className="space-y-24 pb-20">

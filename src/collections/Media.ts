@@ -1,5 +1,6 @@
 // src/collections/Media.ts
 import type { CollectionConfig } from 'payload'
+import { stripLightBackgroundFromLogo } from '@/lib/logoProcessing'
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -15,6 +16,28 @@ export const Media: CollectionConfig = {
   },
   admin: {
     group: 'Catalogo',
+  },
+  hooks: {
+    beforeOperation: [
+      async ({ operation, req }) => {
+        if ((operation !== 'create' && operation !== 'update') || !req.file) return
+
+        const alt = typeof req.data?.alt === 'string' ? req.data.alt : null
+        const processedLogo = await stripLightBackgroundFromLogo({
+          alt,
+          buffer: req.file.data,
+          filename: req.file.name,
+          mimeType: req.file.mimetype,
+        })
+
+        if (!processedLogo) return
+
+        req.file.data = processedLogo.buffer
+        req.file.name = processedLogo.filename
+        req.file.mimetype = processedLogo.mimeType
+        req.file.size = processedLogo.size
+      },
+    ],
   },
   upload: {
     crop: true,
@@ -45,7 +68,8 @@ export const Media: CollectionConfig = {
       label: 'Testo Alternativo (Alt Text)',
       required: true,
       admin: {
-        description: "Molto importante per la SEO e l'accessibilità. Descrivi brevemente cosa mostra l'immagine.",
+        description:
+          "Molto importante per la SEO e l'accessibilita. Se scrivi 'Logo <brand>' proviamo anche a rimuovere automaticamente lo sfondo chiaro dai loghi caricati.",
       },
     },
   ],

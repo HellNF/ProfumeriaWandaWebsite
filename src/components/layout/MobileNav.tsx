@@ -56,7 +56,7 @@ export function MobileNav() {
                 href={href}
                 aria-current={isActive ? 'page' : undefined}
                 className={`flex flex-col items-center justify-center py-3 gap-0.5 transition-colors ${
-                  isActive ? 'text-wanda-fucsia' : 'text-wanda-gray-mid hover:text-wanda-nero'
+                  isActive ? 'text-wanda-fucsia' : 'text-wanda-outline hover:text-wanda-nero'
                 }`}
               >
                 {icon}

@@ -42,6 +42,13 @@ export interface Prodotto {
   updatedAt: string
 }
 
+export interface Marca {
+  id: string
+  nome: string
+  logo?: Media | string | null
+  descrizione?: string | null
+}
+
 export interface Testimonial {
   autore: string
   recensione: string

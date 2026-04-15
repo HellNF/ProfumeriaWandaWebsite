@@ -1,7 +1,7 @@
 import configPromise from '@payload-config'
-import { cacheLife } from 'next/cache'
+import { cacheLife, cacheTag } from 'next/cache'
 import { getPayload, type Where } from 'payload'
-import type { ImpostazioniNegozio, Prodotto, Testimonial } from '@/types/cms'
+import type { ImpostazioniNegozio, Marca, Prodotto, Testimonial } from '@/types/cms'
 
 type CatalogoFilters = {
   categoria?: string
@@ -16,6 +16,7 @@ const DEFAULT_SETTINGS: ImpostazioniNegozio = {
 
 export async function getStoreSettings(): Promise<ImpostazioniNegozio> {
   'use cache'
+  cacheTag('impostazioni-negozio')
   cacheLife('minutes')
 
   try {
@@ -33,6 +34,7 @@ export async function getStoreSettings(): Promise<ImpostazioniNegozio> {
 
 export async function getFeaturedProducts(): Promise<Prodotto[]> {
   'use cache'
+  cacheTag('prodotti')
   cacheLife('minutes')
 
   try {
@@ -52,6 +54,7 @@ export async function getFeaturedProducts(): Promise<Prodotto[]> {
 
 export async function getCatalogProducts(filters: CatalogoFilters): Promise<Prodotto[]> {
   'use cache'
+  cacheTag('prodotti')
   cacheLife('minutes')
 
   try {
@@ -85,8 +88,29 @@ export async function getCatalogProducts(filters: CatalogoFilters): Promise<Prod
   }
 }
 
+export async function getBrands(): Promise<Marca[]> {
+  'use cache'
+  cacheTag('marche')
+  cacheLife('hours')
+
+  try {
+    const payload = await getPayload({ config: configPromise })
+    const { docs } = await payload.find({
+      collection: 'marche',
+      limit: 100,
+      sort: 'nome',
+      depth: 1,
+    })
+    return (docs as unknown as Marca[]) || []
+  } catch (err) {
+    console.error('Error fetching brands:', err)
+    return []
+  }
+}
+
 export async function getReviews(): Promise<Testimonial[]> {
   'use cache'
+  cacheTag('recensioni')
   cacheLife('minutes')
 
   try {

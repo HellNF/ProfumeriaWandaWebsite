@@ -42,6 +42,14 @@ export async function generateMetadata(): Promise<Metadata> {
         default: `${settings.nomeNegozio} — Profumeria dal ${settings.annoFondazione ?? 1960}`,
       },
       description,
+      icons: {
+        icon: [
+          { url: '/media/WandaFavicon.ico', sizes: 'any' },
+          { url: '/media/WandaFavicon.svg', type: 'image/svg+xml' },
+        ],
+        shortcut: '/media/WandaFavicon.ico',
+        apple: '/media/WandaFavicon.ico',
+      },
       metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:3000'),
       openGraph: {
         siteName: settings.nomeNegozio,
@@ -64,6 +72,14 @@ export async function generateMetadata(): Promise<Metadata> {
         default: 'Profumeria Wanda — Profumeria dal 1960',
       },
       description: FALLBACK_DESCRIPTION,
+      icons: {
+        icon: [
+          { url: '/media/WandaFavicon.ico', sizes: 'any' },
+          { url: '/media/WandaFavicon.svg', type: 'image/svg+xml' },
+        ],
+        shortcut: '/media/WandaFavicon.ico',
+        apple: '/media/WandaFavicon.ico',
+      },
       metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:3000'),
       openGraph: {
         siteName: 'Profumeria Wanda',
@@ -80,9 +96,12 @@ export default async function FrontendLayout({ children }: { children: React.Rea
   return (
     <html lang="it" className={`${notoSerif.variable} ${plusJakarta.variable}`}>
       <body className="font-body bg-wanda-bg text-wanda-nero antialiased">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-wanda-fucsia focus:text-white focus:rounded-lg focus:font-bold focus:text-sm">
+          Salta al contenuto principale
+        </a>
         <BannerPromo settings={settings} />
         <Header settings={settings} />
-        <main>{children}</main>
+        <div id="main-content">{children}</div>
         <Footer settings={settings} />
         <MobileNav />
         <Suspense fallback={null}>

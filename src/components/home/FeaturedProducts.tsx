@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ProductGrid } from '@/components/catalogo/ProductGrid'
+import { getMediaUrl, getMediaAlt } from '@/lib/utils'
 import type { Prodotto, Media } from '@/types/cms'
 
 interface FeaturedProductsProps {
@@ -12,15 +13,8 @@ interface FeaturedProductsProps {
 export function FeaturedProducts({ prodotti, title, immagineConsulenza }: FeaturedProductsProps) {
   if (prodotti.length === 0) return null
 
-  const imgUrl = typeof immagineConsulenza === 'object' && immagineConsulenza?.url 
-    ? (immagineConsulenza.url.startsWith('http://localhost:3000') 
-        ? immagineConsulenza.url.replace('http://localhost:3000', '') 
-        : immagineConsulenza.url)
-    : "https://lh3.googleusercontent.com/aida-public/AB6AXuA_ukCokQcWNYZeWe1P839o22ND7Anfgmd4lTY_AEkObfacToVwdFLxN1x1udJDjjmpxEBq4Q7kDuu8cnQop4MEfFXVNlThZ632sAbrcmNtx5UQBmIOIX7l2eWQ609iybIIUVUZQcnFmaOH1KGdBCyP9YNJokW9mPJBwA80z99Vi-NpXk5mEnfu_tkvArVSx6DLpRr0ZtnESv2-49PaLu-XwL6_OXnUf6EegluJHcn4JjMy9efATO5B67aOq1gdGie_JTgBjrHmfQc"
-
-  const imgAlt = typeof immagineConsulenza === 'object' && immagineConsulenza?.alt 
-    ? immagineConsulenza.alt 
-    : "Atelier Interno"
+  const imgUrl = getMediaUrl(immagineConsulenza, "https://lh3.googleusercontent.com/aida-public/AB6AXuA_ukCokQcWNYZeWe1P839o22ND7Anfgmd4lTY_AEkObfacToVwdFLxN1x1udJDjjmpxEBq4Q7kDuu8cnQop4MEfFXVNlThZ632sAbrcmNtx5UQBmIOIX7l2eWQ609iybIIUVUZQcnFmaOH1KGdBCyP9YNJokW9mPJBwA80z99Vi-NpXk5mEnfu_tkvArVSx6DLpRr0ZtnESv2-49PaLu-XwL6_OXnUf6EegluJHcn4JjMy9efATO5B67aOq1gdGie_JTgBjrHmfQc")
+  const imgAlt = getMediaAlt(immagineConsulenza, "Atelier Interno")
 
   return (
     <div className="space-y-24">
