@@ -31,6 +31,10 @@ const nextConfig: NextConfig = {
         hostname: 'kcenuiwiyhschkgqattd.supabase.co',
       },
       {
+        protocol: 'https',
+        hostname: 'kcenuiwiyhschkgqattd.storage.supabase.co',
+      },
+      {
         protocol: 'http',
         hostname: 'localhost',
         port: '3000',
