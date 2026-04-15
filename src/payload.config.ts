@@ -49,7 +49,13 @@ export default buildConfig({
   plugins: [
     s3Storage({
       collections: {
-        media: true,
+        media: {
+          generateFileURL: ({ filename, prefix }) => {
+            const bucket = process.env.SUPABASE_S3_BUCKET || 'wanda-media'
+            const key = prefix ? `${prefix}/${filename}` : filename
+            return `https://kcenuiwiyhschkgqattd.supabase.co/storage/v1/object/public/${bucket}/${key}`
+          },
+        },
       },
       bucket: process.env.SUPABASE_S3_BUCKET || 'wanda-media',
       config: {
