@@ -1,4 +1,4 @@
-import { formatPrice, getCategoryLabel, getDiscountPercent } from '../utils'
+import { formatPrice, getCategoryLabel, getDiscountPercent, normalizePayloadUrl } from '../utils'
 
 describe('formatPrice', () => {
   it('formatta numeri interi con due decimali', () => {
@@ -35,5 +35,32 @@ describe('getDiscountPercent', () => {
   })
   it('restituisce 0 se i prezzi sono uguali', () => {
     expect(getDiscountPercent(50, 50)).toBe(0)
+  })
+})
+
+describe('normalizePayloadUrl', () => {
+  const originalEnv = process.env.NEXT_PUBLIC_SERVER_URL
+
+  beforeEach(() => {
+    process.env.NEXT_PUBLIC_SERVER_URL = 'https://profumeriawanda.it'
+  })
+
+  afterEach(() => {
+    process.env.NEXT_PUBLIC_SERVER_URL = originalEnv
+  })
+
+  it('non modifica URL Supabase già assoluti', () => {
+    const url = 'https://kcenuiwiyhschkgqattd.supabase.co/storage/v1/object/public/wanda-media/foto.webp'
+    expect(normalizePayloadUrl(url)).toBe(url)
+  })
+
+  it('sostituisce localhost con NEXT_PUBLIC_SERVER_URL', () => {
+    const url = 'http://localhost:3000/media/foto.webp'
+    expect(normalizePayloadUrl(url)).toBe('https://profumeriawanda.it/media/foto.webp')
+  })
+
+  it('restituisce null per input null/undefined', () => {
+    expect(normalizePayloadUrl(null)).toBeNull()
+    expect(normalizePayloadUrl(undefined)).toBeNull()
   })
 })
