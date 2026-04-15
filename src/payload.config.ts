@@ -46,14 +46,21 @@ export default buildConfig({
     },
   }),
   sharp,
+  upload: {
+    limits: {
+      fileSize: 10_000_000, // 10MB — protegge da upload troppo grandi su Vercel serverless
+    },
+  },
   plugins: [
     s3Storage({
       collections: {
         media: {
           generateFileURL: ({ filename, prefix }) => {
             const bucket = process.env.SUPABASE_S3_BUCKET || 'wanda-media'
+            const endpoint = process.env.SUPABASE_S3_ENDPOINT || ''
+            const baseUrl = endpoint.replace(/\/s3$/, '')
             const key = prefix ? `${prefix}/${filename}` : filename
-            return `https://kcenuiwiyhschkgqattd.supabase.co/storage/v1/object/public/${bucket}/${key}`
+            return `${baseUrl}/object/public/${bucket}/${key}`
           },
         },
       },
