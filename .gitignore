@@ -1,47 +1,81 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
+# ================================
+# Dipendenze
+# ================================
 /node_modules
 /.pnp
 .pnp.js
 .yarn/install-state.gz
 
-# testing
-/coverage
+# ================================
+# Variabili d'ambiente (SEGRETI)
+# ================================
+.env
+.env.*
+!.env.example
 
-# next.js
+# ================================
+# Next.js
+# ================================
 /.next/
 /out/
+next-env.d.ts
+*.tsbuildinfo
 
-# production
+# ================================
+# Payload CMS (generati automaticamente)
+# ================================
+/src/payload-types.ts
+
+# ================================
+# Media (caricati su Supabase Storage)
+# ================================
+/public/media
+
+# ================================
+# Build e output
+# ================================
 /build
+/coverage
+/dist
 
-# misc
-.DS_Store
-*.pem
+# ================================
+# Vercel
+# ================================
+.vercel
 
-# debug
+# ================================
+# Claude Code / AI tools
+# ================================
+.claude/
+.agents/
+
+# ================================
+# Log
+# ================================
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.log
 
-# local env files
-.env*.local
+# ================================
+# OS
+# ================================
+.DS_Store
+Thumbs.db
+desktop.ini
+*.pem
 
-# vercel
-.vercel
+# ================================
+# Editor
+# ================================
+.idea/
+*.suo
+*.user
+*.swp
+*.swo
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-
-# payload generated files
-/src/payload-types.ts
-
-# reference images
-image.png
-
-/public/media
+# ================================
+# File temporanei progetto
+# ================================
 /stitch_profumeria_pelletteria_online/
-.claude/
-.agents/
+image.png
