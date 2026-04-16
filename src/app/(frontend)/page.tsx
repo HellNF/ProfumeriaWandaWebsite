@@ -42,6 +42,9 @@ export default async function HomePage() {
         ctaHeroUrl={settings.ctaHeroUrl}
       />
 
+      {/* Central Zone — Selezione + FeaturedProducts */}
+      <div className="central-zone relative space-y-24 py-2">
+
       {/* Bento Grid: Curated Categories */}
       <section className="wanda-container">
         <div className="text-center mb-16 space-y-4 reveal-on-scroll">
@@ -135,31 +138,39 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <FeaturedProducts 
-        prodotti={prodottiInEvidenza} 
-        title={settings.testoSezioneEvidenza}
-        immagineConsulenza={settings.immagineConsulenzaWanda}
-      />
+      <div>
+        <FeaturedProducts
+          prodotti={prodottiInEvidenza}
+          title={settings.testoSezioneEvidenza}
+          immagineConsulenza={settings.immagineConsulenzaWanda}
+        />
+      </div>
+
+      </div>{/* /central-zone */}
 
       <BrandsMarquee marche={marche} />
 
       {recensioni && recensioni.length > 0 && <Testimonials reviews={recensioni} />}
 
       {/* New Quality & Tradition Section (Replacing WhatsApp) */}
-      <section className="py-24 relative overflow-hidden reveal-on-scroll">
+      <section className="dot-accent-r py-24 relative overflow-hidden reveal-on-scroll">
         <div className="wanda-container relative z-10">
-          <div className="bg-white rounded-[2rem] p-12 md:p-20 shadow-[0_40px_80px_-20px_rgba(180,0,93,0.05)] flex flex-col md:flex-row items-center gap-16 border border-wanda-fucsia/5">
+          <div className="panel-glass rounded-[2rem] p-12 md:p-20 flex flex-col md:flex-row items-center gap-16">
             <div className="flex-1 space-y-8">
               <div className="inline-block px-4 py-1 bg-wanda-fucsia text-white text-[10px] font-bold tracking-[0.2em] rounded uppercase">
                 Ethos Partner
               </div>
               <h2 className="text-4xl md:text-5xl font-bold leading-tight font-headline">Qualità garantita, <br/><span className="text-wanda-fucsia italic font-light">da oltre 60 anni.</span></h2>
               <p className="text-lg text-wanda-text-soft max-w-md leading-relaxed">
-                Essere partner **ETHOS Profumerie** ci permette di offrirti i migliori marchi internazionali con la sicurezza di prodotti originali e consulenze certificate. 
+                Essere partner <strong>ETHOS Profumerie</strong> ci permette di offrirti i migliori marchi internazionali con la sicurezza di prodotti originali e consulenze certificate.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link href="/negozio" className="btn-primary">
+                <Link href="/negozio" className="btn-primary group flex items-center gap-3">
                   Scopri i nostri servizi
+                  <span
+                    className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center text-sm shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-px"
+                    style={{ transition: 'transform 400ms cubic-bezier(0.32,0.72,0,1)' }}
+                  >→</span>
                 </Link>
                 <Link href="/catalogo" className="btn-outline">
                   Vedi il catalogo

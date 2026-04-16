@@ -41,7 +41,7 @@ export function Hero({
   const positionClass = positionClasses[heroImagePosition ?? 'center']
 
   return (
-    <section className="relative min-h-[700px] lg:min-h-[800px] flex items-center overflow-hidden py-12 lg:py-20">
+    <section className="dot-accent-l relative min-h-[700px] lg:min-h-[800px] flex items-center overflow-hidden py-12 lg:py-20">
       <div className="wanda-container grid lg:grid-cols-12 gap-12 items-center w-full">
         {/* Testo */}
         <div className="lg:col-span-6 z-10 space-y-8 reveal-on-scroll">
@@ -64,12 +64,20 @@ export function Hero({
           </p>
 
           <div className="flex flex-wrap gap-6 pt-4">
-            <Link href={ctaHeroUrl ?? '/catalogo'} className="btn-primary active:scale-95">
+            <Link href={ctaHeroUrl ?? '/catalogo'} className="btn-primary active:scale-[0.97] group flex items-center gap-3">
               {ctaHeroLabel ?? 'Esplora il catalogo'}
+              <span
+                className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center text-sm shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-px"
+                style={{ transition: 'transform 400ms cubic-bezier(0.32,0.72,0,1)' }}
+              >→</span>
             </Link>
-            <Link href="/negozio" className="flex items-center gap-3 text-wanda-fucsia font-bold group active:scale-95">
+            <Link
+              href="/negozio"
+              className="flex items-center gap-3 text-wanda-fucsia font-bold group active:scale-[0.97]"
+              style={{ transition: 'opacity 400ms cubic-bezier(0.32,0.72,0,1)' }}
+            >
               La nostra storia
-              <span className="transition-transform duration-300 group-hover:translate-x-2">→</span>
+              <span style={{ transition: 'transform 400ms cubic-bezier(0.32,0.72,0,1)' }} className="group-hover:translate-x-2 inline-block">→</span>
             </Link>
           </div>
         </div>
@@ -77,19 +85,23 @@ export function Hero({
         {/* Immagine con Card Fluttuante */}
         <div className="lg:col-span-6 relative h-[600px] hidden lg:block">
           <div className="absolute inset-0 bg-gradient-to-tr from-wanda-fucsia/10 to-transparent rounded-xl rotate-3" />
-          <div className="absolute top-10 left-10 w-4/5 h-[80%] rounded-xl overflow-hidden shadow-2xl z-0 reveal-on-scroll reveal-delay-200">
-            {imageUrl && (
-              <ParallaxHeroImage>
-                <Image
-                  src={imageUrl}
-                  alt={imageAlt}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className={`${fitClass} ${positionClass} scale-110`}
-                  priority
-                />
-              </ParallaxHeroImage>
-            )}
+          {/* Double-bezel: outer shell */}
+          <div className="absolute top-10 left-10 w-4/5 h-[80%] p-[6px] rounded-[1.25rem] z-0 reveal-on-scroll reveal-delay-200 bg-wanda-fucsia/5 ring-1 ring-wanda-fucsia/8 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]">
+            {/* Double-bezel: inner core */}
+            <div className="w-full h-full rounded-[14px] overflow-hidden shadow-2xl">
+              {imageUrl && (
+                <ParallaxHeroImage>
+                  <Image
+                    src={imageUrl}
+                    alt={imageAlt}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className={`${fitClass} ${positionClass} scale-110`}
+                    priority
+                  />
+                </ParallaxHeroImage>
+              )}
+            </div>
           </div>
 
           {/* Card Fluttuante (Testimonial o Info) */}

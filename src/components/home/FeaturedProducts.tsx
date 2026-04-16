@@ -37,7 +37,7 @@ export function FeaturedProducts({ prodotti, title, immagineConsulenza }: Featur
 
       {/* Curated Selection Section (from Stitch) */}
       <section className="wanda-container">
-        <div className="bg-white p-8 md:p-12 rounded-xl border border-wanda-fucsia/10 shadow-sm">
+        <div className="panel-glass rounded-2xl p-8 md:p-12">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <div className="flex-1 space-y-6">
               <span className="text-wanda-fucsia font-bold uppercase tracking-[0.3em] text-sm">Curated with Love</span>

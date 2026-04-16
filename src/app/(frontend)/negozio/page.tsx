@@ -36,26 +36,77 @@ export default async function NegozioPage() {
     <main className="space-y-24 pb-20">
       <StructuredData settings={settings} />
 
-      {/* Hero Section from Stitch */}
-      <section className="wanda-container pt-12">
-        <div className="relative w-full h-[500px] md:h-[700px] rounded-xl overflow-hidden shadow-xl reveal-on-scroll">
-          <Image 
-            src={imgHero}
-            alt={altHero}
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent flex flex-col justify-center px-8 md:px-24">
-            <span className="text-white bg-wanda-fucsia/80 backdrop-blur-md px-4 py-1 rounded-full w-fit mb-6 text-[10px] font-bold tracking-widest uppercase">
-              IL NOSTRO NEGOZIO
-            </span>
-            <h1 className="text-4xl md:text-7xl text-white italic font-headline mb-6 leading-tight max-w-2xl">
-              Benvenuti a casa nostra.
+      {/* Hero Section — asimmetrico, senza dark overlay */}
+      <section className="dot-accent-l relative min-h-[600px] lg:min-h-[700px] flex items-center overflow-hidden py-12 lg:py-20">
+        <div className="wanda-container grid lg:grid-cols-12 gap-12 items-center w-full">
+          {/* Testo */}
+          <div className="lg:col-span-5 z-10 space-y-8 reveal-on-scroll">
+            <div className="inline-block px-4 py-1 bg-wanda-fucsia/10 text-wanda-fucsia rounded-full font-bold text-[10px] tracking-[0.2em] uppercase">
+              Il nostro Negozio
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] text-wanda-nero tracking-tight">
+              Benvenuti a<br />
+              <span className="italic text-wanda-fucsia font-light">casa nostra.</span>
             </h1>
-            <p className="text-white/90 text-base md:text-xl max-w-lg font-light leading-relaxed">
-              Un luogo dove la cortesia è di casa e ogni profumo racconta una story. Dal 1960, accogliamo ogni cliente come un ospite di riguardo.
+            <p className="text-lg text-wanda-text-soft max-w-md leading-relaxed font-body">
+              Un luogo dove la cortesia è di casa e ogni profumo racconta una storia. Dal 1960, accogliamo ogni cliente come un ospite di riguardo.
             </p>
+            <div className="flex flex-wrap gap-4 pt-2">
+              <a href="#contatti" className="btn-primary active:scale-[0.97] group flex items-center gap-3">
+                Passa a trovarci
+                <span
+                  className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center text-sm shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-px"
+                  style={{ transition: 'transform 400ms cubic-bezier(0.32,0.72,0,1)' }}
+                >→</span>
+              </a>
+              <a
+                href="#contatti"
+                className="flex items-center gap-2 text-wanda-fucsia font-bold group active:scale-[0.97]"
+              >
+                Orari e contatti
+                <span style={{ transition: 'transform 400ms cubic-bezier(0.32,0.72,0,1)' }} className="group-hover:translate-x-2 inline-block">→</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Immagine */}
+          <div className="lg:col-span-7 relative h-[420px] lg:h-[580px] hidden lg:block">
+            <div className="absolute inset-0 bg-gradient-to-tl from-wanda-fucsia/8 to-transparent rounded-xl rotate-2" />
+            {/* Double-bezel: outer shell */}
+            <div className="absolute top-8 right-8 w-[88%] h-[88%] p-[6px] rounded-[1.25rem] z-0 reveal-on-scroll reveal-delay-200 bg-wanda-fucsia/5 ring-1 ring-wanda-fucsia/8 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]">
+              {/* Double-bezel: inner core */}
+              <div className="w-full h-full rounded-[14px] overflow-hidden shadow-2xl">
+                <Image
+                  src={imgHero}
+                  alt={altHero}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 55vw"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </div>
+            {/* Badge Est. */}
+            <div className="absolute bottom-6 left-0 card-dialogue z-20 rotate-1 reveal-on-scroll reveal-delay-400 px-6 py-4">
+              <p className="font-headline italic text-wanda-fucsia text-lg leading-snug">
+                Dal 1960,<br />con passione.
+              </p>
+              <span className="text-xs text-wanda-text-soft font-semibold tracking-widest uppercase mt-1 block">
+                Profumeria Wanda
+              </span>
+            </div>
+          </div>
+
+          {/* Mobile: immagine full-width */}
+          <div className="lg:hidden relative w-full h-[300px] rounded-xl overflow-hidden shadow-xl reveal-on-scroll reveal-delay-200">
+            <Image
+              src={imgHero}
+              alt={altHero}
+              fill
+              sizes="100vw"
+              className="object-cover"
+              priority
+            />
           </div>
         </div>
       </section>
@@ -99,9 +150,7 @@ export default async function NegozioPage() {
           {/* Fragrance Consulting */}
           <div className="md:col-span-2 bg-white p-8 md:p-10 rounded-xl shadow-sm border border-wanda-outline/10 flex flex-col md:flex-row gap-8 items-center reveal-on-scroll">
             <div className="flex-1 space-y-4">
-              <div className="w-12 h-12 bg-wanda-fucsia/5 rounded-lg flex items-center justify-center text-wanda-fucsia mb-2">
-                <Wind className="w-6 h-6" />
-              </div>
+              <Wind className="w-7 h-7 text-wanda-fucsia" />
               <h3 className="text-2xl font-headline italic">Consulenza Olfattiva</h3>
               <p className="text-wanda-text-soft leading-relaxed">Ti aiutiamo a trovare la tua firma olfattiva. Attraverso un percorso sensoriale, scopriremo insieme le note che meglio esprimono la tua personalità.</p>
             </div>
@@ -118,9 +167,7 @@ export default async function NegozioPage() {
           {/* Coffee and Chat */}
           <div className="bg-wanda-fucsia/5 p-8 md:p-10 rounded-xl flex flex-col justify-between space-y-6 reveal-on-scroll reveal-delay-200">
             <div className="space-y-4">
-              <div className="w-12 h-12 bg-white/50 rounded-lg flex items-center justify-center text-wanda-fucsia mb-2">
-                <Coffee className="w-6 h-6" />
-              </div>
+              <Coffee className="w-7 h-7 text-wanda-fucsia" />
               <h3 className="text-2xl font-headline italic">Un caffè e due chiacchiere</h3>
               <p className="text-wanda-text-soft">Non abbiamo mai fretta. Il tempo speso con i nostri clienti è il nostro valore più prezioso.</p>
             </div>

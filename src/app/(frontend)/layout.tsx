@@ -104,6 +104,8 @@ export default async function FrontendLayout({ children }: { children: React.Rea
         <div id="main-content">{children}</div>
         <Footer settings={settings} />
         <MobileNav />
+        {/* Noise texture — grana carta, "tactile layers of fine stationery" (DESIGN.md) */}
+        <div aria-hidden="true" className="noise-texture" />
         <Suspense fallback={null}>
           <RevealScript />
         </Suspense>
