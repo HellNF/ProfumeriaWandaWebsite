@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import { formatPrice, normalizePayloadUrl } from '@/lib/utils'
 import type { Prodotto, Media } from '@/types/cms'
@@ -17,86 +19,106 @@ export function ProductCard({ prodotto }: ProductCardProps) {
 
   return (
     <div className="group relative">
+      {/* Background Glow */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -inset-3 -z-10 rounded-[1.75rem] bg-[radial-gradient(circle_at_50%_38%,rgba(180,0,93,0.2),rgba(255,111,162,0.1)_38%,transparent_72%)] opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
+        className="pointer-events-none absolute -inset-4 -z-10 rounded-[3rem] bg-[radial-gradient(circle_at_50%_30%,rgba(180,0,93,0.05),transparent_70%)] opacity-0 blur-2xl transition-opacity duration-1000 group-hover:opacity-100"
       />
-      <article className="relative z-10 bg-white rounded-xl overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] border border-black/5 h-full flex flex-col">
-        {/* Badges Catchy */}
-        {inPromozione && percentualeSconto && (
-          <div className="absolute top-4 left-4 z-20">
-            <span className="bg-wanda-fucsia text-white text-[10px] font-bold px-2.5 py-1 rounded shadow-lg">
-              -{percentualeSconto}%
-            </span>
-          </div>
-        )}
-        
-        {disponibile === false && (
-          <span aria-disabled="true" className="absolute inset-0 z-20 bg-white/60 backdrop-blur-[1px] flex items-center justify-center p-6">
-            <span className="bg-wanda-nero text-white text-[10px] tracking-widest font-bold px-6 py-2 rounded-full uppercase">
-              Esaurito
-            </span>
-          </span>
-        )}
 
-        {/* Image Container */}
-        <div className="aspect-[4/5] bg-wanda-surface-low relative overflow-hidden">
-          {imageUrl ? (
-            <Image
-              src={imageUrl}
-              alt={(immagine as Media)?.alt ?? nome}
-              fill
-              className={`object-cover transition-transform duration-700 group-hover:scale-105 ${disponibile === false ? 'grayscale' : ''}`}
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center bg-wanda-surface-mid/20">
-               <span className="text-wanda-nero opacity-30 italic text-xs tracking-tight">Selezione Wanda</span>
+      <article className="relative z-10 flex flex-col h-full group/card">
+        {/* Image Container - Double Bezel Architecture */}
+        <div className="relative aspect-[3/4] mb-5">
+          <div className="relative h-full p-1.5 bg-white/40 backdrop-blur-sm rounded-[2rem] border border-white/60 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.04)] ring-1 ring-black/5 transition-all duration-1000 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover/card:shadow-[0_48px_80px_-20px_rgba(180,0,93,0.1)]">
+            <div className="relative w-full h-full overflow-hidden rounded-[calc(2.2rem-1rem)] shadow-inner bg-wanda-surface-low">
+              {imageUrl ? (
+                <Image
+                  src={imageUrl}
+                  alt={(immagine as Media)?.alt ?? nome}
+                  fill
+                  className={`object-cover transition-transform duration-[2s] ease-[cubic-bezier(0.32,0.72,0,1)] group-hover/card:scale-110 ${disponibile === false ? 'grayscale blur-[1px] opacity-60' : ''}`}
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                   <span className="text-wanda-nero/10 italic text-[10px] tracking-widest uppercase">Selezione Wanda</span>
+                </div>
+              )}
+              
+              {/* Promo Badge */}
+              {inPromozione && percentualeSconto && disponibile !== false && (
+                <div className="absolute top-3 left-3 z-20">
+                  <span className="bg-wanda-fucsia text-white text-[9px] font-bold px-2 py-1 rounded-full shadow-lg tracking-tighter">
+                    -{percentualeSconto}%
+                  </span>
+                </div>
+              )}
+
+              {/* Status Overlay */}
+              {disponibile === false && (
+                <div className="absolute inset-0 z-20 flex items-center justify-center p-6">
+                  <span className="bg-wanda-nero/80 backdrop-blur-md text-white text-[9px] tracking-[0.3em] font-bold px-6 py-2 rounded-full uppercase border border-white/10 shadow-2xl">
+                    Esaurito
+                  </span>
+                </div>
+              )}
             </div>
-          )}
-          
-          {formato && (
-            <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md px-2 py-1 rounded text-[9px] font-bold text-wanda-nero shadow-sm">
-              {formato}ml
-            </div>
-          )}
+          </div>
         </div>
 
-        {/* Info Container */}
-        <div className="p-5 flex flex-col flex-1">
-          {marca && (
-            <p className="text-[10px] text-wanda-fucsia uppercase tracking-[0.25em] mb-2 font-bold">
-              {typeof marca === 'object' ? marca.nome : marca}
-            </p>
-          )}
-          <h3 className="font-headline text-lg text-wanda-nero leading-tight mb-4 line-clamp-2 h-12">
-            {nome}
-          </h3>
+        {/* Content Section - Data-Rich Editorial Label */}
+        <div className="px-1 flex flex-col flex-1 space-y-4">
+          <div className="space-y-1">
+            <div className="flex items-center justify-between gap-2">
+              {marca && (
+                <p className="text-[10px] text-wanda-fucsia font-bold uppercase tracking-[0.25em] truncate">
+                  {typeof marca === 'object' ? marca.nome : marca}
+                </p>
+              )}
+              {formato && (
+                <span className="text-[9px] font-bold text-wanda-nero/30 tracking-[0.1em] uppercase shrink-0">
+                  {formato}ML
+                </span>
+              )}
+            </div>
+            
+            <h3 className="font-headline text-lg md:text-xl text-wanda-nero leading-[1.15] tracking-tight line-clamp-2 min-h-[2.3em] group-hover/card:text-wanda-fucsia transition-colors duration-500">
+              {nome}
+            </h3>
+          </div>
 
-          <div className="flex items-center justify-between mt-auto">
-            <div className="flex flex-col">
+          <div className="pt-3 border-t border-wanda-fucsia/5 mt-auto flex items-end justify-between gap-4">
+            <div className="flex flex-col gap-0.5">
               {inPromozione && prezzoScontato != null ? (
                 <>
-                  <span className="text-wanda-text-soft text-[10px] line-through opacity-50">
+                  <span className="text-wanda-text-soft/40 text-[10px] font-bold line-through tracking-wider">
                     €{formatPrice(prezzo ?? 0)}
                   </span>
-                  <span className="text-wanda-fucsia font-bold text-xl tracking-tight">
+                  <span className="text-wanda-fucsia font-bold text-2xl tracking-tighter leading-none">
                     €{formatPrice(prezzoScontato)}
                   </span>
                 </>
               ) : prezzo != null ? (
-                <span className="text-wanda-nero font-bold text-lg tracking-tight">€{formatPrice(prezzo)}</span>
+                <span className="text-wanda-nero font-bold text-xl tracking-tighter leading-none">€{formatPrice(prezzo)}</span>
               ) : (
-                <span className="text-wanda-text-soft text-xs italic">Prezzo in negozio</span>
+                <span className="text-wanda-text-soft/40 text-[9px] font-bold uppercase tracking-[0.2em] italic">In Boutique</span>
               )}
             </div>
             
-            <button aria-label={`Aggiungi ${nome} al carrello`} className="p-2.5 bg-wanda-surface-low rounded-full text-wanda-nero hover:bg-wanda-nero hover:text-white transition-all active:scale-90 focus-visible:outline-2 focus-visible:outline-wanda-fucsia focus-visible:outline-offset-2">
-               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-            </button>
+            <span
+              className={`inline-flex items-center rounded-full px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em] transition-all duration-500 ${
+                disponibile === false
+                  ? 'bg-wanda-nero/5 text-wanda-nero/40'
+                  : 'bg-wanda-surface-low text-wanda-fucsia group-hover/card:bg-wanda-fucsia group-hover/card:text-white'
+              }`}
+            >
+              {disponibile === false ? 'Non disponibile' : 'In atelier'}
+            </span>
           </div>
         </div>
       </article>
     </div>
   )
 }
+
+
+

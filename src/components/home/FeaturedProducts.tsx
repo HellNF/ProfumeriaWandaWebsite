@@ -1,82 +1,59 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { ProductGrid } from '@/components/catalogo/ProductGrid'
-import { getMediaUrl, getMediaAlt } from '@/lib/utils'
-import type { Prodotto, Media } from '@/types/cms'
+import { ArrowTopRightIcon } from '@radix-ui/react-icons'
+import type { Prodotto } from '@/types/cms'
 
 interface FeaturedProductsProps {
   prodotti: Prodotto[]
   title?: string | null
-  immagineConsulenza?: Media | string | null | undefined
 }
 
-export function FeaturedProducts({ prodotti, title, immagineConsulenza }: FeaturedProductsProps) {
+export function FeaturedProducts({ prodotti, title }: FeaturedProductsProps) {
   if (prodotti.length === 0) return null
 
-  const imgUrl = getMediaUrl(immagineConsulenza, "https://lh3.googleusercontent.com/aida-public/AB6AXuA_ukCokQcWNYZeWe1P839o22ND7Anfgmd4lTY_AEkObfacToVwdFLxN1x1udJDjjmpxEBq4Q7kDuu8cnQop4MEfFXVNlThZ632sAbrcmNtx5UQBmIOIX7l2eWQ609iybIIUVUZQcnFmaOH1KGdBCyP9YNJokW9mPJBwA80z99Vi-NpXk5mEnfu_tkvArVSx6DLpRr0ZtnESv2-49PaLu-XwL6_OXnUf6EegluJHcn4JjMy9efATO5B67aOq1gdGie_JTgBjrHmfQc")
-  const imgAlt = getMediaAlt(immagineConsulenza, "Atelier Interno")
-
   return (
-    <div className="space-y-24">
+    <div className="py-24 md:py-32">
 
-      {/* ─── Selezione del mese — aria, nessun container ─── */}
-      <section className="wanda-container py-4">
-        <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
-          <div className="space-y-4 reveal-on-scroll">
-            <span className="text-wanda-fucsia font-bold uppercase tracking-[0.3em] text-xs">I Nostri Preferiti</span>
-            <h2 className="text-3xl md:text-5xl font-bold text-wanda-nero">{title ?? 'In evidenza'}</h2>
+      {/* Asymmetric Header Section */}
+      <section className="wanda-container mb-20 md:mb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+          
+          <div className="lg:col-span-8 space-y-6 reveal-on-scroll">
+            <div className="flex items-center gap-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-wanda-fucsia animate-pulse" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-wanda-fucsia">
+                I Nostri Preferiti
+              </span>
+            </div>
+            
+            <h2 className="text-5xl md:text-7xl font-headline font-bold leading-[0.9] tracking-tighter text-wanda-nero max-w-2xl">
+              {title ?? 'In evidenza'}
+            </h2>
           </div>
-          <Link
-            href="/catalogo"
-            className="text-sm font-bold uppercase tracking-widest text-wanda-fucsia flex items-center gap-3 group active:scale-95 reveal-on-scroll"
-            style={{ transition: 'transform 400ms cubic-bezier(0.32,0.72,0,1)' }}
-          >
-            Vedi tutto il catalogo
-            <span style={{ transition: 'transform 400ms cubic-bezier(0.32,0.72,0,1)' }} className="group-hover:translate-x-1 inline-block">→</span>
-          </Link>
+
+          <div className="lg:col-span-4 flex lg:justify-end pb-2 reveal-on-scroll reveal-delay-200">
+            <Link
+              href="/catalogo"
+              className="group relative inline-flex items-center gap-4 text-xs font-bold uppercase tracking-[0.25em] text-wanda-nero transition-colors duration-500 hover:text-wanda-fucsia"
+            >
+              <span>Vedi tutto il catalogo</span>
+              <div className="w-10 h-10 rounded-full border border-wanda-nero/10 flex items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:bg-wanda-fucsia group-hover:border-wanda-fucsia group-hover:text-white group-hover:rotate-45">
+                <ArrowTopRightIcon className="w-4 h-4" />
+              </div>
+            </Link>
+          </div>
+
         </div>
-        <ProductGrid prodotti={prodotti} />
+        
+        {/* Subtle separator line */}
+        <div className="w-full h-px bg-gradient-to-r from-wanda-fucsia/10 via-wanda-fucsia/5 to-transparent mt-12" />
       </section>
 
-      {/* ─── Consulenza Wanda — panel-glass standalone ─── */}
       <section className="wanda-container">
-        <div className="panel-glass rounded-[2rem] p-8 md:p-12">
-          <div className="flex flex-col lg:flex-row items-center gap-16">
-            <div className="flex-1 space-y-6 reveal-on-scroll">
-              <span className="text-wanda-fucsia font-bold uppercase tracking-[0.3em] text-sm">Curated with Love</span>
-              <h2 className="text-3xl md:text-4xl font-bold font-headline leading-tight">La Consulenza di Wanda</h2>
-              <p className="text-wanda-text-soft text-lg leading-relaxed italic">
-                &quot;Crediamo che ogni donna meriti un momento di pura bellezza. Non vendiamo solo prodotti, curiamo esperienze che fanno bene all&apos;anima.&quot;
-              </p>
-              <div className="pt-4">
-                <Link
-                  href="/negozio"
-                  className="text-wanda-fucsia font-bold flex items-center gap-2 group active:scale-95"
-                  style={{ transition: 'opacity 400ms cubic-bezier(0.32,0.72,0,1)' }}
-                >
-                  Scopri la nostra storia
-                  <span style={{ transition: 'transform 400ms cubic-bezier(0.32,0.72,0,1)' }} className="group-hover:translate-x-2 inline-block">→</span>
-                </Link>
-              </div>
-            </div>
-            <div className="flex-1 w-full relative reveal-on-scroll reveal-delay-200">
-              <div className="aspect-video rounded-xl overflow-hidden shadow-2xl rotate-2 relative">
-                <Image
-                  src={imgUrl}
-                  alt={imgAlt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-8 -left-8 bg-wanda-fucsia/10 backdrop-blur-md p-6 rounded-lg shadow-xl -rotate-2 hidden md:block border border-white/40">
-                <p className="font-headline text-wanda-fucsia font-bold text-xl italic">Dal 1960 a casa tua.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ProductGrid prodotti={prodotti} />
       </section>
 
     </div>
   )
 }
+

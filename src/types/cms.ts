@@ -24,7 +24,15 @@ export interface Media {
 export interface Prodotto {
   id: string
   nome: string
-  categoria: 'profumeria' | 'cosmetici' | 'trucco' | 'pelletteria' | 'borse-valigie' | 'altro'
+  categoria:
+    | 'profumeria'
+    | 'cosmetici'
+    | 'trucco'
+    | 'pelletteria'
+    | 'borse-valigie'
+    | 'idee-regalo'
+    | 'altro'
+  destinatario?: 'donna' | 'uomo' | 'unisex' | null
   marca?: string | { nome: string } | null
   descrizione?: string | null
   formato?: number | string | null

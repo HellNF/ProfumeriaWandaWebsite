@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { Wind, Coffee, MapPin, Clock, Phone, Navigation } from 'lucide-react'
 import { MapEmbed } from '@/components/negozio/MapEmbed'
 import { StructuredData } from '@/components/negozio/StructuredData'
+import { HeroImageContainer } from '@/components/negozio/HeroImageContainer'
+import { ServiceBento } from '@/components/negozio/ServiceBento'
+import { ContactSection } from '@/components/negozio/ContactSection'
 import { getStoreSettings } from '@/lib/cms'
 import { getMediaUrl, getMediaAlt } from '@/lib/utils'
 
@@ -33,77 +35,56 @@ export default async function NegozioPage() {
   const altCaffe = getMediaAlt(servImages.immagineCaffeChiacchiere, "Un caffè e due chiacchiere")
 
   return (
-    <main className="space-y-24 pb-20">
+    <main className="pb-32 overflow-x-hidden">
       <StructuredData settings={settings} />
 
-      {/* Hero Section — asimmetrico, senza dark overlay */}
-      <section className="dot-accent-l relative min-h-[600px] lg:min-h-[700px] flex items-center overflow-hidden py-12 lg:py-20">
-        <div className="wanda-container grid lg:grid-cols-12 gap-12 items-center w-full">
-          {/* Testo */}
-          <div className="lg:col-span-5 z-10 space-y-8 reveal-on-scroll">
-            <div className="inline-block px-4 py-1 bg-wanda-fucsia/10 text-wanda-fucsia rounded-full font-bold text-[10px] tracking-[0.2em] uppercase">
-              Il nostro Negozio
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] text-wanda-nero tracking-tight">
-              Benvenuti a<br />
-              <span className="italic text-wanda-fucsia font-light">casa nostra.</span>
-            </h1>
-            <p className="text-lg text-wanda-text-soft max-w-md leading-relaxed font-body">
-              Un luogo dove la cortesia è di casa e ogni profumo racconta una storia. Dal 1960, accogliamo ogni cliente come un ospite di riguardo.
-            </p>
-            <div className="flex flex-wrap gap-4 pt-2">
-              <a href="#contatti" className="btn-primary active:scale-[0.97] group flex items-center gap-3">
-                Passa a trovarci
-                <span
-                  className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center text-sm shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-px"
-                  style={{ transition: 'transform 400ms cubic-bezier(0.32,0.72,0,1)' }}
-                >→</span>
-              </a>
-              <a
-                href="#contatti"
-                className="flex items-center gap-2 text-wanda-fucsia font-bold group active:scale-[0.97]"
-              >
-                Orari e contatti
-                <span style={{ transition: 'transform 400ms cubic-bezier(0.32,0.72,0,1)' }} className="group-hover:translate-x-2 inline-block">→</span>
-              </a>
-            </div>
-          </div>
-
-          {/* Immagine */}
-          <div className="lg:col-span-7 relative h-[420px] lg:h-[580px] hidden lg:block">
-            <div className="absolute inset-0 bg-gradient-to-tl from-wanda-fucsia/8 to-transparent rounded-xl rotate-2" />
-            {/* Double-bezel: outer shell */}
-            <div className="absolute top-8 right-8 w-[88%] h-[88%] p-[6px] rounded-[1.25rem] z-0 reveal-on-scroll reveal-delay-200 bg-wanda-fucsia/5 ring-1 ring-wanda-fucsia/8 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]">
-              {/* Double-bezel: inner core */}
-              <div className="w-full h-full rounded-[14px] overflow-hidden shadow-2xl">
-                <Image
-                  src={imgHero}
-                  alt={altHero}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 55vw"
-                  className="object-cover"
-                  priority
-                />
+      {/* Hero Section — Asymmetric & Dynamic */}
+      <section className="relative min-h-[85dvh] flex items-center pt-32 pb-20 lg:pt-40">
+        <div className="wanda-container grid lg:grid-cols-12 gap-16 lg:gap-24 items-center">
+          {/* Content */}
+          <div className="lg:col-span-5 space-y-10 z-10">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-wanda-fucsia/5 text-wanda-fucsia rounded-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-wanda-fucsia animate-pulse" />
+                <span className="text-[10px] font-bold tracking-[0.2em] uppercase">Il nostro Atelier</span>
               </div>
-            </div>
-            {/* Badge Est. */}
-            <div className="absolute bottom-6 left-0 card-dialogue z-20 rotate-1 reveal-on-scroll reveal-delay-400 px-6 py-4">
-              <p className="font-headline italic text-wanda-fucsia text-lg leading-snug">
-                Dal 1960,<br />con passione.
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.9] tracking-tighter text-wanda-nero">
+                Benvenuti a<br />
+                <span className="italic font-headline text-wanda-fucsia">casa nostra.</span>
+              </h1>
+              <p className="text-lg md:text-xl text-wanda-text-soft max-w-md leading-relaxed">
+                Dal 1960, un luogo dove la cortesia è di casa e ogni fragranza racconta una storia di passione familiare.
               </p>
-              <span className="text-xs text-wanda-text-soft font-semibold tracking-widest uppercase mt-1 block">
-                Profumeria Wanda
-              </span>
+            </div>
+            
+            <div className="flex flex-wrap gap-6 pt-4">
+              <a href="#contatti" className="btn-primary group !px-8 !py-4 active:scale-95">
+                Passa a trovarci
+                <span className="ml-3 group-hover:translate-x-1 transition-transform inline-block">→</span>
+              </a>
+              <a href="#storia" className="flex items-center gap-3 text-wanda-nero font-bold group">
+                La nostra storia
+                <div className="w-10 h-[1px] bg-wanda-nero group-hover:w-16 transition-all duration-500" />
+              </a>
             </div>
           </div>
 
-          {/* Mobile: immagine full-width */}
-          <div className="lg:hidden relative w-full h-[300px] rounded-xl overflow-hidden shadow-xl reveal-on-scroll reveal-delay-200">
+          {/* Desktop Image with Parallax & Tilt */}
+          <div className="lg:col-span-7 hidden lg:block">
+            <HeroImageContainer 
+              src={imgHero} 
+              alt={altHero} 
+              badgeText="Dal 1960,"
+              badgeSubtext="con passione"
+            />
+          </div>
+
+          {/* Mobile Image */}
+          <div className="lg:hidden relative aspect-[4/3] w-full rounded-3xl overflow-hidden shadow-2xl">
             <Image
               src={imgHero}
               alt={altHero}
               fill
-              sizes="100vw"
               className="object-cover"
               priority
             />
@@ -111,162 +92,69 @@ export default async function NegozioPage() {
         </div>
       </section>
 
-      {/* Our Story / Heritage */}
-      <section className="py-20 bg-wanda-surface-low overflow-hidden">
-        <div className="wanda-container grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div className="order-2 md:order-1 relative reveal-on-scroll">
-            <div className="absolute -top-6 -left-6 w-32 h-32 bg-wanda-fucsia/10 rounded-full blur-3xl"></div>
-            <div className="relative aspect-[4/5] md:aspect-square rounded-xl overflow-hidden shadow-2xl transform -rotate-2 hover:rotate-0 transition-transform duration-500">
+      {/* Heritage Section */}
+      <section id="storia" className="py-32 bg-slate-50 relative overflow-hidden">
+        {/* Subtle Decorative Elements */}
+        <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-wanda-fucsia/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-[30vw] h-[30vw] bg-white rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
+
+        <div className="wanda-container grid grid-cols-1 lg:grid-cols-2 gap-24 items-center relative z-10">
+          <div className="order-2 lg:order-1 relative group">
+            <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] border-8 border-white group-hover:-rotate-2 transition-transform duration-700">
               <Image 
                 src={imgStoria}
                 alt={altStoria}
                 fill
-                className="object-cover"
+                className="object-cover group-hover:scale-105 transition-transform duration-1000"
               />
             </div>
-            <div className="absolute -bottom-4 -right-4 bg-white p-6 rounded-lg shadow-lg z-20">
-              <p className="font-headline italic text-wanda-fucsia text-xl">Est. 1960</p>
+            {/* Liquid Glass Badge */}
+            <div className="absolute -bottom-10 -right-10 bg-white/40 backdrop-blur-xl p-10 rounded-[2.5rem] shadow-2xl border border-white/20 hidden md:block">
+              <p className="font-headline italic text-4xl text-wanda-fucsia">Est. 1960</p>
+              <p className="text-[10px] font-bold tracking-[0.3em] uppercase mt-2 text-wanda-text-soft">Torino, Italia</p>
             </div>
           </div>
-          <div className="order-1 md:order-2 space-y-8 reveal-on-scroll reveal-delay-200">
-            <h2 className="text-3xl md:text-5xl font-bold leading-tight">Una storia di famiglia e passione.</h2>
-            <div className="space-y-6 text-wanda-text-soft text-lg leading-relaxed font-body">
-              <p>Fondata nel cuore dell&apos;Italia nel 1960, Profumeria Wanda è nata dal desiderio di portare bellezza e raffinatezza nella vita quotidiana.</p>
-              <p>Quello che è iniziato come un piccolo atelier si è evoluto in un punto di riferimento per chi cerca non solo un prodotto, ma un&apos;esperienza. Abbiamo mantenuto intatto il calore umano di un tempo, unendo la competenza professionale alla gentilezza che ci ha sempre contraddistinto.</p>
-              <p>Ogni scaffale, ogni fragranza e ogni accessorio in pelle viene scelto con cura certosina per garantirvi solo l&apos;eccellenza.</p>
+          
+          <div className="order-1 lg:order-2 space-y-10">
+            <div className="space-y-6">
+              <h2 className="text-4xl md:text-6xl font-bold leading-[0.9] tracking-tighter">
+                Una storia di<br />
+                <span className="italic font-headline text-wanda-fucsia">famiglia.</span>
+              </h2>
+              <div className="w-20 h-1.5 bg-wanda-fucsia rounded-full" />
+            </div>
+            
+            <div className="space-y-6 text-wanda-text-soft text-lg leading-relaxed font-medium">
+              <p>Fondata nel cuore di Torino nel 1960, Profumeria Wanda è nata dal desiderio di portare bellezza e raffinatezza nella vita quotidiana dei nostri concittadini.</p>
+              <p>Quello che è iniziato come un piccolo atelier si è evoluto in un punto di riferimento per chi cerca non solo un prodotto, ma un&apos;esperienza autentica. Abbiamo mantenuto intatto il calore umano di un tempo, unendo la competenza professionale alla gentilezza che ci ha sempre contraddistinto.</p>
+              <p className="italic border-l-4 border-wanda-fucsia/20 pl-6 py-2">
+                &quot;Ogni scaffale, ogni fragranza e ogni accessorio viene scelto con cura certosina per garantirvi solo l&apos;eccellenza.&quot;
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Services Section - Bento Layout */}
-      <section className="wanda-container py-24">
-        <div className="mb-16 text-center space-y-4 reveal-on-scroll">
-          <h2 className="text-3xl md:text-5xl font-bold">Molto più di un acquisto.</h2>
-          <p className="text-wanda-text-soft text-lg">Il nostro atelier è uno spazio di condivisione e consulenza.</p>
+      <section className="py-32 wanda-container">
+        <div className="max-w-3xl mb-20 space-y-4">
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tighter">Molto più di un acquisto.</h2>
+          <p className="text-xl text-wanda-text-soft max-w-xl">
+            Il nostro atelier è uno spazio di condivisione dove il tempo si ferma per lasciare spazio ai sensi.
+          </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Fragrance Consulting */}
-          <div className="md:col-span-2 bg-white p-8 md:p-10 rounded-xl shadow-sm border border-wanda-outline/10 flex flex-col md:flex-row gap-8 items-center reveal-on-scroll">
-            <div className="flex-1 space-y-4">
-              <Wind className="w-7 h-7 text-wanda-fucsia" />
-              <h3 className="text-2xl font-headline italic">Consulenza Olfattiva</h3>
-              <p className="text-wanda-text-soft leading-relaxed">Ti aiutiamo a trovare la tua firma olfattiva. Attraverso un percorso sensoriale, scopriremo insieme le note che meglio esprimono la tua personalità.</p>
-            </div>
-            <div className="flex-1 w-full h-48 md:h-full rounded-lg overflow-hidden relative min-h-[200px]">
-              <Image 
-                src={imgConsulenza}
-                alt={altConsulenza}
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
-
-          {/* Coffee and Chat */}
-          <div className="bg-wanda-fucsia/5 p-8 md:p-10 rounded-xl flex flex-col justify-between space-y-6 reveal-on-scroll reveal-delay-200">
-            <div className="space-y-4">
-              <Coffee className="w-7 h-7 text-wanda-fucsia" />
-              <h3 className="text-2xl font-headline italic">Un caffè e due chiacchiere</h3>
-              <p className="text-wanda-text-soft">Non abbiamo mai fretta. Il tempo speso con i nostri clienti è il nostro valore più prezioso.</p>
-            </div>
-            <div className="w-full h-40 rounded-lg overflow-hidden relative">
-              <Image 
-                src={imgCaffe}
-                alt={altCaffe}
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </div>
+        <ServiceBento 
+          imgConsulenza={imgConsulenza} 
+          altConsulenza={altConsulenza}
+          imgCaffe={imgCaffe}
+          altCaffe={altCaffe}
+        />
       </section>
 
       {/* Visit Us & Map */}
-      <section className="wanda-container py-24" id="contatti">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          <div className="space-y-12 reveal-on-scroll">
-            <h2 className="text-3xl md:text-5xl italic font-headline">Passa a trovarci.</h2>
-            
-            <div className="space-y-8">
-              <div className="flex gap-6">
-                <div className="w-14 h-14 bg-wanda-fucsia/10 rounded-full flex items-center justify-center text-wanda-fucsia shrink-0">
-                  <MapPin className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold mb-1">Indirizzo</h4>
-                  <p className="text-wanda-text-soft italic">{settings.indirizzo}, {settings.cap} {settings.citta} ({settings.provincia})</p>
-                </div>
-              </div>
-
-              <div className="flex gap-6">
-                <div className="w-14 h-14 bg-wanda-fucsia/10 rounded-full flex items-center justify-center text-wanda-fucsia shrink-0">
-                  <Clock className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold mb-1">Orari di Apertura</h4>
-                  <ul className="text-wanda-text-soft space-y-1">
-                    {settings.orariStrutturati?.map((item, idx) => (
-                      <li key={idx} className="flex justify-between w-full sm:w-64">
-                        <span className="font-medium">{item.giorni.map(d => dayLabels[d]).join(', ')}</span>
-                        <span className="text-right ml-4">
-                          {item.chiuso ? 'Chiuso' : (
-                            item.pausaPranzo 
-                              ? `${item.oraApertura}-${item.oraChiusuraPranzo} / ${item.oraRiaperturaPranzo}-${item.oraChiusura}`
-                              : `${item.oraApertura}-${item.oraChiusura}`
-                          )}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              <div className="flex gap-6">
-                <div className="w-14 h-14 bg-wanda-fucsia/10 rounded-full flex items-center justify-center text-wanda-fucsia shrink-0">
-                  <Phone className="w-6 h-6" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="text-xl font-bold mb-4">Contatti e Consulenza</h4>
-                  <div className="flex flex-wrap gap-4">
-                    <a href={`tel:${settings.telefono?.replace(/\s/g, '')}`} className="btn-primary !px-6 !py-3 text-sm active:scale-95">
-                      Chiama in negozio
-                    </a>
-                    <a 
-                      href={settings.linkWhatsApp ? `https://wa.me/${settings.linkWhatsApp.replace(/\D/g, '')}` : "#"}
-                      className="btn-outline !py-3 !px-6 text-sm active:scale-95"
-                    >
-                      Messaggio WhatsApp
-                    </a>
-                  </div>
-                  <p className="text-xs text-wanda-text-soft mt-4 italic">
-                    Siamo disponibili telefonicamente durante gli orari di apertura per ordini o consigli rapidi.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="rounded-xl overflow-hidden shadow-2xl h-[400px] md:h-[500px] relative reveal-on-scroll reveal-delay-200">
-            {settings.googleMapsEmbedUrl ? (
-              <MapEmbed src={settings.googleMapsEmbedUrl} />
-            ) : (
-              <div className="w-full h-full bg-wanda-surface-low flex items-center justify-center text-wanda-text-soft italic">
-                Mappa in arrivo
-              </div>
-            )}
-            <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-4 md:p-6 rounded-lg shadow-lg flex items-center justify-between">
-              <div>
-                <p className="font-bold text-sm md:text-base">Siamo nel cuore della città</p>
-                <p className="text-xs md:text-sm text-wanda-text-soft">Parcheggio riservato disponibile</p>
-              </div>
-              <div className="bg-wanda-fucsia text-white p-3 rounded-full shadow-lg">
-                <Navigation className="w-5 h-5 fill-current" />
-              </div>
-            </div>
-          </div>
-        </div>
+      <section className="py-32 wanda-container" id="contatti">
+        <ContactSection settings={settings} dayLabels={dayLabels} />
       </section>
     </main>
   )

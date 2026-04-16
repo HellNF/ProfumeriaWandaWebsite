@@ -1,13 +1,8 @@
 import configPromise from '@payload-config'
 import { cacheLife, cacheTag } from 'next/cache'
 import { getPayload, type Where } from 'payload'
+import type { CatalogFilters } from '@/lib/catalog'
 import type { ImpostazioniNegozio, Marca, Prodotto, Testimonial } from '@/types/cms'
-
-type CatalogoFilters = {
-  categoria?: string
-  promo?: boolean
-  destinatario?: string
-}
 
 const DEFAULT_SETTINGS: ImpostazioniNegozio = {
   nomeNegozio: 'Profumeria Wanda',
@@ -52,7 +47,7 @@ export async function getFeaturedProducts(): Promise<Prodotto[]> {
   }
 }
 
-export async function getCatalogProducts(filters: CatalogoFilters): Promise<Prodotto[]> {
+export async function getCatalogProducts(filters: CatalogFilters): Promise<Prodotto[]> {
   'use cache'
   cacheTag('prodotti')
   cacheLife('minutes')

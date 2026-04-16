@@ -18,33 +18,19 @@
   
   --font-headline: var(--font-noto-serif), serif;
   --font-body: var(--font-plus-jakarta), sans-serif;
+
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+  }
+  --animate-pulse-slow: pulse-slow 12s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 @layer base {
   body {
     @apply bg-wanda-bg text-wanda-nero font-body antialiased selection:bg-wanda-fucsia/10 selection:text-wanda-fucsia;
-    /*
-     * Tri-plane depth system — Editorial Luxury archetype
-     *
-     * PIANO 3 — VICINO: vignette atmosferica (bordi scuri, centro avanza)
-     * PIANO 2 — MEDIO:  sorgenti di luce direzionali (blob fuchsia / cipria / violetto)
-     * PIANO 1 — LONTANO: wash ambientale, la "stanza" in cui tutto galleggia
-     */
-    background-image:
-      /* P3 — Vignette: bordi recedono, crea profondità di campo */
-      radial-gradient(ellipse 105% 105% at 50% 50%, transparent 48%, rgba(45, 47, 47, 0.032) 100%),
-
-      /* P2 — Luce primaria: spot top-right, fuchsia caldo intenso */
-      radial-gradient(ellipse 60% 52% at 95% 3%,   rgba(212, 0, 110, 0.09)   0%, transparent 68%),
-      /* P2 — Luce di riempimento: bottom-left, cipria morbida */
-      radial-gradient(ellipse 55% 44% at 3%  96%,  rgba(255, 111, 162, 0.075) 0%, transparent 68%),
-      /* P2 — Accento complementare: violetto profondo, mid-left */
-      radial-gradient(ellipse 42% 48% at 0%  44%,  rgba(151, 55, 117, 0.058) 0%, transparent 65%),
-      /* P2 — Bloom centrale: piano di messa a fuoco, warm rose */
-      radial-gradient(ellipse 78% 62% at 50% 40%,  rgba(255, 224, 240, 0.44) 0%, transparent 66%),
-
-      /* P1 — Atmospheric base wash: "la stanza", moltissimo spazio */
-      radial-gradient(ellipse 140% 120% at 58% 22%, rgba(255, 242, 249, 0.30) 0%, transparent 72%);
+    /* Clean base for AtmosphericBackground component */
+    background-image: radial-gradient(ellipse 105% 105% at 50% 50%, transparent 48%, rgba(45, 47, 47, 0.02) 100%);
     background-attachment: fixed;
   }
 
@@ -185,23 +171,18 @@
     -webkit-mask-image: radial-gradient(ellipse 65% 70% at 0% 100%, black 0%, transparent 68%);
   }
 
-  /* Reveal Animations — cinematic fade: opacity + translate + blur */
+  /* Reveal Animations — opacity + transform only, no blur compositing */
   .reveal-on-scroll {
     opacity: 0;
-    transform: translateY(24px);
-    filter: blur(6px);
+    transform: translate3d(0, 18px, 0);
     transition:
-      opacity 0.8s cubic-bezier(0.32, 0.72, 0, 1),
-      transform 0.8s cubic-bezier(0.32, 0.72, 0, 1),
-      filter 0.8s cubic-bezier(0.32, 0.72, 0, 1);
-    will-change: opacity, transform, filter;
+      opacity 0.56s cubic-bezier(0.32, 0.72, 0, 1),
+      transform 0.56s cubic-bezier(0.32, 0.72, 0, 1);
   }
 
   .reveal-on-scroll.is-visible {
     opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-    will-change: auto;
+    transform: translate3d(0, 0, 0);
   }
 
   .reveal-delay-0 { transition-delay: 0ms; }
@@ -228,9 +209,7 @@
     .reveal-on-scroll {
       opacity: 1;
       transform: none;
-      filter: none;
       transition: none;
-      will-change: auto;
     }
     .reveal-delay-0,
     .reveal-delay-100,

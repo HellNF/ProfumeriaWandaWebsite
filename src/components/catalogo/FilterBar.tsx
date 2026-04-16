@@ -1,34 +1,26 @@
 'use client'
 
 import { useRouter, useSearchParams, usePathname } from 'next/navigation'
-import { useCallback } from 'react'
+import { useCallback, useTransition } from 'react'
+import { CheckIcon, Cross1Icon } from '@radix-ui/react-icons'
+import { CATALOG_CATEGORIES, CATALOG_GENDERS } from '@/lib/catalog'
 
-const CATEGORIES = [
-  { value: '', label: 'Tutti' },
-  { value: 'profumeria', label: 'Profumeria' },
-  { value: 'cosmetici', label: 'Cosmetici' },
-  { value: 'trucco', label: 'Trucco' },
-  { value: 'pelletteria', label: 'Pelletteria' },
-  { value: 'borse-valigie', label: 'Borse & Valigie' },
-  { value: 'idee-regalo', label: 'Idee Regalo' },
-  { value: 'altro', label: 'Altro' },
-]
-
-const GENDERS = [
-  { value: '', label: 'Tutti' },
-  { value: 'donna', label: 'Donna' },
-  { value: 'uomo', label: 'Uomo' },
-  { value: 'unisex', label: 'Unisex' },
-]
+const ALL_CATEGORIES_OPTION = { value: '', label: 'Tutte le Collezioni' } as const
+const ALL_GENDERS_OPTION = { value: '', label: 'Tutti' } as const
 
 export function FilterBar() {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
+  const [isPending, startTransition] = useTransition()
+  const categoryOptions = [ALL_CATEGORIES_OPTION, ...CATALOG_CATEGORIES]
 
   const activeCategory = searchParams.get('categoria') ?? ''
   const activeGender = searchParams.get('destinatario') ?? ''
   const onlyPromo = searchParams.get('promo') === '1'
+  const activeCategoryLabel =
+    categoryOptions.find((category) => category.value === activeCategory)?.label ??
+    ALL_CATEGORIES_OPTION.label
 
   const updateFilter = useCallback(
     (key: string, value: string) => {
@@ -39,73 +31,159 @@ export function FilterBar() {
         params.delete(key)
       }
       const qs = params.toString()
-      router.push(qs ? `${pathname}?${qs}` : pathname)
+      const url = qs ? `${pathname}?${qs}` : pathname
+
+      startTransition(() => {
+        router.replace(url, { scroll: false })
+      })
     },
     [router, pathname, searchParams],
   )
 
+  const clearAll = useCallback(() => {
+    startTransition(() => {
+      router.replace(pathname, { scroll: false })
+    })
+  }, [pathname, router])
+
+  const isFiltered = !!(activeCategory || activeGender || onlyPromo)
+
   return (
-    <div className="mb-12 space-y-3">
-      {/* Riga 1: Categorie (scroll orizzontale) + toggle promo */}
-      <div className="flex items-center gap-2 bg-wanda-surface-low rounded-xl p-2">
-        {/* Scroll area con fade sui bordi */}
-        <div className="relative flex-1 min-w-0">
-          <div className="overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <div className="flex gap-2 w-max">
-              {CATEGORIES.map(({ value, label }) => (
+    <section
+      aria-label="Filtri catalogo"
+      className={`mb-20 space-y-8 transition-opacity duration-500 ${isPending ? 'pointer-events-none opacity-60' : 'opacity-100'}`}
+    >
+      <div className="space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 px-1">
+          <div className="flex items-center gap-3">
+            <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-wanda-fucsia">
+              Categorie
+            </p>
+            <span className="hidden h-1 w-1 rounded-full bg-wanda-nero/20 sm:block" />
+            <p className="text-sm text-wanda-text-soft/75">
+              {activeCategory ? activeCategoryLabel : `${categoryOptions.length} categorie visibili`}
+            </p>
+          </div>
+
+          {activeCategory && (
+            <button
+              type="button"
+              disabled={isPending}
+              onClick={() => updateFilter('categoria', '')}
+              className="rounded-full bg-wanda-surface-low px-3 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-wanda-fucsia transition-all duration-300 hover:bg-wanda-surface-mid/60 active:scale-95"
+            >
+              Mostra tutto
+            </button>
+          )}
+        </div>
+
+        <div
+          role="toolbar"
+          aria-label="Filtro per categoria"
+          className="flex flex-wrap gap-2.5"
+        >
+          {categoryOptions.map(({ value, label }) => {
+            const isActive = activeCategory === value
+            const isAllOption = value === ''
+
+            return (
+              <button
+                key={value}
+                type="button"
+                disabled={isPending}
+                aria-pressed={isActive}
+                aria-label={label}
+                onClick={() => updateFilter('categoria', value)}
+                className={`group/category inline-flex items-center gap-2.5 rounded-full px-4 py-3 text-left transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.985] ${
+                  isActive
+                    ? 'bg-wanda-nero text-white shadow-[0_16px_30px_-22px_rgba(45,47,47,0.45)]'
+                    : 'bg-wanda-surface-low/70 text-wanda-nero hover:bg-wanda-surface-low'
+                } ${
+                  isAllOption ? 'pr-5' : ''
+                }`}
+              >
+                <span
+                  className={`flex h-7 w-7 items-center justify-center rounded-full transition-colors ${
+                    isActive
+                      ? 'bg-white/12 text-white'
+                      : 'bg-white/75 text-wanda-fucsia'
+                  }`}
+                >
+                  {isActive ? <CheckIcon className="h-3.5 w-3.5" /> : <span className="h-1.5 w-1.5 rounded-full bg-current" />}
+                </span>
+                <span className={`text-sm font-bold tracking-tight ${isAllOption ? 'pr-1' : ''}`}>
+                  {label}
+                </span>
+              </button>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Secondary Controls */}
+      <div className="flex flex-wrap items-center justify-between gap-6 px-1">
+        <div className="flex items-center gap-4">
+          <div
+            role="toolbar"
+            aria-label="Filtro per destinatario"
+            className="flex rounded-full border border-wanda-nero/5 bg-wanda-surface-low/30 p-1"
+          >
+            {[ALL_GENDERS_OPTION, ...CATALOG_GENDERS].map(({ value, label }) => {
+              const isActive = activeGender === value
+              return (
                 <button
                   key={value}
-                  onClick={() => updateFilter('categoria', value)}
-                  className={`px-4 py-2 rounded-lg font-bold text-sm whitespace-nowrap transition-all duration-200 ${
-                    activeCategory === value
-                      ? 'bg-wanda-fucsia text-white shadow-sm'
-                      : 'bg-transparent text-wanda-text-soft hover:bg-white hover:text-wanda-fucsia'
+                  type="button"
+                  disabled={isPending}
+                  aria-pressed={isActive}
+                  onClick={() => updateFilter('destinatario', value)}
+                  className={`px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-[0.15em] transition-all duration-500 active:scale-95 ${
+                    isActive
+                      ? 'bg-white text-wanda-nero shadow-sm'
+                      : 'text-wanda-nero/30 hover:text-wanda-nero/60'
                   }`}
                 >
                   {label}
                 </button>
-              ))}
-            </div>
+              )
+            })}
           </div>
-          {/* Fade destra per indicare scroll */}
-          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-wanda-surface-low to-transparent pointer-events-none" />
-        </div>
 
-        {/* Divider + toggle promo — sempre visibile a destra */}
-        <div className="shrink-0 flex items-center gap-3 border-l border-wanda-outline/20 pl-3">
-          <label className="flex items-center cursor-pointer gap-2">
-            <span className="text-xs font-bold text-wanda-text-soft whitespace-nowrap hidden sm:block">Offerte</span>
-            <div className="relative">
-              <input
-                type="checkbox"
-                className="sr-only peer"
-                checked={onlyPromo}
-                onChange={() => updateFilter('promo', onlyPromo ? '' : '1')}
-                aria-label="Mostra solo prodotti in promozione"
-              />
-              <div className="w-10 h-5 bg-wanda-surface-mid rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-wanda-fucsia" />
-            </div>
-          </label>
-        </div>
-      </div>
-
-      {/* Riga 2: Genere */}
-      <div className="flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl border border-wanda-outline/5">
-        <span className="text-[10px] font-bold uppercase tracking-widest text-wanda-outline shrink-0 mr-1">Per:</span>
-        {GENDERS.map(({ value, label }) => (
           <button
-            key={value}
-            onClick={() => updateFilter('destinatario', value)}
-            className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 ${
-              activeGender === value
-                ? 'bg-wanda-nero text-white'
-                : 'text-wanda-text-soft hover:bg-wanda-surface-low'
+            type="button"
+            disabled={isPending}
+            onClick={() => updateFilter('promo', onlyPromo ? '' : '1')}
+            className={`group/promo flex items-center gap-3 px-5 py-2 rounded-full border transition-all duration-500 active:scale-95 ${
+              onlyPromo
+                ? 'bg-wanda-fucsia/10 border-wanda-fucsia/20 text-wanda-fucsia'
+                : 'bg-transparent border-wanda-nero/5 text-wanda-nero/40 hover:border-wanda-fucsia/20 hover:text-wanda-fucsia/60'
             }`}
+            aria-pressed={onlyPromo}
+            aria-label="Mostra solo prodotti in promozione"
           >
-            {label}
+            <span className="text-[10px] font-bold uppercase tracking-[0.15em]">Promozioni</span>
+            <div className={`w-4 h-4 rounded-full flex items-center justify-center transition-colors duration-500 ${
+              onlyPromo ? 'bg-wanda-fucsia text-white' : 'bg-wanda-surface-mid/50 group-hover/promo:bg-wanda-fucsia/20'
+            }`}>
+              {onlyPromo && <CheckIcon className="w-3 h-3" />}
+            </div>
           </button>
-        ))}
+        </div>
+
+        {isFiltered && (
+          <button
+            type="button"
+            disabled={isPending}
+            onClick={clearAll}
+            className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-wanda-fucsia hover:opacity-70 transition-all active:scale-95"
+          >
+            <Cross1Icon className="w-3 h-3" />
+            <span>Reset Filtri</span>
+          </button>
+        )}
       </div>
-    </div>
+    </section>
   )
 }
+
+

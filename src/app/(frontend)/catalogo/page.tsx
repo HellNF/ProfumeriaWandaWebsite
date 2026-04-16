@@ -3,6 +3,11 @@ import type { Metadata } from 'next'
 import { FilterBar } from '@/components/catalogo/FilterBar'
 import { ProductGrid } from '@/components/catalogo/ProductGrid'
 import { ProductGridSkeleton } from '@/components/catalogo/ProductSkeleton'
+import {
+  hasCatalogFilters,
+  parseCatalogSearchParams,
+  type CatalogSearchParams,
+} from '@/lib/catalog'
 import { getCatalogProducts, getStoreSettings } from '@/lib/cms'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -14,51 +19,70 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 interface Props {
-  searchParams: Promise<{ categoria?: string; promo?: string; destinatario?: string }>
+  searchParams: Promise<CatalogSearchParams>
 }
 
 async function CatalogoContent({ searchParams }: Props) {
-  const { categoria, promo, destinatario } = await searchParams
-  const prodotti = await getCatalogProducts({
-    categoria,
-    promo: promo === '1',
-    destinatario,
-  })
+  const filters = parseCatalogSearchParams(await searchParams)
+  const prodotti = await getCatalogProducts(filters)
+  const filtraggioAttivo = hasCatalogFilters(filters)
 
-  const filtraggioAttivo = !!(categoria || promo || destinatario)
-
-  return (
-    <>
-      <FilterBar />
-      <ProductGrid prodotti={prodotti} filtraggioAttivo={filtraggioAttivo} />
-    </>
-  )
+  return <ProductGrid prodotti={prodotti} filtraggioAttivo={filtraggioAttivo} />
 }
 
 export default async function CatalogoPage({ searchParams }: Props) {
   return (
-    <main className="wanda-container pt-32 pb-20 min-h-screen space-y-12">
-      {/* Header Section from Stitch */}
-      <header className="text-center lg:text-left space-y-4 reveal-on-scroll">
-        <h1 className="font-headline text-4xl md:text-6xl text-wanda-nero font-bold tracking-tight">
-          La nostra selezione per te
-        </h1>
-        <p className="text-wanda-text-soft text-lg max-w-2xl leading-relaxed">
-          Ogni prodotto è scelto con amore, pensando alla tua storia e alla tua bellezza. 
-          Scopri l&apos;essenza dell&apos;artigianalità italiana e dei marchi internazionali più amati.
-        </p>
-      </header>
+    <main className="pb-32 min-h-screen">
+      {/* Editorial Header Section */}
+      <section className="relative overflow-hidden pt-32 pb-20 md:pt-48 md:pb-12">
+        <div className="wanda-container relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+            
+            <div className="lg:col-span-8 space-y-8 reveal-on-scroll">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-px bg-wanda-fucsia/30" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-wanda-fucsia">
+                  Atelier Wanda
+                </span>
+              </div>
+              
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-headline font-bold leading-[0.9] tracking-tighter text-wanda-nero max-w-4xl">
+                La nostra <br />
+                <span className="italic font-medium text-wanda-fucsia/90">Selezione</span>
+              </h1>
+            </div>
 
-      <Suspense
-        fallback={
-          <div className="space-y-12">
-            <div className="h-20 bg-wanda-surface-low rounded-xl animate-pulse" />
-            <ProductGridSkeleton count={6} />
+            <div className="lg:col-span-4 reveal-on-scroll reveal-delay-200">
+              <p className="text-lg md:text-xl text-wanda-text-soft/70 leading-relaxed font-body max-w-sm italic">
+                Ogni pezzo è un racconto di bellezza, scelto con la cura e l&apos;amore che ci contraddistinguono dal 1960.
+              </p>
+            </div>
+
           </div>
-        }
-      >
-        <CatalogoContent searchParams={searchParams} />
-      </Suspense>
+        </div>
+
+        {/* Background Atmospheric Detail */}
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-wanda-surface-low/30 -z-10 -skew-x-12 translate-x-1/4 pointer-events-none" />
+      </section>
+
+      <div className="wanda-container">
+        {/* FilterBar wrapped in its own Suspense to comply with Next.js dynamic rendering rules */}
+        <Suspense fallback={<div className="h-32 w-full bg-wanda-surface-low/20 animate-pulse rounded-full mb-20" />}>
+          <FilterBar />
+        </Suspense>
+
+        <Suspense
+          fallback={
+            <div className="space-y-16">
+              <ProductGridSkeleton count={8} />
+            </div>
+          }
+        >
+          <CatalogoContent searchParams={searchParams} />
+        </Suspense>
+      </div>
     </main>
   )
 }
+
+

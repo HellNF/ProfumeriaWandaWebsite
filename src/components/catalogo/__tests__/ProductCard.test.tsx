@@ -9,6 +9,20 @@ jest.mock('next/image', () => ({
   ),
 }))
 
+class MockIntersectionObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
+beforeAll(() => {
+  Object.defineProperty(window, 'IntersectionObserver', {
+    writable: true,
+    configurable: true,
+    value: MockIntersectionObserver,
+  })
+})
+
 const prodottoBase = {
   id: '1',
   nome: 'Acqua di Parma Colonia',
@@ -41,24 +55,35 @@ describe('ProductCard', () => {
     expect(screen.getByText('€120,00')).toBeInTheDocument()
   })
 
-  it('mostra badge PROMO se inPromozione è true', () => {
-    render(<ProductCard prodotto={{ ...prodottoBase, inPromozione: true, prezzoScontato: 90 }} />)
-    expect(screen.getByText('PROMO')).toBeInTheDocument()
+  it('mostra la percentuale di sconto quando il prodotto e in promozione', () => {
+    render(
+      <ProductCard
+        prodotto={{ ...prodottoBase, inPromozione: true, prezzoScontato: 90, percentualeSconto: 25 }}
+      />,
+    )
+
+    expect(screen.getByText('-25%')).toBeInTheDocument()
   })
 
-  it('mostra prezzo scontato e prezzo barrato se in promozione', () => {
-    render(<ProductCard prodotto={{ ...prodottoBase, inPromozione: true, prezzoScontato: 90 }} />)
+  it('mostra il prezzo scontato e quello barrato se in promozione', () => {
+    render(
+      <ProductCard
+        prodotto={{ ...prodottoBase, inPromozione: true, prezzoScontato: 90, percentualeSconto: 25 }}
+      />,
+    )
+
     expect(screen.getByText('€90,00')).toBeInTheDocument()
     expect(screen.getByText('€120,00')).toBeInTheDocument()
   })
 
-  it('mostra badge Non disponibile se disponibile è false', () => {
+  it('mostra lo stato non disponibile se il prodotto non e acquistabile', () => {
     render(<ProductCard prodotto={{ ...prodottoBase, disponibile: false }} />)
     expect(screen.getByText('Non disponibile')).toBeInTheDocument()
+    expect(screen.getByText('Esaurito')).toBeInTheDocument()
   })
 
-  it('non mostra il prezzo se prezzo è null', () => {
+  it('mostra un fallback coerente se il prezzo non e disponibile', () => {
     render(<ProductCard prodotto={{ ...prodottoBase, prezzo: null }} />)
-    expect(screen.queryByText(/€/)).not.toBeInTheDocument()
+    expect(screen.getByText('In Boutique')).toBeInTheDocument()
   })
 })
