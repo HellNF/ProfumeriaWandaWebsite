@@ -33,7 +33,7 @@ export default async function HomePage() {
   const altQualita = getMediaAlt(settings.immagineQualitaTradizione, "Qualità Ethos")
 
   return (
-    <main className="space-y-24 pb-20">
+    <main className="space-y-32 pb-28">
       <Hero
         testoHero={settings.testoHero}
         sottotitoloHero={settings.sottotitoloHero}
@@ -42,10 +42,8 @@ export default async function HomePage() {
         ctaHeroUrl={settings.ctaHeroUrl}
       />
 
-      {/* Central Zone — Selezione + FeaturedProducts */}
-      <div className="central-zone relative space-y-24 py-2">
-
-      {/* Bento Grid: Curated Categories */}
+      {/* La nostra Selezione — galleggia sul gradient bg, corner dot accents */}
+      <div className="relative overflow-hidden py-8 dot-accent-tr dot-accent-bl">
       <section className="wanda-container">
         <div className="text-center mb-16 space-y-4 reveal-on-scroll">
           <h2 className="text-3xl md:text-5xl font-bold">La nostra Selezione</h2>
@@ -137,16 +135,13 @@ export default async function HomePage() {
           </Link>
         </div>
       </section>
+      </div>{/* /La nostra Selezione */}
 
-      <div>
-        <FeaturedProducts
-          prodotti={prodottiInEvidenza}
-          title={settings.testoSezioneEvidenza}
-          immagineConsulenza={settings.immagineConsulenzaWanda}
-        />
-      </div>
-
-      </div>{/* /central-zone */}
+      <FeaturedProducts
+        prodotti={prodottiInEvidenza}
+        title={settings.testoSezioneEvidenza}
+        immagineConsulenza={settings.immagineConsulenzaWanda}
+      />
 
       <BrandsMarquee marche={marche} />
 

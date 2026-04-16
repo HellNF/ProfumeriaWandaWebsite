@@ -23,16 +23,28 @@
 @layer base {
   body {
     @apply bg-wanda-bg text-wanda-nero font-body antialiased selection:bg-wanda-fucsia/10 selection:text-wanda-fucsia;
-    /* Mesh gradient — DESIGN.md "Tonal Bloom": colori che sanguinano morbidamente uno nell'altro */
+    /*
+     * Tri-plane depth system — Editorial Luxury archetype
+     *
+     * PIANO 3 — VICINO: vignette atmosferica (bordi scuri, centro avanza)
+     * PIANO 2 — MEDIO:  sorgenti di luce direzionali (blob fuchsia / cipria / violetto)
+     * PIANO 1 — LONTANO: wash ambientale, la "stanza" in cui tutto galleggia
+     */
     background-image:
-      /* Blob 1: top-right — fuchsia caldo come luce di finestra */
-      radial-gradient(ellipse 55% 45% at 92% 6%,  rgba(212, 0, 110, 0.06)  0%, transparent 72%),
-      /* Blob 2: bottom-left — primary-container cipria */
-      radial-gradient(ellipse 50% 38% at 5%  90%,  rgba(255, 111, 162, 0.05) 0%, transparent 72%),
-      /* Blob 3: center ambient — luce diffusa calda */
-      radial-gradient(ellipse 70% 55% at 50% 45%,  rgba(255, 232, 242, 0.30) 0%, transparent 70%),
-      /* Blob 4: violetto complementare — mid-left */
-      radial-gradient(ellipse 35% 40% at 2%  40%,  rgba(151, 55, 117, 0.035) 0%, transparent 68%);
+      /* P3 — Vignette: bordi recedono, crea profondità di campo */
+      radial-gradient(ellipse 105% 105% at 50% 50%, transparent 48%, rgba(45, 47, 47, 0.032) 100%),
+
+      /* P2 — Luce primaria: spot top-right, fuchsia caldo intenso */
+      radial-gradient(ellipse 60% 52% at 95% 3%,   rgba(212, 0, 110, 0.09)   0%, transparent 68%),
+      /* P2 — Luce di riempimento: bottom-left, cipria morbida */
+      radial-gradient(ellipse 55% 44% at 3%  96%,  rgba(255, 111, 162, 0.075) 0%, transparent 68%),
+      /* P2 — Accento complementare: violetto profondo, mid-left */
+      radial-gradient(ellipse 42% 48% at 0%  44%,  rgba(151, 55, 117, 0.058) 0%, transparent 65%),
+      /* P2 — Bloom centrale: piano di messa a fuoco, warm rose */
+      radial-gradient(ellipse 78% 62% at 50% 40%,  rgba(255, 224, 240, 0.44) 0%, transparent 66%),
+
+      /* P1 — Atmospheric base wash: "la stanza", moltissimo spazio */
+      radial-gradient(ellipse 140% 120% at 58% 22%, rgba(255, 242, 249, 0.30) 0%, transparent 72%);
     background-attachment: fixed;
   }
 
@@ -104,7 +116,7 @@
     inset: 0;
     pointer-events: none;
     z-index: 9999;
-    opacity: 0.022;
+    opacity: 0.032;
     background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%3E%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.85%22%20numOctaves%3D%224%22%20stitchTiles%3D%22stitch%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22200%22%20height%3D%22200%22%20filter%3D%22url(%23n)%22%2F%3E%3C%2Fsvg%3E");
     background-repeat: repeat;
     background-size: 200px 200px;
@@ -133,12 +145,16 @@
   }
 
   /* Central zone — DESIGN.md surface-container-low (#f0f1f1) contro surface (#f6f6f6) */
-  /* Separazione tonale, non colorata. Fade con box-shadow inset. */
+  /* Piano incavato: fade top/bottom + ombre laterali per profondità 3D */
   .central-zone {
     background: var(--color-wanda-surface-low);
     box-shadow:
-      inset 0  100px 100px -50px var(--color-wanda-bg),
-      inset 0 -100px 100px -50px var(--color-wanda-bg);
+      /* Fade verticale — zona che emerge dalla pagina */
+      inset 0   130px 130px -65px var(--color-wanda-bg),
+      inset 0  -130px 130px -65px var(--color-wanda-bg),
+      /* Ombre laterali — piano "sunken", come una pagina stampata su carta spessa */
+      inset  5px 0 32px -16px rgba(45, 47, 47, 0.04),
+      inset -5px 0 32px -16px rgba(45, 47, 47, 0.04);
   }
 
   /* Corner variants — usati per la zona centrale (Selezione + FeaturedProducts) */
