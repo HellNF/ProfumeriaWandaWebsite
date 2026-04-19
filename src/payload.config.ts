@@ -79,13 +79,13 @@ export default buildConfig({
       },
     }),
   ],
-  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
+  serverURL: (process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000').replace(/\/$/, ''),
   cors: [
-    process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
+    (process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000').replace(/\/$/, ''),
     'http://localhost:3000',
   ].filter(Boolean),
   csrf: [
-    process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
+    (process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000').replace(/\/$/, ''),
     'http://localhost:3000',
   ].filter(Boolean),
   telemetry: false,
