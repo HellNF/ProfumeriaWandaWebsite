@@ -13,9 +13,7 @@ type Args = {
   }>
 }
 
-export async function generateStaticParams() {
-  return [{ segments: [] }]
-}
+export const dynamic = 'force-dynamic'
 
 export const generateMetadata = ({ params, searchParams }: Args): Promise<Metadata> =>
   generatePageMetadata({ config, params, searchParams })
