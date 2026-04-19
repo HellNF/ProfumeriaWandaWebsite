@@ -10,6 +10,7 @@ const securityHeaders = [
 ]
 
 const nextConfig: NextConfig = {
+  cacheComponents: true,
   serverExternalPackages: ['monaco-editor'],
   async headers() {
     return [
