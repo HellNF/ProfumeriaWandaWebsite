@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { MapEmbed } from '@/components/negozio/MapEmbed'
 import { StructuredData } from '@/components/negozio/StructuredData'
 import { HeroImageContainer } from '@/components/negozio/HeroImageContainer'
 import { ServiceBento } from '@/components/negozio/ServiceBento'
@@ -39,16 +38,16 @@ export default async function NegozioPage() {
       <StructuredData settings={settings} />
 
       {/* Hero Section — Asymmetric & Dynamic */}
-      <section className="relative min-h-[85dvh] flex items-center pt-32 pb-20 lg:pt-40">
-        <div className="wanda-container grid lg:grid-cols-12 gap-16 lg:gap-24 items-center">
+      <section className="relative min-h-[85dvh] flex items-center pt-28 pb-16 lg:pt-40 lg:pb-24">
+        <div className="wanda-container grid lg:grid-cols-12 gap-12 lg:gap-24 items-center">
           {/* Content */}
-          <div className="lg:col-span-5 space-y-10 z-10">
+          <div className="lg:col-span-5 space-y-8 lg:space-y-10 z-10">
             <div className="space-y-6">
               <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-wanda-fucsia/5 text-wanda-fucsia rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-wanda-fucsia animate-pulse" />
                 <span className="text-[10px] font-bold tracking-[0.2em] uppercase">Il nostro Atelier</span>
               </div>
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.9] tracking-tighter text-wanda-nero">
+              <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tighter text-wanda-nero">
                 Benvenuti a<br />
                 <span className="italic font-headline text-wanda-fucsia">casa nostra.</span>
               </h1>
@@ -56,37 +55,47 @@ export default async function NegozioPage() {
                 Dal 1960, un luogo dove la cortesia è di casa e ogni fragranza racconta una storia di passione familiare.
               </p>
             </div>
+
+            {/* Mobile Image (Visible only on mobile/tablet) */}
+            <div className="lg:hidden relative h-[350px] sm:h-[450px] w-full reveal-on-scroll">
+              <div className="absolute inset-0 bg-gradient-to-tr from-wanda-fucsia/8 to-transparent rounded-3xl -rotate-2" />
+              <div className="absolute top-4 right-4 w-[calc(100%-32px)] h-[calc(100%-32px)] p-[4px] rounded-[2rem] z-10 bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl overflow-hidden">
+                <div className="relative w-full h-full rounded-[1.75rem] overflow-hidden">
+                  <Image
+                    src={imgHero}
+                    alt={altHero}
+                    fill
+                    className="object-cover scale-110"
+                    priority
+                  />
+                </div>
+              </div>
+              {/* Badge for mobile */}
+              <div className="absolute bottom-6 -left-2 z-20 bg-white/90 backdrop-blur-md px-5 py-3 rounded-xl shadow-lg border border-white/50 rotate-1">
+                <p className="font-headline italic text-wanda-fucsia text-base">Dal 1960,</p>
+                <span className="text-[8px] text-wanda-text-soft font-bold tracking-[0.1em] uppercase block">con passione</span>
+              </div>
+            </div>
             
-            <div className="flex flex-wrap gap-6 pt-4">
-              <a href="#contatti" className="btn-primary group !px-8 !py-4 active:scale-95">
+            <div className="flex flex-wrap gap-6 pt-2 lg:pt-4">
+              <a href="#contatti" className="btn-primary group !px-8 !py-4 active:scale-95 text-sm md:text-base">
                 Passa a trovarci
                 <span className="ml-3 group-hover:translate-x-1 transition-transform inline-block">→</span>
               </a>
-              <a href="#storia" className="flex items-center gap-3 text-wanda-nero font-bold group">
+              <a href="#storia" className="flex items-center gap-3 text-wanda-nero font-bold group text-sm md:text-base">
                 La nostra storia
                 <div className="w-10 h-[1px] bg-wanda-nero group-hover:w-16 transition-all duration-500" />
               </a>
             </div>
           </div>
 
-          {/* Desktop Image with Parallax & Tilt */}
+          {/* Desktop Image with Parallax & Tilt (Visible only on desktop) */}
           <div className="lg:col-span-7 hidden lg:block">
             <HeroImageContainer 
               src={imgHero} 
               alt={altHero} 
               badgeText="Dal 1960,"
               badgeSubtext="con passione"
-            />
-          </div>
-
-          {/* Mobile Image */}
-          <div className="lg:hidden relative aspect-[4/3] w-full rounded-3xl overflow-hidden shadow-2xl">
-            <Image
-              src={imgHero}
-              alt={altHero}
-              fill
-              className="object-cover"
-              priority
             />
           </div>
         </div>

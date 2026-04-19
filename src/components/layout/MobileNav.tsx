@@ -44,28 +44,39 @@ export function MobileNav() {
 
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-100 md:hidden"
+      className="fixed bottom-0 left-0 right-0 z-50 md:hidden pb-safe"
       aria-label="Navigazione mobile"
     >
-      <ul className="flex">
-        {NAV_ITEMS.map(({ href, label, icon }) => {
-          const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href)
-          return (
-            <li key={href} className="flex-1">
-              <Link
-                href={href}
-                aria-current={isActive ? 'page' : undefined}
-                className={`flex flex-col items-center justify-center py-3 gap-0.5 transition-colors ${
-                  isActive ? 'text-wanda-fucsia' : 'text-wanda-outline hover:text-wanda-nero'
-                }`}
-              >
-                {icon}
-                <span className="text-[10px] tracking-wide uppercase">{label}</span>
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
+      <div className="mx-4 mb-4 rounded-3xl bg-wanda-bg/80 backdrop-blur-xl border border-white/40 shadow-[0_-8px_32px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.8)] overflow-hidden">
+        <ul className="flex items-center justify-around">
+          {NAV_ITEMS.map(({ href, label, icon }) => {
+            const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href)
+            return (
+              <li key={href} className="flex-1">
+                <Link
+                  href={href}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`flex flex-col items-center justify-center py-4 gap-1 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+                    isActive 
+                      ? 'text-wanda-fucsia scale-110' 
+                      : 'text-wanda-outline hover:text-wanda-nero'
+                  }`}
+                >
+                  <div className={`transition-transform duration-500 ${isActive ? 'translate-y-[-2px]' : ''}`}>
+                    {icon}
+                  </div>
+                  <span className={`text-[9px] font-bold tracking-[0.15em] uppercase transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-60'}`}>
+                    {label}
+                  </span>
+                  {isActive && (
+                    <div className="absolute bottom-1 w-1 h-1 rounded-full bg-wanda-fucsia" />
+                  )}
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
     </nav>
   )
 }

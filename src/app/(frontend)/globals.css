@@ -178,6 +178,7 @@
     transition:
       opacity 0.56s cubic-bezier(0.32, 0.72, 0, 1),
       transform 0.56s cubic-bezier(0.32, 0.72, 0, 1);
+    will-change: transform, opacity;
   }
 
   .reveal-on-scroll.is-visible {
@@ -190,6 +191,21 @@
   .reveal-delay-200 { transition-delay: 200ms; }
   .reveal-delay-300 { transition-delay: 300ms; }
   .reveal-delay-400 { transition-delay: 400ms; }
+
+  /* Safe Area Utilities */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+  .px-safe {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  .mb-safe {
+    margin-bottom: env(safe-area-inset-bottom);
+  }
 
   /* Brand Marquee */
   .marquee-track {

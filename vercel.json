@@ -1,5 +1,10 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "npx payload migrate && next build",
   "outputDirectory": ".next",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "functions": {
+    "src/app/(payload)/api/[[...slug]]/route.ts": {
+      "maxDuration": 60
+    }
+  }
 }
