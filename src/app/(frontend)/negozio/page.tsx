@@ -34,15 +34,15 @@ export default async function NegozioPage() {
   const altCaffe = getMediaAlt(servImages.immagineCaffeChiacchiere, "Un caffè e due chiacchiere")
 
   return (
-    <main className="pb-32 overflow-x-hidden">
+    <main className="overflow-x-hidden">
       <StructuredData settings={settings} />
 
       {/* Hero Section — Asymmetric & Dynamic */}
-      <section className="relative min-h-[85dvh] flex items-center pt-28 pb-16 lg:pt-40 lg:pb-24">
-        <div className="wanda-container grid lg:grid-cols-12 gap-12 lg:gap-24 items-center">
+      <section className="relative min-h-[70dvh] lg:min-h-[85dvh] flex items-center pt-24 pb-12 lg:pt-40 lg:pb-24">
+        <div className="wanda-container grid lg:grid-cols-12 gap-10 lg:gap-24 items-center">
           {/* Content */}
-          <div className="lg:col-span-5 space-y-8 lg:space-y-10 z-10">
-            <div className="space-y-6">
+          <div className="lg:col-span-5 space-y-6 lg:space-y-10 z-10">
+            <div className="space-y-4 lg:space-y-6">
               <div className="inline-flex items-center gap-3 px-4 py-1.5 bg-wanda-fucsia/5 text-wanda-fucsia rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-wanda-fucsia animate-pulse" />
                 <span className="text-[10px] font-bold tracking-[0.2em] uppercase">Il nostro Atelier</span>
@@ -51,15 +51,15 @@ export default async function NegozioPage() {
                 Benvenuti a<br />
                 <span className="italic font-headline text-wanda-fucsia">casa nostra.</span>
               </h1>
-              <p className="text-lg md:text-xl text-wanda-text-soft max-w-md leading-relaxed">
+              <p className="text-base md:text-xl text-wanda-text-soft max-w-md leading-relaxed">
                 Dal 1960, un luogo dove la cortesia è di casa e ogni fragranza racconta una storia di passione familiare.
               </p>
             </div>
 
             {/* Mobile Image (Visible only on mobile/tablet) */}
-            <div className="lg:hidden relative h-[350px] sm:h-[450px] w-full reveal-on-scroll">
+            <div className="lg:hidden relative h-[300px] sm:h-[400px] w-full reveal-on-scroll">
               <div className="absolute inset-0 bg-gradient-to-tr from-wanda-fucsia/8 to-transparent rounded-3xl -rotate-2" />
-              <div className="absolute top-4 right-4 w-[calc(100%-32px)] h-[calc(100%-32px)] p-[4px] rounded-[2rem] z-10 bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl overflow-hidden">
+              <div className="absolute top-3 right-3 w-[calc(100%-24px)] h-[calc(100%-24px)] p-[4px] rounded-[2rem] z-10 bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl overflow-hidden">
                 <div className="relative w-full h-full rounded-[1.75rem] overflow-hidden">
                   <Image
                     src={imgHero}
@@ -71,20 +71,20 @@ export default async function NegozioPage() {
                 </div>
               </div>
               {/* Badge for mobile */}
-              <div className="absolute bottom-6 -left-2 z-20 bg-white/90 backdrop-blur-md px-5 py-3 rounded-xl shadow-lg border border-white/50 rotate-1">
-                <p className="font-headline italic text-wanda-fucsia text-base">Dal 1960,</p>
+              <div className="absolute bottom-4 -left-2 z-20 bg-white/90 backdrop-blur-md px-4 py-2.5 rounded-xl shadow-lg border border-white/50 rotate-1">
+                <p className="font-headline italic text-wanda-fucsia text-sm">Dal 1960,</p>
                 <span className="text-[8px] text-wanda-text-soft font-bold tracking-[0.1em] uppercase block">con passione</span>
               </div>
             </div>
             
-            <div className="flex flex-wrap gap-6 pt-2 lg:pt-4">
-              <a href="#contatti" className="btn-primary group !px-8 !py-4 active:scale-95 text-sm md:text-base">
+            <div className="flex flex-wrap gap-4 pt-2 lg:pt-4">
+              <a href="#contatti" className="btn-primary group !px-6 !py-3.5 md:!px-8 md:!py-4 active:scale-95 text-sm md:text-base">
                 Passa a trovarci
                 <span className="ml-3 group-hover:translate-x-1 transition-transform inline-block">→</span>
               </a>
               <a href="#storia" className="flex items-center gap-3 text-wanda-nero font-bold group text-sm md:text-base">
                 La nostra storia
-                <div className="w-10 h-[1px] bg-wanda-nero group-hover:w-16 transition-all duration-500" />
+                <div className="w-8 md:w-10 h-[1px] bg-wanda-nero group-hover:w-16 transition-all duration-500" />
               </a>
             </div>
           </div>
@@ -102,14 +102,14 @@ export default async function NegozioPage() {
       </section>
 
       {/* Heritage Section */}
-      <section id="storia" className="py-32 bg-slate-50 relative overflow-hidden">
+      <section id="storia" className="py-20 md:py-32 bg-slate-50 relative overflow-hidden">
         {/* Subtle Decorative Elements */}
         <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-wanda-fucsia/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
         <div className="absolute bottom-0 left-0 w-[30vw] h-[30vw] bg-white rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
 
-        <div className="wanda-container grid grid-cols-1 lg:grid-cols-2 gap-24 items-center relative z-10">
+        <div className="wanda-container grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 items-center relative z-10">
           <div className="order-2 lg:order-1 relative group">
-            <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] border-8 border-white group-hover:-rotate-2 transition-transform duration-700">
+            <div className="relative aspect-[4/5] rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] border-4 md:border-8 border-white group-hover:-rotate-2 transition-transform duration-700">
               <Image 
                 src={imgStoria}
                 alt={altStoria}
@@ -118,23 +118,23 @@ export default async function NegozioPage() {
               />
             </div>
             {/* Liquid Glass Badge */}
-            <div className="absolute -bottom-10 -right-10 bg-white/40 backdrop-blur-xl p-10 rounded-[2.5rem] shadow-2xl border border-white/20 hidden md:block">
-              <p className="font-headline italic text-4xl text-wanda-fucsia">Est. 1960</p>
-              <p className="text-[10px] font-bold tracking-[0.3em] uppercase mt-2 text-wanda-text-soft">Torino, Italia</p>
+            <div className="absolute -bottom-6 -right-4 md:-bottom-10 md:-right-10 bg-white/40 backdrop-blur-xl p-6 md:p-10 rounded-3xl md:rounded-[2.5rem] shadow-2xl border border-white/20 z-20">
+              <p className="font-headline italic text-2xl md:text-4xl text-wanda-fucsia">Est. 1960</p>
+              <p className="text-[8px] md:text-[10px] font-bold tracking-[0.3em] uppercase mt-1 md:mt-2 text-wanda-text-soft">Torino, Italia</p>
             </div>
           </div>
           
-          <div className="order-1 lg:order-2 space-y-10">
-            <div className="space-y-6">
+          <div className="order-1 lg:order-2 space-y-8 md:space-y-10">
+            <div className="space-y-4 md:space-y-6">
               <h2 className="text-4xl md:text-6xl font-bold leading-[0.9] tracking-tighter">
                 Una storia di<br />
                 <span className="italic font-headline text-wanda-fucsia">famiglia.</span>
               </h2>
-              <div className="w-20 h-1.5 bg-wanda-fucsia rounded-full" />
+              <div className="w-20 h-1 md:h-1.5 bg-wanda-fucsia rounded-full" />
             </div>
             
-            <div className="space-y-6 text-wanda-text-soft text-lg leading-relaxed font-medium">
-              <p>Fondata nel cuore di Torino nel 1960, Profumeria Wanda è nata dal desiderio di portare bellezza e raffinatezza nella vita quotidiana dei nostri concittadini.</p>
+            <div className="space-y-4 md:space-y-6 text-wanda-text-soft text-base md:text-lg leading-relaxed font-medium">
+              <p>Fondata nel cuore di Torino nel 1960, Profumeria Wanda è nata dal desiderio di portare bellezza e raffinenza nella vita quotidiana dei nostri concittadini.</p>
               <p>Quello che è iniziato come un piccolo atelier si è evoluto in un punto di riferimento per chi cerca non solo un prodotto, ma un&apos;esperienza autentica. Abbiamo mantenuto intatto il calore umano di un tempo, unendo la competenza professionale alla gentilezza che ci ha sempre contraddistinto.</p>
               <p className="italic border-l-4 border-wanda-fucsia/20 pl-6 py-2">
                 &quot;Ogni scaffale, ogni fragranza e ogni accessorio viene scelto con cura certosina per garantirvi solo l&apos;eccellenza.&quot;
@@ -145,10 +145,10 @@ export default async function NegozioPage() {
       </section>
 
       {/* Services Section - Bento Layout */}
-      <section className="py-32 wanda-container">
-        <div className="max-w-3xl mb-20 space-y-4">
+      <section className="py-20 md:py-32 wanda-container">
+        <div className="max-w-3xl mb-12 md:mb-20 space-y-4">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tighter">Molto più di un acquisto.</h2>
-          <p className="text-xl text-wanda-text-soft max-w-xl">
+          <p className="text-lg md:text-xl text-wanda-text-soft max-w-xl">
             Il nostro atelier è uno spazio di condivisione dove il tempo si ferma per lasciare spazio ai sensi.
           </p>
         </div>
@@ -162,7 +162,7 @@ export default async function NegozioPage() {
       </section>
 
       {/* Visit Us & Map */}
-      <section className="py-32 wanda-container" id="contatti">
+      <section className="py-20 md:py-32 wanda-container" id="contatti">
         <ContactSection settings={settings} dayLabels={dayLabels} />
       </section>
     </main>

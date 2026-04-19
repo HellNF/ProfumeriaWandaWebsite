@@ -80,7 +80,7 @@ export function FilterBar() {
         <div
           role="toolbar"
           aria-label="Filtro per categoria"
-          className="flex flex-wrap gap-2.5"
+          className="flex lg:flex-wrap gap-2.5 overflow-x-auto pb-4 lg:pb-0 scrollbar-hide -mx-4 px-4 lg:mx-0 lg:px-0"
         >
           {categoryOptions.map(({ value, label }) => {
             const isActive = activeCategory === value
@@ -94,12 +94,12 @@ export function FilterBar() {
                 aria-pressed={isActive}
                 aria-label={label}
                 onClick={() => updateFilter('categoria', value)}
-                className={`group/category inline-flex items-center gap-2.5 rounded-full px-4 py-3 text-left transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.985] ${
+                className={`group/category inline-flex items-center gap-2.5 rounded-full px-5 py-3.5 lg:px-4 lg:py-3 text-left transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.96] shrink-0 ${
                   isActive
-                    ? 'bg-wanda-nero text-white shadow-[0_16px_30px_-22px_rgba(45,47,47,0.45)]'
+                    ? 'bg-wanda-nero text-white shadow-lg'
                     : 'bg-wanda-surface-low/70 text-wanda-nero hover:bg-wanda-surface-low'
                 } ${
-                  isAllOption ? 'pr-5' : ''
+                  isAllOption ? 'pr-6 lg:pr-5' : ''
                 }`}
               >
                 <span
@@ -121,8 +121,8 @@ export function FilterBar() {
       </div>
 
       {/* Secondary Controls */}
-      <div className="flex flex-wrap items-center justify-between gap-6 px-1">
-        <div className="flex items-center gap-4">
+      <div className="flex flex-wrap items-center justify-between gap-y-4 gap-x-6 px-1">
+        <div className="flex flex-wrap items-center gap-3 lg:gap-4">
           <div
             role="toolbar"
             aria-label="Filtro per destinatario"
@@ -137,7 +137,7 @@ export function FilterBar() {
                   disabled={isPending}
                   aria-pressed={isActive}
                   onClick={() => updateFilter('destinatario', value)}
-                  className={`px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-[0.15em] transition-all duration-500 active:scale-95 ${
+                  className={`px-4 lg:px-5 py-2.5 lg:py-2 rounded-full text-[10px] font-bold uppercase tracking-[0.15em] transition-all duration-500 active:scale-95 ${
                     isActive
                       ? 'bg-white text-wanda-nero shadow-sm'
                       : 'text-wanda-nero/30 hover:text-wanda-nero/60'
@@ -153,7 +153,7 @@ export function FilterBar() {
             type="button"
             disabled={isPending}
             onClick={() => updateFilter('promo', onlyPromo ? '' : '1')}
-            className={`group/promo flex items-center gap-3 px-5 py-2 rounded-full border transition-all duration-500 active:scale-95 ${
+            className={`group/promo flex items-center gap-3 px-5 py-2.5 lg:py-2 rounded-full border transition-all duration-500 active:scale-95 ${
               onlyPromo
                 ? 'bg-wanda-fucsia/10 border-wanda-fucsia/20 text-wanda-fucsia'
                 : 'bg-transparent border-wanda-nero/5 text-wanda-nero/40 hover:border-wanda-fucsia/20 hover:text-wanda-fucsia/60'

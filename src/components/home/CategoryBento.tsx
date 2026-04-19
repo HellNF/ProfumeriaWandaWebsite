@@ -39,18 +39,18 @@ function CategoryCard({ href, title, description, image, alt, className = '', pr
       </div>
       
       {/* Content */}
-      <div className="absolute inset-0 p-8 md:p-14 flex flex-col justify-end z-10">
-        <div className="space-y-3 md:space-y-4">
-          <h3 className="text-3xl md:text-6xl font-bold font-headline leading-[0.9] tracking-tighter text-white">
+      <div className="absolute inset-0 p-6 sm:p-8 md:p-14 flex flex-col justify-end z-10">
+        <div className="space-y-2 sm:space-y-3 md:space-y-4">
+          <h3 className="text-2xl sm:text-3xl md:text-6xl font-bold font-headline leading-[0.9] tracking-tighter text-white">
             {title}
           </h3>
-          <p className="text-base md:text-lg text-white/80 max-w-[300px] leading-snug lg:opacity-0 lg:translate-y-4 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] delay-100">
+          <p className="text-sm sm:text-base md:text-lg text-white/80 max-w-[280px] leading-snug lg:opacity-0 lg:translate-y-4 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] delay-100 line-clamp-2 sm:line-clamp-none">
             {description}
           </p>
           
-          <div className="pt-1 md:pt-2 flex items-center gap-4 lg:opacity-0 lg:-translate-x-4 lg:group-hover:opacity-100 lg:group-hover:translate-x-0 transition-all duration-1000 ease-[cubic-bezier(0.32,0.72,0,1)] delay-200">
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-white">Scopri di più</span>
-            <div className="w-12 h-px bg-white/40" />
+          <div className="pt-1 md:pt-2 flex items-center gap-3 sm:gap-4 lg:opacity-0 lg:-translate-x-4 lg:group-hover:opacity-100 lg:group-hover:translate-x-0 transition-all duration-1000 ease-[cubic-bezier(0.32,0.72,0,1)] delay-200">
+            <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.3em] text-white">Scopri di più</span>
+            <div className="w-8 sm:w-12 h-px bg-white/40" />
           </div>
         </div>
       </div>
