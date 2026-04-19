@@ -33,6 +33,9 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      providers: ['/components/admin/MediaUploadCompressor#MediaUploadCompressor'],
+    },
   },
   collections: [Prodotti, Marche, Media, Users, Recensioni],
   globals: [ImpostazioniNegozio, ImportatoreMarche, ImportatoreProdotti],
