@@ -1,5 +1,5 @@
 {
-  "buildCommand": "next build",
+  "buildCommand": "next build --no-turbopack",
   "outputDirectory": ".next",
   "framework": "nextjs",
   "functions": {
