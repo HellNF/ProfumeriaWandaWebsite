@@ -46,7 +46,7 @@ export default buildConfig({
   },
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || '',
+      connectionString: process.env.DATABASE_URI ?? (() => { throw new Error('DATABASE_URI environment variable is required') })(),
     },
   }),
   sharp,

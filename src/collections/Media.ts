@@ -1,6 +1,6 @@
 // src/collections/Media.ts
 import type { CollectionConfig } from 'payload'
-import { stripLightBackgroundFromLogo } from '@/lib/logoProcessing'
+import { stripLightBackgroundFromLogo } from '../lib/logoProcessing'
 
 export const Media: CollectionConfig = {
   slug: 'media',

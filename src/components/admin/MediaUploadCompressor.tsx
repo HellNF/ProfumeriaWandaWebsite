@@ -61,7 +61,7 @@ async function compressImage(file: File): Promise<File> {
   })
 }
 
-export function MediaUploadCompressor() {
+export function MediaUploadCompressor({ children }: { children?: React.ReactNode }) {
   useEffect(() => {
     const originalFetch = window.fetch
 
@@ -87,5 +87,5 @@ export function MediaUploadCompressor() {
     }
   }, [])
 
-  return null
+  return <>{children}</>
 }

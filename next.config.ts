@@ -11,38 +11,26 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ['monaco-editor'],
+  transpilePackages: ['@payloadcms/storage-s3'],
+  turbopack: {},
   async headers() {
     return [
       {
-        source: '/(.*)',
+        // Usa la sintassi standard di Next.js per intercettare tutte le rotte
+        source: '/:path*',
         headers: securityHeaders,
       },
+      // ⚠️ ABBIAMO RIMOSSO IL BLOCCO DEL CONTENT SECURITY POLICY PER /ADMIN ⚠️
+      // Lasciamo che sia Payload a gestire la sicurezza della sua interfaccia.
     ]
   },
   images: {
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'kcenuiwiyhschkgqattd.supabase.co',
-      },
-      {
-        protocol: 'https',
-        hostname: 'kcenuiwiyhschkgqattd.storage.supabase.co',
-      },
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '3000',
-      },
-      {
-        protocol: 'http',
-        hostname: '127.0.0.1',
-        port: '3000',
-      },
+      { protocol: 'https', hostname: 'lh3.googleusercontent.com' },
+      { protocol: 'https', hostname: 'kcenuiwiyhschkgqattd.supabase.co' },
+      { protocol: 'https', hostname: 'kcenuiwiyhschkgqattd.storage.supabase.co' },
+      { protocol: 'http', hostname: 'localhost', port: '3000' },
+      { protocol: 'http', hostname: '127.0.0.1', port: '3000' },
     ],
   },
 }
